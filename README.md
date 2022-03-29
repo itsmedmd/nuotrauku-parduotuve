@@ -4,7 +4,7 @@
 - Nukopijuoti ".env.example" failą į lokalų failą ".env"
 - Projekto direktorijoje paleisti komandą "php artisan key:generate"
 - Pasileisti XAMPP Control Panel ir įjungti "Apache" ir "MySQL"
-- Nuėjus į "httpp://localhost/phpmyadmin" sukurti naują DB pavadinimu "nuotrauku_db" ir nustatyti "utf8_lithuanian_ci"
+- Nuėjus į "http://localhost/phpmyadmin" sukurti naują DB pavadinimu "nuotrauku_db" ir nustatyti "utf8_lithuanian_ci"
 - Projekto direktorijoje paleisti komandą "php artisan migrate", kad būtų sukurti visi DB stulpeliai lokalioje duomenų bazėje
 - Projekto direktorijoje paleisti komandą "composer install", kad būtų įrašyti visi composer dependencies
 - Projekto direktorijoje paleisti komandą "npm install", kad būtų įrašyti visi npm dependencies
@@ -13,8 +13,8 @@
 - Paleisti XAMPP Control Panel bent "MySQL", o jei norima naudoti ir phpmyadmin, tada paleisti ir "Apache" serverį
 - Projekto direktorijoje paleisti komandą "php artisan serve", po kurios konsolėje bus parodomas adresas, kuriuo galima pasiekti paleistą projektą.
 
-* Norint pamatyti kode atliktus pakeitimus, reikia perkrauti puslapį
-* Norint pamatyti visus routes, projekto direktorijoje paleisti komandą "php artisan route:list"
+-- Norint pamatyti kode atliktus pakeitimus, reikia perkrauti puslapį
+-- Norint pamatyti visus routes, projekto direktorijoje paleisti komandą "php artisan route:list"
 
 ## About Laravel
 
