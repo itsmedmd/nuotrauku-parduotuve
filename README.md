@@ -1,5 +1,5 @@
 ## Projekto įrašymas
-* Projekto pradinis setup padarytas pagal pavyzdį: https://www.positronx.io/php-laravel-crud-operations-mysql-tutorial/#tc_8128_04
+* Projekto pradinis setup padarytas pagal pavyzdį: https://www.positronx.io/php-laravel-crud-operations-mysql-tutorial
 
 - Įsisirašyti Node.js (kartu bus ir npm), PHP, Composer ir XAMPP (galima ir kitą), bet paleidimas bus aprašomas su XAMPP
 - Pasisiųsti projekto failus
