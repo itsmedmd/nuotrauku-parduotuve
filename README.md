@@ -1,11 +1,20 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+## Projekto įrašymas
+- Įsisirašyti Node.js (kartu bus ir npm), PHP, Composer ir XAMPP (galima ir kitą), bet paleidimas bus aprašomas su XAMPP
+- Pasisiųsti projekto failus
+- Nukopijuoti ".env.example" failą į lokalų failą ".env"
+- Projekto direktorijoje paleisti komandą "php artisan key:generate"
+- Pasileisti XAMPP Control Panel ir įjungti "Apache" ir "MySQL"
+- Nuėjus į "httpp://localhost/phpmyadmin" sukurti naują DB pavadinimu "nuotrauku_db" ir nustatyti "utf8_lithuanian_ci"
+- Projekto direktorijoje paleisti komandą "php artisan migrate", kad būtų sukurti visi DB stulpeliai lokalioje duomenų bazėje
+- Projekto direktorijoje paleisti komandą "composer install", kad būtų įrašyti visi composer dependencies
+- Projekto direktorijoje paleisti komandą "npm install", kad būtų įrašyti visi npm dependencies
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## Projekto paleidimas
+- Paleisti XAMPP Control Panel bent "MySQL", o jei norima naudoti ir phpmyadmin, tada paleisti ir "Apache" serverį
+- Projekto direktorijoje paleisti komandą "php artisan serve", po kurios konsolėje bus parodomas adresas, kuriuo galima pasiekti paleistą projektą.
+
+* Norint pamatyti kode atliktus pakeitimus, reikia perkrauti puslapį
+* Norint pamatyti visus routes, projekto direktorijoje paleisti komandą "php artisan route:list"
 
 ## About Laravel
 
