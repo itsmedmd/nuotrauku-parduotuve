@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <meta http-equiv="X-UA-Compatible" content="ie=edge">
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+      <title>Image Shop</title>
+   </head>
+   <body>
+      <div class="app">
+            <div class="nav-container">
+              navigacija!
+            </div>
+            @yield('content')
+      </div>
+      @yield('js')
+   </body>
+</html>
