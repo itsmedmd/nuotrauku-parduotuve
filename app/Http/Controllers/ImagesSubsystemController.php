@@ -6,13 +6,9 @@ use Illuminate\Http\Request;
 
 class ImagesSubsystemController extends Controller
 {
-    public static function TESTnavigateToLogin()
+    public function TESTdoSomething()
     {
-        return view('LoginView');
-    }
-
-    public static function TESTgetResponse()
-    {
+        // returns json data
         return response()->json(
             [
                 'status'=> 'error',

@@ -1,6 +1,13 @@
 <?php
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\StudentController;
+use App\Http\Controllers\AdminSubsystemController;
+use App\Http\Controllers\AuctionsSubsystemController;
+use App\Http\Controllers\AwardsSubsystemController;
+use App\Http\Controllers\CollectionsSubsystemController;
+use App\Http\Controllers\ImagesManagementSubsystemController;
+use App\Http\Controllers\ImagesSubsystemController;
+use App\Http\Controllers\PaymentsSubsystemController;
+use App\Http\Controllers\UserManagementSubsystemController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -14,6 +21,11 @@ use App\Http\Controllers\StudentController;
 
 // Route::resource('students', StudentController::class);
 
+// controller methods
+Route::post('ImagesSubsystemController/TESTdoSomething',[ImagesSubsystemController::class,'TESTdoSomething'])->name('TESTdoSomething');
+
+
+// routes
 Route::get('/', function () {
     return view('HomePage');
 });
