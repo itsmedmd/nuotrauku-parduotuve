@@ -4,3 +4,8 @@
     bills report
 </main>
 @endsection
+
+@section('js')
+<script>
+</script>
+@endsection

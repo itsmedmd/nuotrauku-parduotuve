@@ -4,3 +4,8 @@
     owned image information
 </main>
 @endsection
+
+@section('js')
+<script>
+</script>
+@endsection

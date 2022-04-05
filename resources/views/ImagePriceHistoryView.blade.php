@@ -4,3 +4,8 @@
     image price history
 </main>
 @endsection
+
+@section('js')
+<script>
+</script>
+@endsection

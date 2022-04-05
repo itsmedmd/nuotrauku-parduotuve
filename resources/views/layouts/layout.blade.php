@@ -13,5 +13,6 @@
             </div>
             @yield('content')
       </div>
+      @yield('js')
    </body>
 </html>

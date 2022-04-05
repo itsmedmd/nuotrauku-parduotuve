@@ -4,3 +4,8 @@
     user profile information
 </main>
 @endsection
+
+@section('js')
+<script>
+</script>
+@endsection

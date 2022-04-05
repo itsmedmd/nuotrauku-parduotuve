@@ -4,3 +4,8 @@
     collection creation
 </main>
 @endsection
+
+@section('js')
+<script>
+</script>
+@endsection

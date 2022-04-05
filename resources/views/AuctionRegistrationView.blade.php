@@ -4,3 +4,8 @@
     auction registration
 </main>
 @endsection
+
+@section('js')
+<script>
+</script>
+@endsection

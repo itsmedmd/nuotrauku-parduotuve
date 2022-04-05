@@ -4,3 +4,8 @@
     bank api communicator
 </main>
 @endsection
+
+@section('js')
+<script>
+</script>
+@endsection

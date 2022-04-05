@@ -4,3 +4,8 @@
     wallet balance top up
 </main>
 @endsection
+
+@section('js')
+<script>
+</script>
+@endsection

@@ -4,3 +4,8 @@
     image for sale creation
 </main>
 @endsection
+
+@section('js')
+<script>
+</script>
+@endsection
