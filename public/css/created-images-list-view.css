@@ -1,0 +1,124 @@
+.created-images-list-container {
+
+}
+
+.created-images-list-new-image {
+    margin-bottom: 32px;
+}
+
+.created-images-list-new-image button {
+    font-size: 22px;
+    background-color: rgb(44, 190, 0);
+    border: 0;
+    padding: 10px 16px;
+    color: white;
+}
+
+.created-images-list-new-image button:hover {
+    background-color: rgb(38, 161, 0);
+}
+
+.created-images-list-new-image button:active {
+    background-color: rgb(31, 133, 0);
+}
+
+.created-images-list {
+    display: flex;
+    flex-direction: column;
+}
+
+.created-images-list-item {
+    border-top: 1px solid rgba(0, 0, 0, 0.3);
+}
+
+.created-images-list-item * {
+    display: inline-block;
+    vertical-align: middle;
+    margin: 6px;
+}
+
+.created-images-list-item:first-child {
+    margin-left: 0;
+}
+
+.created-images-list-item:last-child {
+    margin-right: 0;
+}
+
+.created-images-list-item-name {
+    border-left: 1px solid rgba(0, 0, 0, 0.5);
+    padding-left: 8px;
+    line-height: 32px;
+    font-size: 20px;
+}
+
+.created-images-list-image {
+    width: 150px;
+}
+
+/* action confirmation form overlay */
+.action-confirmation-form-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 3;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.action-confirmation-form-overlay-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 320px;
+    height: 320px;
+    background-color: white;
+    border: 1px solid rgb(38, 161, 0);
+    padding: 24px 16px;
+}
+
+.action-confirmation-form-buttons {
+    align-self: center;
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.action-confirmation-form-buttons button {
+    color: white;
+    border: 0;
+    font-size: 24px;
+}
+
+.action-confirmation-form-text {
+    font-size: 20px;
+    margin: 36px 16px;
+}
+
+.action-confirmation-form-confirm {
+    background-color: rgb(38, 161, 0);
+}
+
+.action-confirmation-form-confirm:hover {
+    background-color: rgb(31, 131, 0);
+}
+
+.action-confirmation-form-confirm:active {
+    background-color: rgb(18, 78, 0);
+}
+
+.action-confirmation-form-cancel {
+    background-color: rgb(161, 0, 0);
+}
+
+.action-confirmation-form-cancel:hover {
+    background-color: rgb(139, 0, 0);
+}
+
+.action-confirmation-form-cancel:active {
+    background-color: rgb(107, 0, 0);
+}

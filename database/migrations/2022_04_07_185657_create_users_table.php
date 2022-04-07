@@ -15,12 +15,13 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
+            $table->string('username');
             $table->string('password');
-            $table->rememberToken();
-            $table->timestamps();
+            $table->string('email');
+            $table->float('wallet_balance');
+            $table->string('profile_picture', 1000)->nullable();
+            $table->boolean('is_blocked')->default(false);
+            $table->enum('account_type', ['admin', 'user'])->default('user');
         });
     }
 

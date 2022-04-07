@@ -1,0 +1,114 @@
+/* Form */
+.form-wrapper {
+	/*text-align: center;*/
+    margin: 0 auto;
+}
+
+.form-title {
+    margin-bottom: 32px;
+}
+
+form div input,
+form div textarea,
+form div select,
+.form-submit-button,
+.filtering-input {
+	font-size: 18px;
+	margin: 4px 0 20px;
+	padding: 4px 8px;
+}
+
+.td-remove-entry,
+.td-remove-entry__button,
+.form-submit-button {
+	background-color: white;
+	box-shadow: none;
+}
+
+.td-remove-entry {
+	border: 0;
+}
+
+.td-remove-entry__button {
+	border: 1px solid #2c3e50;
+	font-size: 16px;
+	padding: 3px 8px;
+	margin-left: 4px;
+}
+
+.form-submit-button {
+	border: 1px solid #2c3e50;
+	margin: 10px;
+}
+
+.form-submit-button--green {
+	background-color:  rgb(107, 214, 0);
+}
+
+.form-submit-button--red {
+	background-color:  rgb(226, 0, 0);
+}
+
+.form-submit-button:hover,
+.td-remove-entry__button:hover {
+	background-color: rgb(240, 240, 240);
+	color: black;
+	cursor: pointer;
+}
+
+/* Error and success messages */
+.status-msg-error,
+.status-msg-success {
+	font-weight: bold;
+	text-align: center;
+}
+
+.status-msg-error {
+	color: rgb(199, 28, 28);
+}
+.status-msg-success {
+	color: rgb(105, 189, 22);
+}
+
+/* Filtering form */
+.filtering-wrapper {
+	text-align: center;
+	padding: 16px;
+}
+
+.filtering-wrapper input {
+	margin-top: 12px;
+}
+
+/* Action confirmation form */
+.form-submit-wrapper {
+	display: none;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.3);
+	position: fixed;
+	top: 0;
+	left: 0;
+}
+
+.form-submit-wrapper__content {
+	display: flex;
+	flex-direction: column;
+	width: 300px;
+	background-color: white;
+	border: 1px solid black;
+	position: relative;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	text-align: center;
+}
+
+.form-submit-wrapper__content input {
+	line-height: 2rem;
+	font-size: 24px;
+}
+
+.form-visible {
+	display: block;
+}

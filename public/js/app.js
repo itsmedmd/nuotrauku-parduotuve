@@ -19409,10 +19409,88 @@ var __WEBPACK_AMD_DEFINE_RESULT__;/**
 
 /***/ }),
 
+/***/ "./resources/css/image-information-edit-view.css":
+/*!*******************************************************!*\
+  !*** ./resources/css/image-information-edit-view.css ***!
+  \*******************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
+/***/ "./resources/css/navigation.css":
+/*!**************************************!*\
+  !*** ./resources/css/navigation.css ***!
+  \**************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
 /***/ "./resources/css/app.css":
 /*!*******************************!*\
   !*** ./resources/css/app.css ***!
   \*******************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
+/***/ "./resources/css/created-images-list-view.css":
+/*!****************************************************!*\
+  !*** ./resources/css/created-images-list-view.css ***!
+  \****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
+/***/ "./resources/css/forms.css":
+/*!*********************************!*\
+  !*** ./resources/css/forms.css ***!
+  \*********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
+/***/ "./resources/css/home.css":
+/*!********************************!*\
+  !*** ./resources/css/home.css ***!
+  \********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
+/***/ "./resources/css/image-creation-view.css":
+/*!***********************************************!*\
+  !*** ./resources/css/image-creation-view.css ***!
+  \***********************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -19727,7 +19805,13 @@ process.umask = function() { return 0; };
 /******/ 		// [resolve, reject, Promise] = chunk loading, 0 = chunk loaded
 /******/ 		var installedChunks = {
 /******/ 			"/js/app": 0,
-/******/ 			"css/app": 0
+/******/ 			"css/image-creation-view": 0,
+/******/ 			"css/home": 0,
+/******/ 			"css/forms": 0,
+/******/ 			"css/created-images-list-view": 0,
+/******/ 			"css/app": 0,
+/******/ 			"css/navigation": 0,
+/******/ 			"css/image-information-edit-view": 0
 /******/ 		};
 /******/ 		
 /******/ 		// no chunk on demand loading
@@ -19777,8 +19861,14 @@ process.umask = function() { return 0; };
 /******/ 	// startup
 /******/ 	// Load entry module and return exports
 /******/ 	// This entry module depends on other loaded chunks and execution need to be delayed
-/******/ 	__webpack_require__.O(undefined, ["css/app"], () => (__webpack_require__("./resources/js/app.js")))
-/******/ 	var __webpack_exports__ = __webpack_require__.O(undefined, ["css/app"], () => (__webpack_require__("./resources/css/app.css")))
+/******/ 	__webpack_require__.O(undefined, ["css/image-creation-view","css/home","css/forms","css/created-images-list-view","css/app","css/navigation","css/image-information-edit-view"], () => (__webpack_require__("./resources/js/app.js")))
+/******/ 	__webpack_require__.O(undefined, ["css/image-creation-view","css/home","css/forms","css/created-images-list-view","css/app","css/navigation","css/image-information-edit-view"], () => (__webpack_require__("./resources/css/app.css")))
+/******/ 	__webpack_require__.O(undefined, ["css/image-creation-view","css/home","css/forms","css/created-images-list-view","css/app","css/navigation","css/image-information-edit-view"], () => (__webpack_require__("./resources/css/created-images-list-view.css")))
+/******/ 	__webpack_require__.O(undefined, ["css/image-creation-view","css/home","css/forms","css/created-images-list-view","css/app","css/navigation","css/image-information-edit-view"], () => (__webpack_require__("./resources/css/forms.css")))
+/******/ 	__webpack_require__.O(undefined, ["css/image-creation-view","css/home","css/forms","css/created-images-list-view","css/app","css/navigation","css/image-information-edit-view"], () => (__webpack_require__("./resources/css/home.css")))
+/******/ 	__webpack_require__.O(undefined, ["css/image-creation-view","css/home","css/forms","css/created-images-list-view","css/app","css/navigation","css/image-information-edit-view"], () => (__webpack_require__("./resources/css/image-creation-view.css")))
+/******/ 	__webpack_require__.O(undefined, ["css/image-creation-view","css/home","css/forms","css/created-images-list-view","css/app","css/navigation","css/image-information-edit-view"], () => (__webpack_require__("./resources/css/image-information-edit-view.css")))
+/******/ 	var __webpack_exports__ = __webpack_require__.O(undefined, ["css/image-creation-view","css/home","css/forms","css/created-images-list-view","css/app","css/navigation","css/image-information-edit-view"], () => (__webpack_require__("./resources/css/navigation.css")))
 /******/ 	__webpack_exports__ = __webpack_require__.O(__webpack_exports__);
 /******/ 	
 /******/ })()

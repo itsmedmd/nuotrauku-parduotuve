@@ -90,8 +90,16 @@ Route::get('ImageForSaleCreationView', function () {
     return view('ImageForSaleCreationView');
 });
 
-Route::get('ImageInformationViewView', function () {
-    return view('ImageInformationViewView');
+Route::get('ImageInformationView', function () {
+    return view('ImageInformationView');
+});
+
+Route::get('ImageInformationEditView', function () {
+    return view('ImageInformationEditView');
+});
+
+Route::get('ImageCreationView', function () {
+    return view('ImageCreationView');
 });
 
 Route::get('ImagePriceHistoryView', function () {

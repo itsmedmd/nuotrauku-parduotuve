@@ -11,7 +11,16 @@ const mix = require('laravel-mix');
  |
  */
 
-mix.js('resources/js/app.js', 'public/js')
-    .postCss('resources/css/app.css', 'public/css', [
-        //
-    ]);
+// compile all files from "resources/css/" to "public/css"
+function findFiles(dir) {
+    const fs = require('fs');
+    return fs.readdirSync(dir).filter(file => {
+        return fs.statSync(`${dir}/${file}`).isFile();
+    });
+}
+
+findFiles("resources/css").forEach((file) => {
+    mix.postCss("resources/css/" + file, "public/css");
+});
+
+mix.js('resources/js/app.js', 'public/js');
