@@ -26,7 +26,9 @@
 
 .page-title {
     font-size: 32px;
-    margin-bottom: 32px;
+    margin-bottom: 24px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
 }
 
 .button {
@@ -37,12 +39,12 @@
     padding: 4px 8px;
 }
 
-.button:hover {
+.button-default-actions:hover {
     background-color: rgba(0, 0, 0, 0.03);
 }
 
-.button:active {
-    background-color: rgba(0, 0, 0, 0.07);;
+.button-default-actions:active {
+    background-color: rgba(0, 0, 0, 0.07);
 }
 
 ul,
@@ -55,13 +57,11 @@ ol {
 	border-collapse: collapse;
 	margin: 0px auto 32px;
 }
-
 table tr th,
 table tr td {
 	border: 1px solid grey;
 	padding: 3px 3px 3px 6px;
 }
-
 table tr:nth-child(odd) {
 	background-color: rgb(240, 240, 240);
 } */
