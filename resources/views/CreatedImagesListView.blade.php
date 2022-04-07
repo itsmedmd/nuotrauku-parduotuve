@@ -24,16 +24,29 @@
     </div>
 </div> -->
 <main class="content">
-
-
     <h1 class="page-title">Created Images List</h1>
     <div class="created-images-list-new-image">
         <button class="button" onclick="openImageCreationView()">
             Create New Image
         </button>
     </div>
+    <!-- <h2>Successfully created new image!</h2> -->
     <div class="created-images-list-container">
         <ul class="created-images-list">
+            <li class="created-images-list-item">
+                <img
+                    src="{{ asset('images/nft-4.jpg') }}"
+                    alt="Image name 1"
+                    class="created-images-list-image"
+                >
+                <button class="button button-default-actions" onclick="editImageInformation()">
+                    Edit
+                </button>
+                <button class="button button-default-actions" onclick="submitImageDelete()">
+                    Delete
+                </button>
+                <p class="created-images-list-item-name">Free Sun cancer! NO SCAM!! CALL NOW!!!</p>
+            </li>
             <li class="created-images-list-item">
                 <img
                     src="{{ asset('images/nft-1.jpg') }}"

@@ -57,13 +57,11 @@ ol {
 	border-collapse: collapse;
 	margin: 0px auto 32px;
 }
-
 table tr th,
 table tr td {
 	border: 1px solid grey;
 	padding: 3px 3px 3px 6px;
 }
-
 table tr:nth-child(odd) {
 	background-color: rgb(240, 240, 240);
 } */

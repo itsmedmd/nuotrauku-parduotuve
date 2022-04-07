@@ -8,6 +8,7 @@
       <title>Image Shop</title>
       <link rel="stylesheet" href="{{ asset('css/app.css') }}">
       <link rel="stylesheet" href="{{ asset('css/navigation.css') }}">
+      <link rel="stylesheet" href="{{ asset('css/forms.css') }}">
       @yield('styles')
    </head>
    <body>

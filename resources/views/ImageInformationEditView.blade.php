@@ -1,3 +1,7 @@
+@section('styles')
+<link rel="stylesheet" href="{{ asset('css/image-information-edit.css') }}">
+@endsection
+
 @extends('layouts/layout')
 @section('content')
 <main class="content">
