@@ -2,15 +2,24 @@
     use App\Http\Controllers\ImagesSubsystemController;
 ?>
 
+@section('styles')
+<link rel="stylesheet" href="{{ asset('css/home.css') }}">
+@endsection
+
 @extends('layouts/layout')
 @section('content')
-<main class="content">
-    home
+<main class="content homepage">
+    <div class="home-background-color"></div>
+    <h1 class="home-title">
+        Dive into a world you haven't experienced before - <br>
+        the world of <span class="home-title-cool">digital images</span>
+    </h1>
+    <!-- home
     <div>
         <button onclick="doSomething()">
         get json value from controller method (open browser console to view)
         </button>
-    </div>
+    </div> -->
 </main>
 @endsection
 

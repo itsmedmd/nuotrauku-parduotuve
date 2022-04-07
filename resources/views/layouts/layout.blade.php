@@ -12,18 +12,16 @@
    </head>
    <body>
       <div class="app">
-            <div class="nav-container">
-              <nav>
-                 <ul>
-                    <li>
-                       <a href="/">Home</a>
-                    </li>
-                    <li>
-                       <a href="CreatedImagesListView">Created Images List</a>
-                    </li>
-                 </ul>
-              </nav>
-            </div>
+            <nav class="main-nav">
+               <ul>
+                  <li>
+                     <a href="/">Home</a>
+                  </li>
+                  <li>
+                     <a href="CreatedImagesListView">Created Images List</a>
+                  </li>
+               </ul>
+            </nav>
             @yield('content')
       </div>
       @yield('js')
