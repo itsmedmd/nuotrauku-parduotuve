@@ -7,7 +7,7 @@
 <main class="content image-creation-view">
     <div class="form-wrapper">
         <h2 class="form-title">Create new image</h2>
-        <h4>* Title must not exceed 200 characters.</h4>
+        <!-- <h4>* Title must not exceed 200 characters.</h4> -->
         <form method="post">
             <div>
                 <label for="title">Title:</label><br>

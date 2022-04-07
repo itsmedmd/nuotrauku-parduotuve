@@ -30,7 +30,7 @@
             Create New Image
         </button>
     </div>
-    <!-- <h2>Successfully created new image!</h2> -->
+    <!-- <h2>Successfully updated image information!</h2> -->
     <div class="created-images-list-container">
         <ul class="created-images-list">
             <li class="created-images-list-item">
