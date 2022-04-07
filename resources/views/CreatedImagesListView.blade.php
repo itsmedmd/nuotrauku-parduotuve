@@ -85,10 +85,12 @@
 <script>
     const openImageCreationView = () => {
         console.log("create");
+        window.location.href = "/ImageCreationView";
     };
 
     const editImageInformation = () => {
         console.log("edit");
+        window.location.href = "/ImageInformationEditView";
     };
 
     const submitImageDelete = () => {
