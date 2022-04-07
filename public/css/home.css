@@ -13,6 +13,7 @@
 
 .content.homepage {
     background: url(/images/home-background.jpg?d2a8ef45fb70b71ce722750ad588011f) no-repeat center center;
+    padding: 0;
 }
 
 .home-background-color {

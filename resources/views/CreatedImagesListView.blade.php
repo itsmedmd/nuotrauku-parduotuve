@@ -8,36 +8,75 @@
 
 @extends('layouts/layout')
 @section('content')
+<!-- <div class="action-confirmation-form-overlay">
+    <div class="action-confirmation-form-overlay-content">
+        <p class="action-confirmation-form-text">
+            Do you really want to delete the image?
+        </p>
+        <div class="action-confirmation-form-buttons">
+            <button class="button action-confirmation-form-confirm">
+                Confirm
+            </button>
+            <button class="button action-confirmation-form-cancel">
+                Cancel
+            </button>
+        </div>
+    </div>
+</div> -->
 <main class="content">
-    Created images list:
-    <div>
-        <button onclick="openImageCreationView()">
+
+
+    <h1 class="page-title">Created Images List</h1>
+    <div class="created-images-list-new-image">
+        <button class="button" onclick="openImageCreationView()">
             Create New Image
         </button>
     </div>
-    <div class="created-images-list">
-        <ol>
-            <li>
-                <img src="" alt="Image name 1">
-                <p>Image name 1</p>
-                <button onclick="editImageInformation()">
+    <div class="created-images-list-container">
+        <ul class="created-images-list">
+            <li class="created-images-list-item">
+                <img
+                    src="{{ asset('images/nft-1.jpg') }}"
+                    alt="Image name 1"
+                    class="created-images-list-image"
+                >
+                <button class="button button-default-actions" onclick="editImageInformation()">
                     Edit
                 </button>
-                <button onclick="submitImageDelete()">
+                <button class="button button-default-actions" onclick="submitImageDelete()">
                     Delete
                 </button>
+                <p class="created-images-list-item-name">The weeder. Edition N. 137</p>
             </li>
-            <li>
-                <img src="" alt="anotha Image name">
-                <p>anotha Image name</p>
-                <button onclick="editImageInformation()">
+            <li class="created-images-list-item">
+                <img
+                    src="{{ asset('images/nft-2.png') }}"
+                    alt="Image name 2"
+                    class="created-images-list-image"
+                >
+                <button class="button button-default-actions" onclick="editImageInformation()">
                     Edit
                 </button>
-                <button onclick="submitImageDelete()">
+                <button class="button button-default-actions" onclick="submitImageDelete()">
                     Delete
                 </button>
+                <p class="created-images-list-item-name">Zucc</p>
             </li>
-        </ol>
+            <li class="created-images-list-item">
+                <img
+                    src="{{ asset('images/nft-3.png') }}"
+                    alt="Image name 3"
+                    class="created-images-list-image"
+                >
+                <button class="button button-default-actions" onclick="editImageInformation()">
+                    Edit
+                </button>
+                <button class="button button-default-actions" onclick="submitImageDelete()">
+                    Delete
+                </button>
+                <p class="created-images-list-item-name">The king of the jungle</p>
+            </li>
+        </ul>
     </div>
 </main>
 @endsection
