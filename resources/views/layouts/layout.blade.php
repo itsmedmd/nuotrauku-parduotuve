@@ -6,11 +6,23 @@
       <meta http-equiv="X-UA-Compatible" content="ie=edge">
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
       <title>Image Shop</title>
+      <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+      <link rel="stylesheet" href="{{ asset('css/navigation.css') }}">
+      @yield('styles')
    </head>
    <body>
       <div class="app">
             <div class="nav-container">
-              navigacija!
+              <nav>
+                 <ul>
+                    <li>
+                       <a href="/">Home</a>
+                    </li>
+                    <li>
+                       <a href="CreatedImagesListView">Created Images List</a>
+                    </li>
+                 </ul>
+              </nav>
             </div>
             @yield('content')
       </div>

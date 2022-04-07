@@ -13,6 +13,7 @@
 
 ## Projekto paleidimas
 - Paleisti XAMPP Control Panel bent "MySQL", o jei norima naudoti ir phpmyadmin, tada paleisti ir "Apache" serverį
+- Projekto direktorijoje paleisti komandą "npm run watch", kad būtų kompiliuojami stiliai po kiekvieno failo išsaugojimo. (jei sukuriami nauji css failai jau veikiant npm run watch, komandą reikia paleisti iš naujo, kad pamatytų naujus failus ir juos pradėtų kompiliuoti).
 - Projekto direktorijoje paleisti komandą "php artisan serve", po kurios konsolėje bus parodomas adresas, kuriuo galima pasiekti paleistą projektą.
 
 -- Norint pamatyti kode atliktus pakeitimus, reikia perkrauti puslapį
