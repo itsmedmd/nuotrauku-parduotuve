@@ -30,7 +30,11 @@
             Create New Image
         </button>
     </div>
-    <!-- <h2>Successfully updated image information!</h2> -->
+    @if(session('success-status'))
+        <div class="status-container">
+            <h2 class="success">{{ session('success-status') }}</h2>
+        </div>
+    @endif
     <div class="created-images-list-container">
         <ul class="created-images-list">
             <li class="created-images-list-item">

@@ -21,10 +21,37 @@ use App\Http\Controllers\UserManagementSubsystemController;
 
 // Route::resource('students', StudentController::class);
 
+// --------------------------------------------------------------------------
 // controller methods
-Route::post('ImagesSubsystemController/TESTdoSomething',[ImagesSubsystemController::class,'TESTdoSomething'])->name('TESTdoSomething');
+// --------------------------------------------------------------------------
+
+// ImagesSubsystem
+Route::post('TESTdoSomething',[ImagesSubsystemController::class,'TESTdoSomething'])->name('TESTdoSomething');
+
+// --------------------------------------------------------------------------
+// ImagesManagementSubsystem
+Route::post('submitNewImageCreation',[ImagesManagementSubsystemController::class,'submitNewImageCreation'])->name('submitNewImageCreation');
+
+// --------------------------------------------------------------------------
+// AdminSubsystem
+
+// --------------------------------------------------------------------------
+// AuctionsSubsystem
+
+// --------------------------------------------------------------------------
+// AwardsSubsystem
+
+// --------------------------------------------------------------------------
+// CollectionsSubsystem
+
+// --------------------------------------------------------------------------
+// PaymentsSubsystem
+
+// --------------------------------------------------------------------------
+// UserManagementSubsystem
 
 
+// --------------------------------------------------------------------------
 // routes
 Route::get('/', function () {
     return view('HomePage');

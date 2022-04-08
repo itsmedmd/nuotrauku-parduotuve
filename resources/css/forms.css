@@ -57,16 +57,14 @@ form div select,
 }
 
 /* Error and success messages */
-.status-msg-error,
-.status-msg-success {
-	font-weight: bold;
-	text-align: center;
+.status-container {
+	margin-bottom: 20px;
 }
 
-.status-msg-error {
+.error {
 	color: rgb(199, 28, 28);
 }
-.status-msg-success {
+.success {
 	color: rgb(105, 189, 22);
 }
 

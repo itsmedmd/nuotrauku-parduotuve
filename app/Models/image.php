@@ -15,6 +15,7 @@ class image extends Model
         'price',
         'is_visible',
         'fk_collection_id_dabartine',
+        'fk_collection_id_originali',
         'fk_user_id_savininkas',
         'fk_user_id_kurejas',
         'image'
