@@ -36,63 +36,34 @@
         </div>
     @endif
     <div class="created-images-list-container">
+        @if (count($images) == 0)
+            <h2>There are no created images</h2>
+        @endif
         <ul class="created-images-list">
-            <li class="created-images-list-item">
-                <img
-                    src="{{ asset('images/nft-4.jpg') }}"
-                    alt="Image name 1"
-                    class="created-images-list-image"
-                >
-                <button class="button button-default-actions" onclick="editImageInformation()">
-                    Edit
-                </button>
-                <button class="button button-default-actions" onclick="submitImageDelete()">
-                    Delete
-                </button>
-                <p class="created-images-list-item-name">Free Sun cancer! NO SCAM!! CALL NOW!!!</p>
-            </li>
-            <li class="created-images-list-item">
-                <img
-                    src="{{ asset('images/nft-1.jpg') }}"
-                    alt="Image name 1"
-                    class="created-images-list-image"
-                >
-                <button class="button button-default-actions" onclick="editImageInformation()">
-                    Edit
-                </button>
-                <button class="button button-default-actions" onclick="submitImageDelete()">
-                    Delete
-                </button>
-                <p class="created-images-list-item-name">The weeder. Edition N. 137</p>
-            </li>
-            <li class="created-images-list-item">
-                <img
-                    src="{{ asset('images/nft-2.png') }}"
-                    alt="Image name 2"
-                    class="created-images-list-image"
-                >
-                <button class="button button-default-actions" onclick="editImageInformation()">
-                    Edit
-                </button>
-                <button class="button button-default-actions" onclick="submitImageDelete()">
-                    Delete
-                </button>
-                <p class="created-images-list-item-name">Zucc</p>
-            </li>
-            <li class="created-images-list-item">
-                <img
-                    src="{{ asset('images/nft-3.png') }}"
-                    alt="Image name 3"
-                    class="created-images-list-image"
-                >
-                <button class="button button-default-actions" onclick="editImageInformation()">
-                    Edit
-                </button>
-                <button class="button button-default-actions" onclick="submitImageDelete()">
-                    Delete
-                </button>
-                <p class="created-images-list-item-name">The king of the jungle</p>
-            </li>
+            @foreach($images as $img)
+                <li class="created-images-list-item">
+                    <img
+                        src="{{ asset($img->image) }}"
+                        alt="{{ $img->title }}"
+                        class="created-images-list-image"
+                    >
+                    @if ($img->fk_user_id_savininkas == $img->fk_user_id_kurejas)
+                        <button
+                            class="button button-default-actions"
+                            onclick="editImageInformation({{ $img->id }})"
+                        >
+                            Edit
+                        </button>
+                        <button
+                            class="button button-default-actions"
+                            onclick="submitImageDelete({{ $img->id }})"
+                        >
+                            Delete
+                        </button>
+                    @endif
+                    <p class="created-images-list-item-name">{{ $img->title }}</p>
+                </li>
+            @endforeach
         </ul>
     </div>
 </main>
@@ -105,13 +76,13 @@
         window.location.href = "/ImageCreationView";
     };
 
-    const editImageInformation = () => {
-        console.log("edit");
-        window.location.href = "/ImageInformationEditView";
+    const editImageInformation = (id) => {
+        console.log("edit", id);
+        //window.location.href = "/ImageInformationEditView";
     };
 
-    const submitImageDelete = () => {
-        console.log("delete");
+    const submitImageDelete = (id) => {
+        console.log("delete", id);
     };
 </script>
 @endsection

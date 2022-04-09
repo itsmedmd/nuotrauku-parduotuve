@@ -17,12 +17,13 @@ class ImagesManagementSubsystemController extends Controller
 
     public function submitNewImageCreation(Request $request)
     {
-        $USER_ID = 1;
+        $USER_ID = 2;
 
         $this->validateNewImageData($request);
  
         // save the image file in storage/public/images
         $path = $request->file('image')->store('public/images');
+        $path_arr = explode("/", $path); 
 
         // create new image entry in the database
         $img = new image;
@@ -36,12 +37,18 @@ class ImagesManagementSubsystemController extends Controller
         $img->fk_collection_id_originali = NULL;
         $img->fk_user_id_savininkas = $USER_ID;
         $img->fk_user_id_kurejas = $USER_ID;
-        $img->image = $path;
+        
+        // create file path in format: "storage/images/{filename}"
+        $img->image = 'storage/'.$path_arr[1].'/'.$path_arr[2];
 
         $img->save();
         
-        //return redirect('ImageCreationView')->with('success-status', 'New image successfully created!');
         return redirect('CreatedImagesListView')->with('success-status', 'New image successfully created!');
+    }
 
+    public function displayCreatedImageList() {
+        $USER_ID = 1;
+        $images = image::where('fk_user_id_kurejas', $USER_ID)->get();
+        return view('CreatedImagesListView', compact('images'));
     }
 }

@@ -32,6 +32,11 @@ Route::post('TESTdoSomething',[ImagesSubsystemController::class,'TESTdoSomething
 // ImagesManagementSubsystem
 Route::post('submitNewImageCreation',[ImagesManagementSubsystemController::class,'submitNewImageCreation'])->name('submitNewImageCreation');
 
+// when going to the route automatically execute "displayCreatedImageList" function in order to
+// already have a list of images to render when the page opens
+Route::get('CreatedImagesListView', [ImagesManagementSubsystemController::class,'displayCreatedImageList']);
+
+
 // --------------------------------------------------------------------------
 // AdminSubsystem
 
@@ -107,10 +112,6 @@ Route::get('CollectionView', function () {
 
 Route::get('CreatedCollectionsListView', function () {
     return view('CreatedCollectionsListView');
-});
-
-Route::get('CreatedImagesListView', function () {
-    return view('CreatedImagesListView');
 });
 
 Route::get('ImageForSaleCreationView', function () {
