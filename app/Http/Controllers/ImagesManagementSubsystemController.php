@@ -3,10 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use App\Models\Image;
 
 class ImagesManagementSubsystemController extends Controller
 {
+    private $USER_ID = 1;
+
     private function validateNewImageData(Request $request) {
         $validatedData = $request->validate([
             'title' => 'required|max:200',
@@ -17,8 +20,6 @@ class ImagesManagementSubsystemController extends Controller
 
     public function submitNewImageCreation(Request $request)
     {
-        $USER_ID = 2;
-
         $this->validateNewImageData($request);
  
         // save the image file in storage/public/images
@@ -35,8 +36,8 @@ class ImagesManagementSubsystemController extends Controller
         $img->is_visible = true;
         $img->fk_collection_id_dabartine = NULL;
         $img->fk_collection_id_originali = NULL;
-        $img->fk_user_id_savininkas = $USER_ID;
-        $img->fk_user_id_kurejas = $USER_ID;
+        $img->fk_user_id_savininkas = $this->USER_ID;
+        $img->fk_user_id_kurejas = $this->USER_ID;
         
         // create file path in format: "storage/images/{filename}"
         $img->image = 'storage/'.$path_arr[1].'/'.$path_arr[2];
@@ -47,8 +48,28 @@ class ImagesManagementSubsystemController extends Controller
     }
 
     public function displayCreatedImageList() {
-        $USER_ID = 1;
-        $images = image::where('fk_user_id_kurejas', $USER_ID)->get();
+        $images = image::where('fk_user_id_kurejas', $this->USER_ID)->get();
         return view('CreatedImagesListView', compact('images'));
+    }
+
+    public function submitImageDelete($id) {
+        return redirect('CreatedImagesListView')->with([
+            'openActionConfirmationForm' => true,
+            'itemID' => $id
+        ]);
+    }
+
+    public function deleteImage($id) {
+        $img = image::findOrFail($id);
+
+        // delete image file from storage 
+        $path_arr = explode("/", $img->image); 
+        $path_in_storage = 'public/'.$path_arr[1].'/'.$path_arr[2];
+        Storage::delete($path_in_storage);
+
+        // delete image form the database
+        $img->delete();
+
+        return redirect('CreatedImagesListView')->with('success-status', 'Image successfully deleted!');
     }
 }

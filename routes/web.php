@@ -8,6 +8,7 @@ use App\Http\Controllers\ImagesManagementSubsystemController;
 use App\Http\Controllers\ImagesSubsystemController;
 use App\Http\Controllers\PaymentsSubsystemController;
 use App\Http\Controllers\UserManagementSubsystemController;
+use App\View\Components\ActionConfirmationForm;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -29,8 +30,15 @@ use App\Http\Controllers\UserManagementSubsystemController;
 Route::post('TESTdoSomething',[ImagesSubsystemController::class,'TESTdoSomething'])->name('TESTdoSomething');
 
 // --------------------------------------------------------------------------
+// action confirmation form
+Route::get('cancelAction/{action}',[ActionConfirmationForm::class,'cancelAction'])->name('cancelAction');
+Route::get('confirmAction/{action}/{id}',[ActionConfirmationForm::class,'confirmAction'])->name('confirmAction');
+
+// --------------------------------------------------------------------------
 // ImagesManagementSubsystem
 Route::post('submitNewImageCreation',[ImagesManagementSubsystemController::class,'submitNewImageCreation'])->name('submitNewImageCreation');
+Route::get('submitCreatedImageDelete/{id}',[ImagesManagementSubsystemController::class,'submitImageDelete'])->name('submitCreatedImageDelete');
+Route::get('deleteCreatedImage/{id}',[ImagesManagementSubsystemController::class,'deleteImage'])->name('deleteCreatedImage');
 
 // when going to the route automatically execute "displayCreatedImageList" function in order to
 // already have a list of images to render when the page opens

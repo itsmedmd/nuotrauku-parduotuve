@@ -1,7 +1,3 @@
-<?php
-    use App\Http\Controllers\ImagesSubsystemController;
-?>
-
 @section('styles')
 <link rel="stylesheet" href="{{ asset('css/home.css') }}">
 @endsection
