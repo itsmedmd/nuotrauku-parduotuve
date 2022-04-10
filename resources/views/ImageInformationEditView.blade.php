@@ -7,26 +7,28 @@
 <main class="content image-information-edit-view">
     <div class="image-information-edit-image-container">
         <img
-            src="{{ asset('images/nft-2.png') }}"
-            alt="Image name 2"
+            src="{{ asset($image->image) }}"
+            alt="{{$image->title}}"
             class="image-information-edit-image"
         >
     </div>
     <div class="form-wrapper">
         <h2 class="form-title">Edit image information</h2>
         <!-- <h4>* The title must not be empty.</h4> -->
-        <form method="post">
+        <form method="post" action="{{ route('submitNewImageData') }}">
+            @csrf
+            <input name="id" type="hidden" value="{{$image->id}}">
             <div>
                 <label for="title">Title:</label><br>
-                <input name="title" id="title" type="text" maxlength="200" required value="Zucc">
+                <input name="title" id="title" type="text" maxlength="200" required value="{{$image->title}}">
             </div>	
             <div>
                 <label for="description">Description:</label><br>
-                <input name="description" id="description" type="text" maxlength="500" value="Zucc is the richest">
+                <input name="description" id="description" type="text" maxlength="500" value="{{$image->description}}">
             </div>	
             <div>
                 <label for="price">Price:</label><br>
-                <input name="price" id="price" type="number" min="0" step="0.01" value="1337">
+                <input name="price" id="price" type="number" min="0" step="0.01" value="{{$image->price}}">
             </div>	
             <div>
                 <input type="submit" name="new_image_form" value="Edit" class="form-submit-button">

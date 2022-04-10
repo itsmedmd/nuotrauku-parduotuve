@@ -10,14 +10,26 @@ class ImagesManagementSubsystemController extends Controller
 {
     private $USER_ID = 1;
 
+    // validate new image data
     private function validateNewImageData(Request $request) {
         $validatedData = $request->validate([
             'title' => 'required|max:200',
             'image' => 'required|image',
-            'description' => 'max:500'
+            'description' => 'max:500',
+            'price' => 'min:0'
         ]);
     }
 
+    // validate image information edit data
+    private function validateImageData(Request $request) {
+        $validatedData = $request->validate([
+            'title' => 'required|max:200',
+            'description' => 'max:500',
+            'price' => 'min:0'
+        ]);
+    }
+
+    // create new image
     public function submitNewImageCreation(Request $request)
     {
         $this->validateNewImageData($request);
@@ -47,11 +59,13 @@ class ImagesManagementSubsystemController extends Controller
         return redirect('CreatedImagesListView')->with('success-status', 'New image successfully created!');
     }
 
+    // open created images list
     public function displayCreatedImageList() {
         $images = image::where('fk_user_id_kurejas', $this->USER_ID)->get();
         return view('CreatedImagesListView', compact('images'));
     }
 
+    // open delete image view
     public function submitImageDelete($id) {
         return redirect('CreatedImagesListView')->with([
             'openActionConfirmationForm' => true,
@@ -59,6 +73,7 @@ class ImagesManagementSubsystemController extends Controller
         ]);
     }
 
+    // delete image
     public function deleteImage($id) {
         $img = image::findOrFail($id);
 
@@ -71,5 +86,24 @@ class ImagesManagementSubsystemController extends Controller
         $img->delete();
 
         return redirect('CreatedImagesListView')->with('success-status', 'Image successfully deleted!');
+    }
+
+    // open edit information view
+    public function editImageInformation($id) {
+        $img = image::findOrFail($id);
+        return view('ImageInformationEditView')->with('image', $img);
+    }
+
+    // edit information
+    public function submitNewImageData(Request $request) {
+        $this->validateImageData($request);
+
+        image::whereId($request->id)->update([
+            'title' => $request->title,
+            'description' => $request->description,
+            'price' => $request->price,
+        ]);
+
+        return redirect('CreatedImagesListView')->with('success-status', 'Successfully updated image information!');
     }
 }

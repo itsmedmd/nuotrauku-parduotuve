@@ -20,7 +20,7 @@
                      <a href="/">Home</a>
                   </li>
                   <li>
-                     <a href="CreatedImagesListView">Created Images List</a>
+                     <a href="/CreatedImagesListView">Created Images List</a>
                   </li>
                </ul>
             </nav>

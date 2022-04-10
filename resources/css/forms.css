@@ -38,7 +38,8 @@ form div select,
 
 .form-submit-button {
 	border: 1px solid #2c3e50;
-	margin: 10px;
+	margin: 0;
+	width: 239px;
 }
 
 .form-submit-button--green {
@@ -109,4 +110,8 @@ form div select,
 
 .form-visible {
 	display: block;
+}
+
+.image-upload-input {
+	padding-left: 0;
 }

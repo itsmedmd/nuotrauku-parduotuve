@@ -39,6 +39,8 @@ Route::get('confirmAction/{action}/{id}',[ActionConfirmationForm::class,'confirm
 Route::post('submitNewImageCreation',[ImagesManagementSubsystemController::class,'submitNewImageCreation'])->name('submitNewImageCreation');
 Route::get('submitCreatedImageDelete/{id}',[ImagesManagementSubsystemController::class,'submitImageDelete'])->name('submitCreatedImageDelete');
 Route::get('deleteCreatedImage/{id}',[ImagesManagementSubsystemController::class,'deleteImage'])->name('deleteCreatedImage');
+Route::get('editImageInformation/{id}',[ImagesManagementSubsystemController::class,'editImageInformation'])->name('editImageInformation');
+Route::post('submitNewImageData',[ImagesManagementSubsystemController::class,'submitNewImageData'])->name('submitNewImageData');
 
 // when going to the route automatically execute "displayCreatedImageList" function in order to
 // already have a list of images to render when the page opens

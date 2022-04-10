@@ -42,7 +42,9 @@
                             class="button button-default-actions"
                             onclick="editImageInformation({{ $img->id }})"
                         >
-                            Edit
+                            <a href="{{ route('editImageInformation', ['id' => $img->id]) }}">
+                                Edit
+                            </a> 
                         </button>
                         <button class="button button-default-actions">
                             <a href="{{ route('submitCreatedImageDelete', ['id' => $img->id]) }}">
@@ -62,11 +64,6 @@
 <script>
     const openImageCreationView = () => {
         window.location.href = "/ImageCreationView";
-    };
-
-    const editImageInformation = (id) => {
-        console.log("edit", id);
-        //window.location.href = "/ImageInformationEditView";
     };
 </script>
 @endsection

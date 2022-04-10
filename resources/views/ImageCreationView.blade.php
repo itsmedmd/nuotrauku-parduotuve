@@ -24,7 +24,7 @@
             </div>
             <div>
                 <label for="image">Image file:</label><br>
-                <input  id="image" name="image" type="file" placeholder="Choose image" required>
+                <input class="image-upload-input" id="image" name="image" type="file" placeholder="Choose image" required>
             </div>	
             <div>
                 <label for="description">Description (not required):</label><br>
