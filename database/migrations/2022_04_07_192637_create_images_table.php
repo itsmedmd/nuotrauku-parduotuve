@@ -23,15 +23,17 @@ return new class extends Migration
             $table->boolean('is_visible')->default(true);
             $table->string('image', 1000);
 
-            $table->unsignedBigInteger('fk_collection_id_dabartine');
-            $table->unsignedBigInteger('fk_collection_id_originali');
+            $table->unsignedBigInteger('fk_collection_id_dabartine')->nullable();
+            $table->unsignedBigInteger('fk_collection_id_originali')->nullable();
             $table->unsignedBigInteger('fk_user_id_savininkas');
             $table->unsignedBigInteger('fk_user_id_kurejas');
 
-            $table->foreign('fk_collection_id_dabartine')->references('id')->on('collections')->nullable();
+            $table->foreign('fk_collection_id_dabartine')->references('id')->on('collections');
             $table->foreign('fk_collection_id_originali')->references('id')->on('collections');
             $table->foreign('fk_user_id_savininkas')->references('id')->on('users');
             $table->foreign('fk_user_id_kurejas')->references('id')->on('users');
+            
+            $table->timestamps();
         });
     }
 

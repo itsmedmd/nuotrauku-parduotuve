@@ -9,6 +9,7 @@
       <link rel="stylesheet" href="{{ asset('css/app.css') }}">
       <link rel="stylesheet" href="{{ asset('css/navigation.css') }}">
       <link rel="stylesheet" href="{{ asset('css/forms.css') }}">
+      <link rel="stylesheet" href="{{ asset('css/action-confirmation-form.css') }}">
       @yield('styles')
    </head>
    <body>
@@ -19,7 +20,7 @@
                      <a href="/">Home</a>
                   </li>
                   <li>
-                     <a href="CreatedImagesListView">Created Images List</a>
+                     <a href="/CreatedImagesListView">Created Images List</a>
                   </li>
                </ul>
             </nav>

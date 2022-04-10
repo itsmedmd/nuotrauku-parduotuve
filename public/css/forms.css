@@ -38,7 +38,8 @@ form div select,
 
 .form-submit-button {
 	border: 1px solid #2c3e50;
-	margin: 10px;
+	margin: 0;
+	width: 239px;
 }
 
 .form-submit-button--green {
@@ -57,16 +58,14 @@ form div select,
 }
 
 /* Error and success messages */
-.status-msg-error,
-.status-msg-success {
-	font-weight: bold;
-	text-align: center;
+.status-container {
+	margin-bottom: 20px;
 }
 
-.status-msg-error {
+.error {
 	color: rgb(199, 28, 28);
 }
-.status-msg-success {
+.success {
 	color: rgb(105, 189, 22);
 }
 
@@ -112,3 +111,8 @@ form div select,
 .form-visible {
 	display: block;
 }
+
+.image-upload-input {
+	padding-left: 0;
+}
+

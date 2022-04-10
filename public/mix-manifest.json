@@ -1,10 +1,11 @@
 {
     "/js/app.js": "/js/app.js",
-    "/css/image-creation-view.css": "/css/image-creation-view.css",
     "/css/home.css": "/css/home.css",
     "/css/forms.css": "/css/forms.css",
     "/css/created-images-list-view.css": "/css/created-images-list-view.css",
     "/css/app.css": "/css/app.css",
+    "/css/action-confirmation-form.css": "/css/action-confirmation-form.css",
     "/css/navigation.css": "/css/navigation.css",
-    "/css/image-information-edit-view.css": "/css/image-information-edit-view.css"
+    "/css/image-information-edit-view.css": "/css/image-information-edit-view.css",
+    "/css/image-creation-view.css": "/css/image-creation-view.css"
 }

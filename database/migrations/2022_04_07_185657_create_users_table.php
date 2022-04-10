@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('profile_picture', 1000)->nullable();
             $table->boolean('is_blocked')->default(false);
             $table->enum('account_type', ['admin', 'user'])->default('user');
+            $table->timestamps();
         });
     }
 

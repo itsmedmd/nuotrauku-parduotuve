@@ -10,6 +10,8 @@
 - Projekto direktorijoje paleisti komandą "php artisan migrate", kad būtų sukurti visi DB stulpeliai lokalioje duomenų bazėje
 - Projekto direktorijoje paleisti komandą "composer install", kad būtų įrašyti visi composer dependencies
 - Projekto direktorijoje paleisti komandą "npm install", kad būtų įrašyti visi npm dependencies
+- "storage/app/public" direktorijoje sukurti "images" direktoriją, kuri būtų pasiekiama per "storage/app/public/images"
+- Kad būtų galima pasiekti nuotraukas, įvykdyti komandą "php artisan storage:link", kad būtų sukurtas simbolinis susiejimas su "storage/app/public" direktorija ir "public" direktorija
 
 ## Projekto paleidimas
 - Paleisti XAMPP Control Panel bent "MySQL", o jei norima naudoti ir phpmyadmin, tada paleisti ir "Apache" serverį
