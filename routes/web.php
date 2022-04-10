@@ -26,9 +26,6 @@ use App\View\Components\ActionConfirmationForm;
 // controller methods
 // --------------------------------------------------------------------------
 
-// ImagesSubsystem
-Route::post('TESTdoSomething',[ImagesSubsystemController::class,'TESTdoSomething'])->name('TESTdoSomething');
-
 // --------------------------------------------------------------------------
 // action confirmation form
 Route::get('cancelAction/{action}',[ActionConfirmationForm::class,'cancelAction'])->name('cancelAction');
@@ -45,6 +42,11 @@ Route::post('submitNewImageData',[ImagesManagementSubsystemController::class,'su
 // when going to the route automatically execute "displayCreatedImageList" function in order to
 // already have a list of images to render when the page opens
 Route::get('CreatedImagesListView', [ImagesManagementSubsystemController::class,'displayCreatedImageList']);
+
+
+// --------------------------------------------------------------------------
+// ImagesSubsystem
+Route::post('TESTdoSomething',[ImagesSubsystemController::class,'TESTdoSomething'])->name('TESTdoSomething');
 
 
 // --------------------------------------------------------------------------
