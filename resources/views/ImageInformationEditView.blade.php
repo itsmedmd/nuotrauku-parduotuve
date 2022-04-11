@@ -14,7 +14,15 @@
     </div>
     <div class="form-wrapper">
         <h2 class="form-title">Edit image information</h2>
-        <!-- <h4>* The title must not be empty.</h4> -->
+    
+        @if ($errors->any())
+            <div class="status-container">
+                @foreach ($errors->all() as $error)
+                    <h4 class="error">* {{ $error }}</h4>
+                @endforeach
+            </div>
+        @endif
+
         <form method="post" action="{{ route('submitNewImageData') }}">
             @csrf
             <input name="id" type="hidden" value="{{$image->id}}">
