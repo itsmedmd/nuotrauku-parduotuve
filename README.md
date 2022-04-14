@@ -1,21 +1,19 @@
 ## Projekto įrašymas
-* Projekto pradinis setup padarytas pagal pavyzdį: https://www.positronx.io/php-laravel-crud-operations-mysql-tutorial
-
-- Įsisirašyti Node.js (kartu bus ir npm), PHP, Composer ir XAMPP (galima ir kitą), bet paleidimas bus aprašomas su XAMPP
+- Įsisirašyti Node.js (kartu bus ir npm), PHP, Composer ir XAMPP (galima ir kitą vietoj XAMPP), bet paleidimas bus aprašomas su XAMPP
 - Pasisiųsti projekto failus
 - Nukopijuoti ".env.example" failą į lokalų failą ".env"
 - Projekto direktorijoje paleisti komandą "php artisan key:generate"
 - Pasileisti XAMPP Control Panel ir įjungti "Apache" ir "MySQL"
 - Nuėjus į "http://localhost/phpmyadmin" sukurti naują DB pavadinimu "nuotrauku_db" ir nustatyti "utf8_lithuanian_ci"
-- Projekto direktorijoje paleisti komandą "php artisan migrate", kad būtų sukurti visi DB stulpeliai lokalioje duomenų bazėje
-- Projekto direktorijoje paleisti komandą "composer install", kad būtų įrašyti visi composer dependencies
-- Projekto direktorijoje paleisti komandą "npm install", kad būtų įrašyti visi npm dependencies
-- "storage/app/public" direktorijoje sukurti "images" direktoriją, kuri būtų pasiekiama per "storage/app/public/images"
+- Projekto direktorijoje paleisti komandą "php artisan migrate", kad būtų sukurtos visos lentelės lokalioje duomenų bazėje
+- Projekto direktorijoje paleisti komandą "composer install", kad būtų įrašyti visi composer paketai
+- Projekto direktorijoje paleisti komandą "npm install", kad būtų įrašyti visi npm paketai
+- "storage/app/public" direktorijoje sukurti "images" direktoriją, kuri būtų pasiekiama per "storage/app/public/images" (bus reikalinga lokaliam nuotraukų saugojimui)
 - Kad būtų galima pasiekti nuotraukas, įvykdyti komandą "php artisan storage:link", kad būtų sukurtas simbolinis susiejimas su "storage/app/public" direktorija ir "public" direktorija
 
 ## Projekto paleidimas
 - Paleisti XAMPP Control Panel bent "MySQL", o jei norima naudoti ir phpmyadmin, tada paleisti ir "Apache" serverį
-- Projekto direktorijoje paleisti komandą "npm run watch", kad būtų kompiliuojami stiliai po kiekvieno failo išsaugojimo. (jei sukuriami nauji css failai jau veikiant npm run watch, komandą reikia paleisti iš naujo, kad pamatytų naujus failus ir juos pradėtų kompiliuoti).
+- Projekto direktorijoje paleisti komandą "npm run watch", kad būtų kompiliuojami stiliai po kiekvieno .css failo išsaugojimo. (jei sukuriami nauji css failai jau veikiant npm run watch, komandą reikia paleisti iš naujo, kad pamatytų naujus failus ir juos pradėtų kompiliuoti).
 - Projekto direktorijoje paleisti komandą "php artisan serve", po kurios konsolėje bus parodomas adresas, kuriuo galima pasiekti paleistą projektą.
 
 -- Norint pamatyti kode atliktus pakeitimus, reikia perkrauti puslapį
