@@ -39,7 +39,11 @@ form div select,
 .form-submit-button {
 	border: 1px solid #2c3e50;
 	margin: 0;
-	width: 239px;
+}
+
+input,
+select {
+	width: 100%;
 }
 
 .form-submit-button--green {

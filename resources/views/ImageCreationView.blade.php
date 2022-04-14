@@ -27,6 +27,14 @@
                 <input class="image-upload-input" id="image" name="image" type="file" placeholder="Choose image" required>
             </div>	
             <div>
+                <label for="collection_id">Assigned collection:</label><br>
+                <select name="collection_id" id="collection_id">
+                    @foreach($collections as $collection)
+                        <option value="{{ $collection->id }}">{{ $collection->name }}</option>
+                    @endforeach
+                </select>
+            </div>	
+            <div>
                 <label for="description">Description (not required):</label><br>
                 <input name="description" id="description" type="text" maxlength="500">
             </div>	

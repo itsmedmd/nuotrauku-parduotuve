@@ -26,50 +26,48 @@ use App\View\Components\ActionConfirmationForm;
 // controller methods
 // --------------------------------------------------------------------------
 
-// --------------------------------------------------------------------------
+// @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 // action confirmation form
 Route::get('cancelAction/{action}',[ActionConfirmationForm::class,'cancelAction'])->name('cancelAction');
 Route::get('confirmAction/{action}/{id}',[ActionConfirmationForm::class,'confirmAction'])->name('confirmAction');
 
-// --------------------------------------------------------------------------
+// @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 // ImagesManagementSubsystem
 Route::post('submitNewImageCreation',[ImagesManagementSubsystemController::class,'submitNewImageCreation'])->name('submitNewImageCreation');
 Route::get('submitCreatedImageDelete/{id}',[ImagesManagementSubsystemController::class,'submitImageDelete'])->name('submitCreatedImageDelete');
 Route::get('deleteCreatedImage/{id}',[ImagesManagementSubsystemController::class,'deleteImage'])->name('deleteCreatedImage');
 Route::get('editImageInformation/{id}',[ImagesManagementSubsystemController::class,'editImageInformation'])->name('editImageInformation');
 Route::post('submitNewImageData',[ImagesManagementSubsystemController::class,'submitNewImageData'])->name('submitNewImageData');
-
-// when going to the route automatically execute "displayCreatedImageList" function in order to
-// already have a list of images to render when the page opens
+Route::get('ImageCreationView', [ImagesManagementSubsystemController::class,'openImageCreationView']);
 Route::get('CreatedImagesListView', [ImagesManagementSubsystemController::class,'displayCreatedImageList']);
 
 
-// --------------------------------------------------------------------------
+// @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 // ImagesSubsystem
 Route::post('TESTdoSomething',[ImagesSubsystemController::class,'TESTdoSomething'])->name('TESTdoSomething');
 
 
-// --------------------------------------------------------------------------
+// @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 // AdminSubsystem
 
-// --------------------------------------------------------------------------
+// @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 // AuctionsSubsystem
 
-// --------------------------------------------------------------------------
+// @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 // AwardsSubsystem
 
-// --------------------------------------------------------------------------
+// @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 // CollectionsSubsystem
 
-// --------------------------------------------------------------------------
+// @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 // PaymentsSubsystem
 
-// --------------------------------------------------------------------------
+// @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 // UserManagementSubsystem
 
 
-// --------------------------------------------------------------------------
-// routes
+// @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+// ungrouped routes
 Route::get('/', function () {
     return view('HomePage');
 });
@@ -136,10 +134,6 @@ Route::get('ImageInformationView', function () {
 
 Route::get('ImageInformationEditView', function () {
     return view('ImageInformationEditView');
-});
-
-Route::get('ImageCreationView', function () {
-    return view('ImageCreationView');
 });
 
 Route::get('ImagePriceHistoryView', function () {

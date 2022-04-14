@@ -24,7 +24,7 @@ return new class extends Migration
             $table->string('image', 1000);
 
             $table->unsignedBigInteger('fk_collection_id_dabartine')->nullable();
-            $table->unsignedBigInteger('fk_collection_id_originali')->nullable();
+            $table->unsignedBigInteger('fk_collection_id_originali');
             $table->unsignedBigInteger('fk_user_id_savininkas');
             $table->unsignedBigInteger('fk_user_id_kurejas');
 

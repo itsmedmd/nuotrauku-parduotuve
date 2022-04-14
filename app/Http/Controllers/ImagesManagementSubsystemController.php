@@ -5,10 +5,11 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Image;
+use App\Models\collection;
 
 class ImagesManagementSubsystemController extends Controller
 {
-    private $USER_ID = 1;
+    private $USER_ID = 2;
 
     // validate new image data
     private function validateNewImageData(Request $request) {
@@ -16,7 +17,8 @@ class ImagesManagementSubsystemController extends Controller
             'title' => 'required|max:200',
             'image' => 'required|image',
             'description' => 'max:500',
-            'price' => 'min:0'
+            'price' => 'min:0',
+            'collection_id' => 'required'
         ]);
     }
 
@@ -27,6 +29,12 @@ class ImagesManagementSubsystemController extends Controller
             'description' => 'max:500',
             'price' => 'min:0'
         ]);
+    }
+
+    // open image creation view with collections list to select from
+    public function openImageCreationView() {
+        $collections = collection::where('fk_user_id_kurejas', $this->USER_ID)->get();
+        return view('ImageCreationView', compact('collections'));
     }
 
     // create new image
@@ -46,8 +54,8 @@ class ImagesManagementSubsystemController extends Controller
         $img->rating = 0;
         $img->price = $request->price;
         $img->is_visible = true;
-        $img->fk_collection_id_dabartine = NULL;
-        $img->fk_collection_id_originali = NULL;
+        $img->fk_collection_id_dabartine = $request->collection_id;
+        $img->fk_collection_id_originali = $request->collection_id;
         $img->fk_user_id_savininkas = $this->USER_ID;
         $img->fk_user_id_kurejas = $this->USER_ID;
         
@@ -88,7 +96,7 @@ class ImagesManagementSubsystemController extends Controller
         return redirect('CreatedImagesListView')->with('success-status', 'Image successfully deleted!');
     }
 
-    // open edit information view
+    // open edit information view with selected image information
     public function editImageInformation($id) {
         $img = image::findOrFail($id);
         return view('ImageInformationEditView')->with('image', $img);
