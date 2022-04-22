@@ -13,4 +13,5 @@ class award extends Model
         'fk_user_id_laimetojas',
         'fk_image_id'
     ];
+    protected $table = 'awards';
 }

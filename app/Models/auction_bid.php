@@ -13,4 +13,5 @@ class auction_bid extends Model
         'fk_auction_id',
         'fk_user_id'
     ];
+    protected $table = 'auction_bids';
 }

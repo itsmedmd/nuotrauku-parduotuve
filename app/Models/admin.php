@@ -12,4 +12,5 @@ class admin extends Model
         'role_level',
         'id_user'
     ];
+    protected $table = 'admins';
 }

@@ -13,4 +13,5 @@ class bill extends Model
         'fk_user_id',
         'fk_image_id',
     ];
+    protected $table = 'bills';
 }

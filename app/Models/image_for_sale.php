@@ -12,4 +12,5 @@ class image_for_sale extends Model
         'price',
         'fk_image_id'
     ];
+    protected $table = 'images_for_sale';
 }

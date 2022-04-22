@@ -13,4 +13,5 @@ class image_rating extends Model
         'fk_user_id_vertintojas',
         'fk_image_id'
     ];
+    protected $table = 'image_ratings';
 }

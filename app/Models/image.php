@@ -20,4 +20,5 @@ class image extends Model
         'fk_user_id_kurejas',
         'image'
     ];
+    protected $table = 'images';
 }

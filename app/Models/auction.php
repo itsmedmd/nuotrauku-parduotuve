@@ -16,4 +16,5 @@ class auction extends Model
         'status',
         'fk_image_id'
     ];
+    protected $table = 'auctions';
 }

@@ -13,4 +13,5 @@ class collection extends Model
         'description',
         'fk_user_id_kurejas'
     ];
+    protected $table = 'collections';
 }
