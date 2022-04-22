@@ -10,7 +10,7 @@ use App\Models\collection;
 
 class ImagesManagementSubsystemController extends Controller
 {
-    private $USER_ID = 2;
+    private $USER_ID = 1;
 
     // validate new image data
     private function validateNewImageData(Request $request) {
