@@ -27,8 +27,14 @@
     margin-left: 12px;
 }
 
+.images-for-sale__sort-container {
+    margin-bottom: 36px;
+}
+
 .images-for-sale__sorting {
     text-align: center;
+    padding: 4px 12px;
+    margin-right: 16px;
 }
 
 .images-for-sale__filtering {
@@ -37,7 +43,6 @@
 }
 
 /* images for sale list */
-
 .images-for-sale__images-list {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
