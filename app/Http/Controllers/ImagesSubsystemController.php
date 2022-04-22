@@ -20,7 +20,7 @@ class ImagesSubsystemController extends Controller
     // }
 
     // gets all images for sale with their information
-    public function getImagesForSale() {
+    private function getAllImagesForSale () {
         $images = DB::select('
             SELECT
                 images.title as title,
@@ -34,35 +34,63 @@ class ImagesSubsystemController extends Controller
             INNER JOIN collections
                 ON images.fk_collection_id_dabartine = collections.id
             WHERE images.is_visible = 1
+            ORDER BY images.creation_date DESC
         ');
+
+        return $images;
+    }
+
+    // gets all images that match search input
+    private function getSearchResults($text, $order = "DESC") {
+        $images = DB::select(
+            "
+                SELECT
+                    images.title as title,
+                    images.image as img_url,
+                    collections.name as collection,
+                    images_for_sale.price as price,
+                    images.description as img_description
+                FROM images_for_sale
+                INNER JOIN images
+                    ON images_for_sale.fk_image_id = images.id
+                INNER JOIN collections
+                    ON images.fk_collection_id_dabartine = collections.id
+                WHERE
+                    images.is_visible = 1
+                    AND
+                    (
+                        images.title LIKE '%".$text."%'
+                        OR images.description LIKE '%".$text."%'
+                        OR collections.name LIKE '%".$text."%'
+                    )
+                ORDER BY images_for_sale.price ".$order
+            );
+
+        return $images;
+    }
+
+    // return view with all images
+    public function getImagesForSale() {
+        $images = $this->getAllImagesForSale();
+        return view('ImagesListView', compact('images'));
+    }
+
+    // return view with search results
+    public function submitImageSearch(Request $request) {
+        $images = $this->getSearchResults($request->text);
+        return view('ImagesListView', compact('images'));
+    }
+
+    // sort images by price in descending order
+    public function sortImageListDesc(Request $request) {
+        $images = $this->getSearchResults($request->text, "DESC");
 
         return view('ImagesListView', compact('images'));
     }
 
-    // search images for sale for their title/description/collection
-    public function submitImageSearch(Request $request) {
-        $images = DB::select(
-        "
-            SELECT
-                images.title as title,
-                images.image as img_url,
-                collections.name as collection,
-                images_for_sale.price as price,
-                images.description as img_description
-            FROM images_for_sale
-            INNER JOIN images
-                ON images_for_sale.fk_image_id = images.id
-            INNER JOIN collections
-                ON images.fk_collection_id_dabartine = collections.id
-            WHERE
-                images.is_visible = 1
-                AND
-                (
-                    images.title LIKE '%".$request->text."%'
-                    OR images.description LIKE '%".$request->text."%'
-                    OR collections.name LIKE '%".$request->text."%'
-                )
-        ");
+    // sort images by price in ascending order
+    public function sortImageListAsc(Request $request) {
+        $images = $this->getSearchResults($request->text, "ASC");
 
         return view('ImagesListView', compact('images'));
     }

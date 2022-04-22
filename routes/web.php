@@ -48,6 +48,9 @@ Route::get('CreatedImagesListView', [ImagesManagementSubsystemController::class,
 
 Route::get('ImagesListView', [ImagesSubsystemController::class,'getImagesForSale']);
 Route::get('submitImageSearch', [ImagesSubsystemController::class,'submitImageSearch'])->name('submitImageSearch');
+Route::get('sortImageListDesc',[ImagesSubsystemController::class,'sortImageListDesc'])->name('sortImageListDesc');
+Route::get('sortImageListAsc',[ImagesSubsystemController::class,'sortImageListAsc'])->name('sortImageListAsc');
+
 
 
 // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@

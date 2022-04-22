@@ -25,6 +25,18 @@
                     value="Search"
                 />
             </form>
+            <a
+                class="form-submit-button images-for-sale__sorting"
+                href="{{ route('sortImageListAsc', ['text' => app('request')->input('text')]) }}"
+            >
+                Sort Price Ascending
+            </a>
+            <a
+                class="form-submit-button images-for-sale__sorting"
+                href="{{ route('sortImageListDesc', ['text' => app('request')->input('text')]) }}"
+            >
+                Sort Price Descending
+            </a>
             <div class="images-for-sale__filtering">
                 filtering here
             </div>
@@ -47,7 +59,7 @@
                             <p class="images-for-sale__card-collection">Collection: <b>{{ $img->collection }}</b></p>
                             <p class="images-for-sale__card-description">{{ $img->img_description }}</p>
                         </div>
-</a>
+                    </a>
                 @endforeach
             </div>
         </div>
