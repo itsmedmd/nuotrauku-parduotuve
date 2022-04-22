@@ -46,6 +46,8 @@ Route::get('CreatedImagesListView', [ImagesManagementSubsystemController::class,
 // ImagesSubsystem
 Route::post('TESTdoSomething',[ImagesSubsystemController::class,'TESTdoSomething'])->name('TESTdoSomething');
 
+Route::get('ImagesListView', [ImagesSubsystemController::class,'getImagesForSale']);
+
 
 // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 // AdminSubsystem
@@ -146,10 +148,6 @@ Route::get('ImagePurchaseInformationView', function () {
 
 Route::get('ImageRightsTransferView', function () {
     return view('ImageRightsTransferView');
-});
-
-Route::get('ImagesListView', function () {
-    return view('ImagesListView');
 });
 
 Route::get('LoginView', function () {

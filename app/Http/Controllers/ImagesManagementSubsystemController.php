@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Image;
+use App\Models\image_for_sale;
 use App\Models\collection;
 
 class ImagesManagementSubsystemController extends Controller
@@ -17,7 +18,7 @@ class ImagesManagementSubsystemController extends Controller
             'title' => 'required|max:200',
             'image' => 'required|image',
             'description' => 'max:500',
-            'price' => 'min:0',
+            'price' => 'required|min:0',
             'collection_id' => 'required'
         ]);
     }
@@ -27,7 +28,7 @@ class ImagesManagementSubsystemController extends Controller
         $validatedData = $request->validate([
             'title' => 'required|max:200',
             'description' => 'max:500',
-            'price' => 'min:0'
+            'price' => 'required|min:0'
         ]);
     }
 
@@ -63,6 +64,13 @@ class ImagesManagementSubsystemController extends Controller
         $img->image = 'storage/'.$path_arr[1].'/'.$path_arr[2];
 
         $img->save();
+        $img_id = $img->id; // get id of created image entry
+
+        // create image_for_sale for this image
+        $img_for_sale = new image_for_sale;
+        $img_for_sale->price = $request->price;
+        $img_for_sale->fk_image_id = $img_id;
+        $img_for_sale->save();
         
         return redirect('CreatedImagesListView')->with('success-status', 'New image successfully created!');
     }

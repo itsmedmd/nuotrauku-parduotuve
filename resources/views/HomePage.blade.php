@@ -21,19 +21,19 @@
 
 @section('js')
 <script>
-    const csrfToken = '{{csrf_token()}}';
+    // const csrfToken = '{{csrf_token()}}';
 
-    // "$" comes from jquery (imported in layout file)
-    const doSomething = () => {
-        $.post('{{route('TESTdoSomething')}}', { _token: csrfToken }, function (data) {
-            console.log("all received data: ", data);
+    // // "$" comes from jquery (imported in layout file)
+    // const doSomething = () => {
+    //     $.post('{{route('TESTdoSomething')}}', { _token: csrfToken }, function (data) {
+    //         console.log("all received data: ", data);
 
-            if (data.status === "error") {
-                console.log("error! message from data: ", data.message);
-            } else{
-                console.log("success!");
-            }
-        });
-    };
+    //         if (data.status === "error") {
+    //             console.log("error! message from data: ", data.message);
+    //         } else{
+    //             console.log("success!");
+    //         }
+    //     });
+    // };
 </script>
 @endsection
