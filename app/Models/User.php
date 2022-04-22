@@ -17,4 +17,5 @@ class user extends Model
         'is_blocked',
         'account_type'
     ];
+    protected $table = 'users';
 }

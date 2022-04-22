@@ -13,4 +13,5 @@ class comment extends Model
         'fk_user_id',
         'fk_image_for_sale_id'
     ];
+    protected $table = 'comments';
 }
