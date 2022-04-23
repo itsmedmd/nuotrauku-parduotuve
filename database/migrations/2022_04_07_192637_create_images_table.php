@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\DB;
 
 return new class extends Migration
 {
@@ -19,7 +20,7 @@ return new class extends Migration
             $table->string('description', 500)->nullable();
             $table->integer('rating')->default(0);
             $table->float('price')->nullable();
-            $table->timestamp('creation_date');
+            $table->timestamp('creation_date')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->boolean('is_visible')->default(true);
             $table->string('image', 1000);
 

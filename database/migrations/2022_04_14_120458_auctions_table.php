@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\DB;
 
 return new class extends Migration
 {
@@ -15,7 +16,7 @@ return new class extends Migration
     {
         Schema::create('auctions', function (Blueprint $table) {
             $table->id();
-            $table->timestamp('creation_date');
+            $table->timestamp('creation_date')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->dateTime('end_date')->nullable();
             $table->float('price');
             $table->float('initial_price');
