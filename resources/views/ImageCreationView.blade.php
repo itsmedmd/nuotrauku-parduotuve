@@ -39,8 +39,8 @@
                 <input name="description" id="description" type="text" maxlength="500">
             </div>	
             <div>
-                <label for="price">Price (not required):</label><br>
-                <input name="price" id="price" type="number" min="0" step="0.01">
+                <label for="price">Price:</label><br>
+                <input name="price" id="price" type="number" min="0" step="0.01" required>
             </div>	
             <div>
                 <input type="submit" name="new_image_form" value="Create" class="form-submit-button">

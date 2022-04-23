@@ -1,0 +1,239 @@
+.image-information-view__content {
+    margin-bottom: 64px;
+}
+
+.image-information-view__row {
+    display: flex;
+    margin-bottom: 24px;
+}
+
+/* image information */
+.image-information-view__rating-container {
+    display: flex;
+    flex-direction: column;
+    font-size: 34px;
+    margin-right: 12px;
+    text-align: center;
+}
+
+.image-information-view__rate-up:hover {
+    color: rgb(36, 153, 0);
+}
+
+.image-information-view__rate-up:active {
+    color: rgb(33, 141, 0);
+}
+
+.image-information-view__rate-down:hover {
+    color: rgb(226, 0, 0);
+}
+
+.image-information-view__rate-down:active {
+    color: rgb(207, 0, 0);
+}
+
+.image-information-view__image {
+    object-fit: cover;
+    height: 400px;
+    width: 450px;
+}
+
+.image-information-view__image-text {
+    margin-left: 24px;
+    padding: 8px 16px;
+    flex-grow: 1;
+    border: 1px solid rgba(0, 0, 0, 0.4);
+}
+
+.image-information-view__image-title {
+    margin-bottom: 4px;
+}
+
+.image-information-view__image-price {
+    color: rgb(36, 153, 0);
+    margin-bottom: 16px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+    padding-bottom: 6px;
+}
+
+.image-information-view__image-creation-date {
+    margin-bottom: 6px;
+}
+
+.image-information-view__image-seller {
+    margin-bottom: 16px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+    padding-bottom: 4px;
+}
+
+.image-information-view__image-seller-name {
+    color: rgb(36, 153, 0);
+}
+
+.image-information-view__image-coll {
+    padding-bottom: 4px;
+}
+
+.image-information-view__image-coll-name {
+    font-weight: normal;
+    padding-left: 16px;
+    font-size: 18px;
+}
+
+.image-information-view__image-coll-desc {
+    font-weight: normal;
+    padding-left: 16px;
+    padding-bottom: 8px;
+    font-size: 18px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+    margin-bottom: 16px;
+}
+
+.image-information-view__image-desc-title {
+    padding-bottom: 12px;
+}
+
+.image-information-view__image-desc {
+    padding-left: 16px;
+}
+
+/* image action buttons */
+.image-information-view__buy-button,
+.image-information-view__price-history-button,
+.image-information-view__new-recommendations-button {
+    font-size: 22px;
+    padding: 6px 16px;
+    color: black;
+    text-transform: uppercase;
+    border: 1px solid rgba(0, 0, 0, 0.5);
+    border-radius: 5px;
+    display: inline-block;
+}
+
+.image-information-view__buy-button {
+    background-color: rgb(36, 153, 0);
+    border-color: rgb(36, 153, 0);
+    color: white;
+    margin: 0 34px 0 40px;
+}
+
+.image-information-view__buy-button:hover {
+    background-color: rgb(42, 180, 0);
+}
+
+.image-information-view__buy-button:active {
+    background-color: rgb(33, 141, 0);
+}
+
+.image-information-view__price-history-button:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+.image-information-view__price-history-button:active {
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
+/* comments */
+.image-information-view__no-comments-msg {
+    margin-top: 16px;
+}
+
+.image-information-view__comments,
+.image-information-view__recommendations {
+    max-width: 1200px;
+    margin: 0 auto 64px;
+}
+
+.image-information-view__comments-title,
+.image-information-view__recommendations-title {
+    padding-bottom: 8px;
+}
+
+.image-information-view__comments-content,
+.image-information-view__recommendations-list {
+    border: 1px solid rgba(0, 0, 0, 0.5);
+    padding: 16px;
+}
+
+.image-information-view__comment-form {
+    display: flex;
+    align-items: center;
+    width: 70%;
+    margin: 0 auto;
+}
+
+.image-information-view__comment-input {
+    display: inline-block;
+    flex-grow: 1;
+    font-size: 20px;
+    margin: 4px 0;
+    padding: 4px 12px;
+    height: 100%;
+}
+
+.image-information-view__comment-submit {
+    display: inline-block;
+    width: 160px;
+    font-size: 20px;
+    height: 100%;
+    margin-left: 12px;
+}
+
+.image-information-view__comment-container {
+    display: flex;
+    padding: 8px 12px 8px 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.7);
+}
+
+.image-information-view__comment-container:first-of-type {
+    border-top: 1px solid rgba(0, 0, 0, 0.7);
+    margin-top: 24px;
+}
+
+.image-information-view__comment-container:last-of-type {
+    border-bottom: 0;
+    padding-bottom: 0;
+}
+
+.image-information-view__comment-content {
+    display: flex;
+    flex-direction: column;
+}
+
+.image-information-view__comment-author-image {
+    width: 48px;
+    height: 48px;
+    object-fit: cover;
+    margin-right: 16px;
+}
+
+.image-information-view__comment-author {
+    font-size: 20px;
+    font-weight: bold;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    padding-bottom: 4px;
+}
+
+.image-information-view__comment-date {
+    font-size: 18px;
+    font-weight: normal;
+    margin-left: 16px;
+}
+
+.image-information-view__comment-text {
+    margin-top: 8px;
+    font-size: 17px;
+    padding-left: 16px;
+}
+
+/* recommendations */
+.image-information-view__recommendations {
+}
+
+.image-information-view__recommendations-list {
+
+}
+
+.image-information-view__new-recommendations-button {
+    margin-top: 12px;
+}

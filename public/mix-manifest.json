@@ -6,6 +6,8 @@
     "/css/app.css": "/css/app.css",
     "/css/action-confirmation-form.css": "/css/action-confirmation-form.css",
     "/css/navigation.css": "/css/navigation.css",
+    "/css/images-for-sale-list-view.css": "/css/images-for-sale-list-view.css",
+    "/css/image-information-view.css": "/css/image-information-view.css",
     "/css/image-information-edit-view.css": "/css/image-information-edit-view.css",
     "/css/image-creation-view.css": "/css/image-creation-view.css"
 }
