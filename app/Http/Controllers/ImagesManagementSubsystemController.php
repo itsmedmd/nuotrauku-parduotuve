@@ -64,20 +64,21 @@ class ImagesManagementSubsystemController extends Controller
         $img->image = 'storage/'.$path_arr[1].'/'.$path_arr[2];
 
         $img->save();
-        $img_id = $img->id; // get id of created image entry
 
+        // --- THIS WORKS CORRECTLY, IT JUST NEEDS TO BE A SEPARATE FUNCTION FOR "PA19" USE CASE:
         // create image_for_sale for this image
-        $img_for_sale = new image_for_sale;
-        $img_for_sale->price = $request->price;
-        $img_for_sale->fk_image_id = $img_id;
-        $img_for_sale->save();
+        // $img_id = $img->id; // get id of created image entry
+        // $img_for_sale = new image_for_sale;
+        // $img_for_sale->price = $request->price;
+        // $img_for_sale->fk_image_id = $img_id;
+        // $img_for_sale->save();
         
         return redirect('CreatedImagesListView')->with('success-status', 'New image successfully created!');
     }
 
     // open created images list
     public function displayCreatedImageList() {
-        $images = image::where('fk_user_id_kurejas', $this->USER_ID)->get();
+        $images = image::where('fk_user_id_kurejas', $this->USER_ID)->orderBy('creation_date', 'desc')->get();
         return view('CreatedImagesListView', compact('images'));
     }
 
