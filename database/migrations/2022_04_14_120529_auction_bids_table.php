@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\DB;
 
 return new class extends Migration
 {
@@ -16,7 +17,7 @@ return new class extends Migration
         Schema::create('auction_bids', function (Blueprint $table) {
             $table->id();
             $table->float('price');
-            $table->timestamp('bid_date');
+            $table->timestamp('bid_date')->default(DB::raw('CURRENT_TIMESTAMP'));
 
             $table->unsignedBigInteger('fk_auction_id');
             $table->foreign('fk_auction_id')->references('id')->on('auctions');

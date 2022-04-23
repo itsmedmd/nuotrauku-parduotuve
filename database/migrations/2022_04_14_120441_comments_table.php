@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\DB;
 
 return new class extends Migration
 {
@@ -16,7 +17,7 @@ return new class extends Migration
         Schema::create('comments', function (Blueprint $table) {
             $table->id();
             $table->string('comment', 500);
-            $table->timestamp('date');
+            $table->timestamp('date')->default(DB::raw('CURRENT_TIMESTAMP'));
             
             $table->unsignedBigInteger('fk_user_id');
             $table->unsignedBigInteger('fk_image_for_sale_id');

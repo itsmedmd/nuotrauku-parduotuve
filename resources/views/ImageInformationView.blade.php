@@ -8,8 +8,48 @@
     <div class="image-information-view__content">
         <div class="image-information-view__row">
             <div class="image-information-view__rating-container">
-                <a href="/" class="image-information-view__rate-up">&#129093;</a>
-                <a href="/" class="image-information-view__rate-down">&#129095;</a>
+                @if (count($user_rated_img) > 0)
+                    @if($user_rated_img[0]->rating == true)
+                        <a
+                            href="{{ route('rateImage', ['id' => $image[0]->image_id, 'rating' => 'true']) }}"
+                            class="image-information-view__rate-up image-information-view__rate-up--active"
+                        >
+                            &#129093;
+                        </a>
+                        <a
+                            href="{{ route('rateImage', ['id' => $image[0]->image_id, 'rating' => 'false']) }}"
+                            class="image-information-view__rate-down"
+                        >
+                            &#129095;
+                        </a>
+                    @else
+                        <a
+                            href="{{ route('rateImage', ['id' => $image[0]->image_id, 'rating' => 'true']) }}"
+                            class="image-information-view__rate-up"
+                        >
+                            &#129093;
+                        </a>
+                        <a
+                            href="{{ route('rateImage', ['id' => $image[0]->image_id, 'rating' => 'false']) }}"
+                            class="image-information-view__rate-down image-information-view__rate-down--active"
+                        >
+                            &#129095;
+                        </a>
+                    @endif
+                @else
+                    <a
+                        href="{{ route('rateImage', ['id' => $image[0]->image_id, 'rating' => 'true']) }}"
+                        class="image-information-view__rate-up"
+                    >
+                        &#129093;
+                    </a>
+                    <a
+                        href="{{ route('rateImage', ['id' => $image[0]->image_id, 'rating' => 'false']) }}"
+                        class="image-information-view__rate-down"
+                    >
+                        &#129095;
+                    </a>
+                @endif
                 <p class="image-information-view__rating">{{$image[0]->rating}}</p>
             </div>
             <img

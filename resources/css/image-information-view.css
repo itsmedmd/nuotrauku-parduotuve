@@ -16,12 +16,20 @@
     text-align: center;
 }
 
+.image-information-view__rate-up--active {
+    color: rgb(46, 197, 0);
+}
+
 .image-information-view__rate-up:hover {
     color: rgb(36, 153, 0);
 }
 
 .image-information-view__rate-up:active {
     color: rgb(33, 141, 0);
+}
+
+.image-information-view__rate-down--active {
+    color: rgb(255, 0, 0);
 }
 
 .image-information-view__rate-down:hover {
