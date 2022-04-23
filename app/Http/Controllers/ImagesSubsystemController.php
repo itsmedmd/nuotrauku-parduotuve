@@ -5,9 +5,13 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\image_for_sale;
+use App\Models\image_rating;
+use App\Models\image;
 
 class ImagesSubsystemController extends Controller
 {
+    private $USER_ID = 1;
+
     // public function TESTdoSomething()
     // {
     //     // returns json data
@@ -101,9 +105,11 @@ class ImagesSubsystemController extends Controller
 
     // open image information view with the image data
     public function openImageInformationView(Request $request) {
+        // get image data
         $image = DB::select("
             SELECT
-                images_for_sale.id as id,
+                images_for_sale.id as image_for_sale_id,
+                images.id as image_id,
                 images.title as title,
                 images.description as img_description,
                 images.rating as rating,
@@ -123,6 +129,7 @@ class ImagesSubsystemController extends Controller
             WHERE images_for_sale.id = ".$request->id
         );
 
+        // get image comments
         $comments = DB::select("
             SELECT
                 comments.comment as comment,
@@ -136,6 +143,84 @@ class ImagesSubsystemController extends Controller
             ORDER BY comments.date DESC
         ");
 
-        return view('ImageInformationView', compact('image', 'comments'));
+        // check if the user rated this image
+        $user_rated_img = DB::select("
+            SELECT rating
+            FROM image_ratings
+            WHERE fk_user_id_vertintojas = ".$this->USER_ID."
+            AND fk_image_id = ".$image[0]->image_id
+        );
+
+        return view('ImageInformationView', compact('image', 'comments', 'user_rated_img'));
+    }
+
+    // rate image
+    public function rateImage(Request $request) {
+        $add_to_total = 0;
+        
+        // create new rating object
+        $new_rating = new image_rating;
+        $new_rating->fk_user_id_vertintojas = $this->USER_ID;
+        $new_rating->fk_image_id = $request->id;
+
+        if ($request->rating == 'true') {
+            $new_rating->rating = true;
+            $add_to_total = 1;
+        } else {
+            $new_rating->rating = false;
+            $add_to_total = -1;
+        }
+
+        // check if the user already rated this image
+        $img_rating = DB::select("
+            SELECT id, rating
+            FROM image_ratings
+            WHERE fk_user_id_vertintojas = ".$this->USER_ID."
+            AND fk_image_id = ".$request->id
+        );
+
+        // if old rating exists, update final image rating count
+        if (count($img_rating) > 0) {
+            if ($img_rating[0]->rating) {
+                $add_to_total = $add_to_total - 1;
+            } else {
+                $add_to_total = $add_to_total + 1;
+            }
+        }
+        
+        // if the user already rated the image
+        if ($img_rating) {
+            // check if new and old ratings are different
+            $is_rating_different = true;
+            if ($img_rating[0]->rating == $new_rating->rating) {
+                $is_rating_different = false;
+                // if rating is the same, the rating will be reversed
+                // (+1 becomes -1 and -1 becomes +1)
+                if ($img_rating[0]->rating) {
+                    $add_to_total = $add_to_total - 1;
+                } else {
+                    $add_to_total = $add_to_total + 1;
+                }
+            }
+
+            // first delete the old rating
+            image_rating::destroy($img_rating[0]->id);
+
+            // if the ratings are different - add new rating to DB
+            if ($is_rating_different) {
+                $new_rating->save();
+            }
+        } else {
+            // add new rating to DB
+            $new_rating->save();
+        }
+
+        // update total image rating
+        image::whereId($request->id)->update([
+            'rating'=> DB::raw('rating+'.$add_to_total)
+        ]);
+        
+        // return the same page but it will retrieve updated data
+        return back();
     }
 }
