@@ -38,29 +38,49 @@
     </div>
     <div class="image-information-view__comments">
         <h2 class="image-information-view__comments-title">Comments</h2>
-        <form class="image-information-view__comment-form" action="/" method="post">
-            <input
-                type="text"
-                name="text"
-                class="image-information-view__comment-input"
-                required
-                placeholder="Write a comment..."
-            >
-            <input
-                class="form-submit-button image-information-view__comment-submit"
-                type="submit"
-                value="Comment"
-            />
-        </form>
-        <div class="image-information-view__comments-list">
-            <div class="image-information-view__comment-container">
-                <span>IMG</span>
-                <p>author <span> comment date </span></p>
-                <p>comment here!!!!!!!!!!!</p>
-            </div>
+        <div class="image-information-view__comments-content">
+            <form class="image-information-view__comment-form" action="/" method="post">
+                <input
+                    type="text"
+                    name="text"
+                    class="image-information-view__comment-input"
+                    required
+                    placeholder="Write a comment..."
+                >
+                <input
+                    class="form-submit-button image-information-view__comment-submit"
+                    type="submit"
+                    value="Comment"
+                />
+            </form>
+            @if (count($comments) == 0)
+                <h2 class="image-information-view__no-comments-msg">There are no comments yet</h2>
+            @endif
+            @if (count($comments) > 0)
+                <div class="image-information-view__comments-list">
+                    @foreach($comments as $comment)
+                        <div class="image-information-view__comment-container">
+                            <img
+                                src="{{ asset($comment->author_img) }}"
+                                alt="{{ $comment->author }}"
+                                class="image-information-view__comment-author-image"
+                            >
+
+                            <div class="image-information-view__comment-content">
+                                <p class="image-information-view__comment-author">
+                                    {{$comment->author}}
+                                    <span class="image-information-view__comment-date">{{$comment->date}}</span>
+                                </p>
+                                <p class="image-information-view__comment-text">{{$comment->comment}}</p>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+            @endif
         </div>
     </div>
     <div class="image-information-view__recommendations">
+        <h2 class="image-information-view__recommendations-title">Recommendations</h2>
         <div class="image-information-view__recommendations-list">
             recommendations here
         </div>

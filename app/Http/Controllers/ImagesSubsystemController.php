@@ -23,7 +23,7 @@ class ImagesSubsystemController extends Controller
     private function getAllImagesForSale () {
         $images = DB::select('
             SELECT
-                images.id as id,
+                images_for_sale.id as id,
                 images.title as title,
                 images.rating as rating,
                 images.image as img_url,
@@ -47,7 +47,7 @@ class ImagesSubsystemController extends Controller
         $images = DB::select(
             "
                 SELECT
-                    images.id as id,
+                    images_for_sale.id as id,
                     images.rating as rating,
                     images.title as title,
                     images.image as img_url,
@@ -103,7 +103,7 @@ class ImagesSubsystemController extends Controller
     public function openImageInformationView(Request $request) {
         $image = DB::select("
             SELECT
-                images.id as id,
+                images_for_sale.id as id,
                 images.title as title,
                 images.description as img_description,
                 images.rating as rating,
@@ -120,9 +120,22 @@ class ImagesSubsystemController extends Controller
                 ON images.fk_collection_id_dabartine = collections.id
             INNER JOIN users
                 ON images.fk_user_id_savininkas = users.id
-            WHERE images.id = ".$request->id
+            WHERE images_for_sale.id = ".$request->id
         );
 
-        return view('ImageInformationView', compact('image'));
+        $comments = DB::select("
+            SELECT
+                comments.comment as comment,
+                comments.date as date,
+                users.username as author,
+                users.profile_picture as author_img
+            FROM comments
+            INNER JOIN users
+                ON comments.fk_user_id = users.id
+            WHERE comments.fk_image_for_sale_id = ".$request->id."
+            ORDER BY comments.date DESC
+        ");
+
+        return view('ImageInformationView', compact('image', 'comments'));
     }
 }

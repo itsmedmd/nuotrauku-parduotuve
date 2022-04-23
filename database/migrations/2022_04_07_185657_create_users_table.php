@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('password');
             $table->string('email');
             $table->float('wallet_balance');
-            $table->string('profile_picture', 1000)->nullable();
+            $table->string('profile_picture', 1000)->default('images/profile-img-default.svg');
             $table->boolean('is_blocked')->default(false);
             $table->enum('account_type', ['admin', 'user'])->default('user');
             $table->timestamps();
