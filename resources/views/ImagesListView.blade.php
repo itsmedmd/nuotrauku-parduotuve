@@ -15,7 +15,6 @@
                     type="text"
                     name="text"
                     class="images-for-sale__search-input"
-                    id="images-search-input"
                     required
                     placeholder="Title, description or collection"
                 >
@@ -49,7 +48,10 @@
             </p>
             <div class="images-for-sale__images-list">
                 @foreach($images as $img)
-                    <a class="images-for-sale__card">
+                    <a
+                        class="images-for-sale__card"
+                        href="{{ route('imageInformationView', ['id' => $img->id]) }}"
+                    >
                         <img
                             src="{{ asset($img->img_url) }}"
                             alt="{{ $img->title }}"
@@ -58,6 +60,7 @@
                         <div class="images-for-sale__card-content">
                             <b><span class="images-for-sale__card-price">{{ $img->price }}$</span></b>
                             <span class="images-for-sale__card-title">{{ $img->title }}</span>
+                            <p class="images-for-sale__card-rating">Rating: {{$img->rating}}</p>
                             <p class="images-for-sale__card-collection">Collection: <b>{{ $img->collection }}</b></p>
                             <p class="images-for-sale__card-description">{{ $img->img_description }}</p>
                         </div>

@@ -51,6 +51,8 @@ Route::get('submitImageSearch', [ImagesSubsystemController::class,'submitImageSe
 Route::get('sortImageListDesc',[ImagesSubsystemController::class,'sortImageListDesc'])->name('sortImageListDesc');
 Route::get('sortImageListAsc',[ImagesSubsystemController::class,'sortImageListAsc'])->name('sortImageListAsc');
 
+Route::get('imageInformationView/{id}',[ImagesSubsystemController::class,'openImageInformationView'])->name('imageInformationView');
+
 
 
 // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@

@@ -23,7 +23,9 @@ class ImagesSubsystemController extends Controller
     private function getAllImagesForSale () {
         $images = DB::select('
             SELECT
+                images.id as id,
                 images.title as title,
+                images.rating as rating,
                 images.image as img_url,
                 collections.name as collection,
                 images_for_sale.price as price,
@@ -45,6 +47,8 @@ class ImagesSubsystemController extends Controller
         $images = DB::select(
             "
                 SELECT
+                    images.id as id,
+                    images.rating as rating,
                     images.title as title,
                     images.image as img_url,
                     collections.name as collection,
@@ -93,5 +97,32 @@ class ImagesSubsystemController extends Controller
         $images = $this->getSearchResults($request->text, "ASC");
 
         return view('ImagesListView', compact('images'));
+    }
+
+    // open image information view with the image data
+    public function openImageInformationView(Request $request) {
+        $image = DB::select("
+            SELECT
+                images.id as id,
+                images.title as title,
+                images.description as img_description,
+                images.rating as rating,
+                images.image as img_url,
+                images.creation_date as creation_date,
+                collections.name as coll_name,
+                collections.description as coll_description,
+                images_for_sale.price as price,
+                users.username as seller_name
+            FROM images_for_sale
+            INNER JOIN images
+                ON images_for_sale.fk_image_id = images.id
+            INNER JOIN collections
+                ON images.fk_collection_id_dabartine = collections.id
+            INNER JOIN users
+                ON images.fk_user_id_savininkas = users.id
+            WHERE images.id = ".$request->id
+        );
+
+        return view('ImageInformationView', compact('image'));
     }
 }

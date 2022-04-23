@@ -10,6 +10,8 @@
 .main-nav a:hover {
     color: white;
 	text-decoration: none;
+    padding: 8px 12px;
+    line-height: 48px;
 }
 
 .main-nav ul {
@@ -19,9 +21,8 @@
 
 .main-nav ul li {
     background-color: rgb(36, 153, 0);
-	padding: 8px 12px;
     margin-right: 16px;
-    line-height: 36px;
+    line-height: 48px;
 }
 
 .main-nav ul li:last-of-type {

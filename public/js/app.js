@@ -19435,6 +19435,19 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/css/image-information-view.css":
+/*!**************************************************!*\
+  !*** ./resources/css/image-information-view.css ***!
+  \**************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
 /***/ "./resources/css/images-for-sale-list-view.css":
 /*!*****************************************************!*\
   !*** ./resources/css/images-for-sale-list-view.css ***!
@@ -19838,6 +19851,7 @@ process.umask = function() { return 0; };
 /******/ 			"css/action-confirmation-form": 0,
 /******/ 			"css/navigation": 0,
 /******/ 			"css/images-for-sale-list-view": 0,
+/******/ 			"css/image-information-view": 0,
 /******/ 			"css/image-information-edit-view": 0,
 /******/ 			"css/image-creation-view": 0
 /******/ 		};
@@ -19889,16 +19903,17 @@ process.umask = function() { return 0; };
 /******/ 	// startup
 /******/ 	// Load entry module and return exports
 /******/ 	// This entry module depends on other loaded chunks and execution need to be delayed
-/******/ 	__webpack_require__.O(undefined, ["css/home","css/forms","css/created-images-list-view","css/app","css/action-confirmation-form","css/navigation","css/images-for-sale-list-view","css/image-information-edit-view","css/image-creation-view"], () => (__webpack_require__("./resources/js/app.js")))
-/******/ 	__webpack_require__.O(undefined, ["css/home","css/forms","css/created-images-list-view","css/app","css/action-confirmation-form","css/navigation","css/images-for-sale-list-view","css/image-information-edit-view","css/image-creation-view"], () => (__webpack_require__("./resources/css/action-confirmation-form.css")))
-/******/ 	__webpack_require__.O(undefined, ["css/home","css/forms","css/created-images-list-view","css/app","css/action-confirmation-form","css/navigation","css/images-for-sale-list-view","css/image-information-edit-view","css/image-creation-view"], () => (__webpack_require__("./resources/css/app.css")))
-/******/ 	__webpack_require__.O(undefined, ["css/home","css/forms","css/created-images-list-view","css/app","css/action-confirmation-form","css/navigation","css/images-for-sale-list-view","css/image-information-edit-view","css/image-creation-view"], () => (__webpack_require__("./resources/css/created-images-list-view.css")))
-/******/ 	__webpack_require__.O(undefined, ["css/home","css/forms","css/created-images-list-view","css/app","css/action-confirmation-form","css/navigation","css/images-for-sale-list-view","css/image-information-edit-view","css/image-creation-view"], () => (__webpack_require__("./resources/css/forms.css")))
-/******/ 	__webpack_require__.O(undefined, ["css/home","css/forms","css/created-images-list-view","css/app","css/action-confirmation-form","css/navigation","css/images-for-sale-list-view","css/image-information-edit-view","css/image-creation-view"], () => (__webpack_require__("./resources/css/home.css")))
-/******/ 	__webpack_require__.O(undefined, ["css/home","css/forms","css/created-images-list-view","css/app","css/action-confirmation-form","css/navigation","css/images-for-sale-list-view","css/image-information-edit-view","css/image-creation-view"], () => (__webpack_require__("./resources/css/image-creation-view.css")))
-/******/ 	__webpack_require__.O(undefined, ["css/home","css/forms","css/created-images-list-view","css/app","css/action-confirmation-form","css/navigation","css/images-for-sale-list-view","css/image-information-edit-view","css/image-creation-view"], () => (__webpack_require__("./resources/css/image-information-edit-view.css")))
-/******/ 	__webpack_require__.O(undefined, ["css/home","css/forms","css/created-images-list-view","css/app","css/action-confirmation-form","css/navigation","css/images-for-sale-list-view","css/image-information-edit-view","css/image-creation-view"], () => (__webpack_require__("./resources/css/images-for-sale-list-view.css")))
-/******/ 	var __webpack_exports__ = __webpack_require__.O(undefined, ["css/home","css/forms","css/created-images-list-view","css/app","css/action-confirmation-form","css/navigation","css/images-for-sale-list-view","css/image-information-edit-view","css/image-creation-view"], () => (__webpack_require__("./resources/css/navigation.css")))
+/******/ 	__webpack_require__.O(undefined, ["css/home","css/forms","css/created-images-list-view","css/app","css/action-confirmation-form","css/navigation","css/images-for-sale-list-view","css/image-information-view","css/image-information-edit-view","css/image-creation-view"], () => (__webpack_require__("./resources/js/app.js")))
+/******/ 	__webpack_require__.O(undefined, ["css/home","css/forms","css/created-images-list-view","css/app","css/action-confirmation-form","css/navigation","css/images-for-sale-list-view","css/image-information-view","css/image-information-edit-view","css/image-creation-view"], () => (__webpack_require__("./resources/css/action-confirmation-form.css")))
+/******/ 	__webpack_require__.O(undefined, ["css/home","css/forms","css/created-images-list-view","css/app","css/action-confirmation-form","css/navigation","css/images-for-sale-list-view","css/image-information-view","css/image-information-edit-view","css/image-creation-view"], () => (__webpack_require__("./resources/css/app.css")))
+/******/ 	__webpack_require__.O(undefined, ["css/home","css/forms","css/created-images-list-view","css/app","css/action-confirmation-form","css/navigation","css/images-for-sale-list-view","css/image-information-view","css/image-information-edit-view","css/image-creation-view"], () => (__webpack_require__("./resources/css/created-images-list-view.css")))
+/******/ 	__webpack_require__.O(undefined, ["css/home","css/forms","css/created-images-list-view","css/app","css/action-confirmation-form","css/navigation","css/images-for-sale-list-view","css/image-information-view","css/image-information-edit-view","css/image-creation-view"], () => (__webpack_require__("./resources/css/forms.css")))
+/******/ 	__webpack_require__.O(undefined, ["css/home","css/forms","css/created-images-list-view","css/app","css/action-confirmation-form","css/navigation","css/images-for-sale-list-view","css/image-information-view","css/image-information-edit-view","css/image-creation-view"], () => (__webpack_require__("./resources/css/home.css")))
+/******/ 	__webpack_require__.O(undefined, ["css/home","css/forms","css/created-images-list-view","css/app","css/action-confirmation-form","css/navigation","css/images-for-sale-list-view","css/image-information-view","css/image-information-edit-view","css/image-creation-view"], () => (__webpack_require__("./resources/css/image-creation-view.css")))
+/******/ 	__webpack_require__.O(undefined, ["css/home","css/forms","css/created-images-list-view","css/app","css/action-confirmation-form","css/navigation","css/images-for-sale-list-view","css/image-information-view","css/image-information-edit-view","css/image-creation-view"], () => (__webpack_require__("./resources/css/image-information-edit-view.css")))
+/******/ 	__webpack_require__.O(undefined, ["css/home","css/forms","css/created-images-list-view","css/app","css/action-confirmation-form","css/navigation","css/images-for-sale-list-view","css/image-information-view","css/image-information-edit-view","css/image-creation-view"], () => (__webpack_require__("./resources/css/image-information-view.css")))
+/******/ 	__webpack_require__.O(undefined, ["css/home","css/forms","css/created-images-list-view","css/app","css/action-confirmation-form","css/navigation","css/images-for-sale-list-view","css/image-information-view","css/image-information-edit-view","css/image-creation-view"], () => (__webpack_require__("./resources/css/images-for-sale-list-view.css")))
+/******/ 	var __webpack_exports__ = __webpack_require__.O(undefined, ["css/home","css/forms","css/created-images-list-view","css/app","css/action-confirmation-form","css/navigation","css/images-for-sale-list-view","css/image-information-view","css/image-information-edit-view","css/image-creation-view"], () => (__webpack_require__("./resources/css/navigation.css")))
 /******/ 	__webpack_exports__ = __webpack_require__.O(__webpack_exports__);
 /******/ 	
 /******/ })()
