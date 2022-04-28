@@ -73,7 +73,12 @@
         </div>
         <div class="image-information-view__row">
             <a href="/" class="image-information-view__buy-button">Buy Now</a>
-            <a href="/" class="image-information-view__price-history-button">Show Price History</a>
+            <a
+                href="{{ route('imagePriceHistoryView', ['id' => $image[0]->image_id]) }}"
+                class="image-information-view__price-history-button"
+            >
+                Show Price History
+            </a>
         </div>
     </div>
     <div class="image-information-view__comments">
