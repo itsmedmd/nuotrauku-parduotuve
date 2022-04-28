@@ -223,4 +223,23 @@ class ImagesSubsystemController extends Controller
         // return the same page but it will retrieve updated data
         return back();
     }
+
+    // open image information price history view
+    public function openImagePriceHistoryView(Request $request) {
+        // get all image bills
+        $bills = DB::select("
+            SELECT
+                bills.date as date,
+                bills.price as price,
+                users.username as username,
+                users.profile_picture as profile_img
+            FROM bills
+            INNER JOIN users
+                ON bills.fk_user_id = users.id
+            WHERE bills.fk_image_id = ".$request->id."
+            ORDER BY bills.date DESC
+        ");
+
+        return view('ImagePriceHistoryView', compact('bills'));
+    }
 }
