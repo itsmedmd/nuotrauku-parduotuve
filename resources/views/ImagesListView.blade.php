@@ -24,9 +24,6 @@
                     value="Search"
                 />
             </form>
-            <div class="images-for-sale__filtering">
-                filtering here
-            </div>
         </div>
         <div class="images-for-sale__sort-container">
             <a

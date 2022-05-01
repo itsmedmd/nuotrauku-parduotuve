@@ -44,8 +44,6 @@ Route::get('CreatedImagesListView', [ImagesManagementSubsystemController::class,
 
 // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 // ImagesSubsystem
-Route::post('TESTdoSomething',[ImagesSubsystemController::class,'TESTdoSomething'])->name('TESTdoSomething');
-
 Route::get('ImagesListView', [ImagesSubsystemController::class,'getImagesForSale']);
 Route::get('submitImageSearch', [ImagesSubsystemController::class,'submitImageSearch'])->name('submitImageSearch');
 Route::get('sortImageListDesc',[ImagesSubsystemController::class,'sortImageListDesc'])->name('sortImageListDesc');
@@ -54,6 +52,7 @@ Route::get('sortImageListAsc',[ImagesSubsystemController::class,'sortImageListAs
 Route::get('imageInformationView/{id}',[ImagesSubsystemController::class,'openImageInformationView'])->name('imageInformationView');
 Route::get('imagePriceHistoryView/{id}',[ImagesSubsystemController::class,'openImagePriceHistoryView'])->name('imagePriceHistoryView');
 Route::get('rateImage/{id}/{rating}',[ImagesSubsystemController::class,'rateImage'])->name('rateImage');
+Route::post('getImageRecommendations',[ImagesSubsystemController::class,'getImageRecommendations'])->name('getImageRecommendations');
 
 
 // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@

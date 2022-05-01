@@ -12,17 +12,6 @@ class ImagesSubsystemController extends Controller
 {
     private $USER_ID = 1;
 
-    // public function TESTdoSomething()
-    // {
-    //     // returns json data
-    //     return response()->json(
-    //         [
-    //             'status'=> 'error',
-    //             'message'=> 'oof'
-    //         ]
-    //     );
-    // }
-
     // gets all images for sale with their information
     private function getAllImagesForSale () {
         $images = DB::select('
@@ -118,7 +107,9 @@ class ImagesSubsystemController extends Controller
                 collections.name as coll_name,
                 collections.description as coll_description,
                 images_for_sale.price as price,
-                users.username as seller_name
+                users.username as seller_name,
+                images.fk_user_id_savininkas as seller_id,
+                images.fk_collection_id_dabartine as coll_id
             FROM images_for_sale
             INNER JOIN images
                 ON images_for_sale.fk_image_id = images.id
@@ -241,5 +232,140 @@ class ImagesSubsystemController extends Controller
         ");
 
         return view('ImagePriceHistoryView', compact('bills'));
+    }
+
+    // get recommendations for an image
+    public function getImageRecommendations(Request $request) {
+        // get parameters from request
+        $img_id = $request->input('img_id');
+        $image_for_sale_id = $request->input('image_for_sale_id');
+        $coll_id = $request->input('coll_id');
+        $seller_id = $request->input('seller_id');
+        $img_title = $request->input('img_title');
+        $img_description = $request->input('img_description');
+
+        // select 5 most recent images from the same collection
+        $recommendations = DB::select("
+            SELECT
+                images.image as img_url,
+                images.title as title,
+                images.description as description,
+                images_for_sale.id as image_for_sale_id
+            FROM images_for_sale
+                INNER JOIN images
+                    ON images_for_sale.fk_image_id = images.id
+            WHERE images.fk_collection_id_dabartine = ".$coll_id."
+                AND NOT images_for_sale.id = ".$image_for_sale_id."
+            ORDER BY images.creation_date DESC
+            LIMIT 5
+        ");
+
+        if (count($recommendations) < 5) {
+            // do not return images that are in $recommendations array
+            $images_to_not_include = "";
+            foreach ($recommendations as $key => $val) {
+                $images_to_not_include = $images_to_not_include." AND NOT images_for_sale.id = ".$val->image_for_sale_id;
+            }
+
+            $from_same_seller = DB::select("
+                SELECT
+                    images.image as img_url,
+                    images.title as title,
+                    images.description as description,
+                    images_for_sale.id as image_for_sale_id
+                FROM images_for_sale
+                    INNER JOIN images
+                        ON images_for_sale.fk_image_id = images.id
+                WHERE images.fk_user_id_savininkas = ".$seller_id."
+                    AND NOT images_for_sale.id = ".$image_for_sale_id.$images_to_not_include."
+                ORDER BY images.rating DESC
+                LIMIT 5
+            ");
+
+            // add new images
+            $recommendations = array_merge($recommendations, $from_same_seller);
+
+            if (count($recommendations) < 5) {
+                // do not return images that are in $recommendations array
+                $images_to_not_include = "";
+                foreach ($recommendations as $key => $val) {
+                    $images_to_not_include = $images_to_not_include." AND NOT images_for_sale.id = ".$val->image_for_sale_id;
+                }
+
+                $all_images_for_sale = DB::select("
+                    SELECT
+                        images.image as img_url,
+                        images.title as title,
+                        images.description as description,
+                        images_for_sale.id as image_for_sale_id
+                    FROM images_for_sale
+                        INNER JOIN images
+                            ON images_for_sale.fk_image_id = images.id
+                    WHERE NOT images_for_sale.id = ".$image_for_sale_id.$images_to_not_include
+                );
+
+                // count words in titles and descriptions similarity by percentage
+                $percentages = [];
+                foreach ($all_images_for_sale as $key => $val) {
+                    $title = strtoupper($val->title);
+                    $description = strtoupper($val->description);
+
+                    similar_text(strtoupper($img_title), $title, $percent_title);
+                    similar_text(strtoupper($img_description), $description, $percent_description);
+
+                    $combined_similarity = ($percent_title + $percent_description) / 2;
+                    $item = (object) ['image_for_sale_id' => $val->image_for_sale_id, 'similarity' => $combined_similarity];
+                    array_push($percentages, $item);
+                }
+
+                // sort $percentages by similarity descending
+                usort($percentages, function($a, $b) {
+                    return $a->similarity < $b->similarity ? 1 : -1;
+                });
+
+                // add 5 new images based on highest percentage of title and description similarity
+                $similar_recommendations = [];
+                for ($i = 0; $i < 5; $i++) {
+                    if (count($percentages) == $i) {
+                        break;
+                    }
+                    $image_id = $percentages[$i]->image_for_sale_id;
+                    $item_id = array_search($image_id, array_column($all_images_for_sale, 'image_for_sale_id'));
+                    array_push($similar_recommendations, $all_images_for_sale[$item_id]);
+                }
+
+                $recommendations = array_merge($recommendations, $similar_recommendations);
+
+                if (count($recommendations) < 5) {
+                    // do not return images that are in $recommendations array
+                    $images_to_not_include = "";
+                    foreach ($recommendations as $key => $val) {
+                        $images_to_not_include = $images_to_not_include." AND NOT images_for_sale.id = ".$val->image_for_sale_id;
+                    }
+
+                    $first_5_from_all_images = DB::select("
+                        SELECT
+                            images.image as img_url,
+                            images.title as title,
+                            images.description as description,
+                            images_for_sale.id as image_for_sale_id
+                        FROM images_for_sale
+                            INNER JOIN images
+                                ON images_for_sale.fk_image_id = images.id
+                        WHERE NOT images_for_sale.id = ".$image_for_sale_id.$images_to_not_include."
+                        ORDER BY images.rating DESC
+                        LIMIT 5
+                    ");
+
+                    $recommendations = array_merge($recommendations, $first_5_from_all_images);
+                }
+            }
+        }
+
+        return response()->json(
+            [
+                'recommendations' => $recommendations
+            ]
+        );
     }
 }

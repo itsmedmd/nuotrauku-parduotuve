@@ -129,12 +129,43 @@
         <div class="image-information-view__recommendations-list">
             recommendations here
         </div>
-        <a href="/" class="image-information-view__new-recommendations-button">New Recommendations</a>
+        <button onclick="getRecommendations()" class="image-information-view__new-recommendations-button">New Recommendations</button>
     </div>
 </main>
 @endsection
 
 @section('js')
 <script>
+    const csrfToken = '{{csrf_token()}}';
+    const image = @json($image);
+    const recommendations = [];
+
+    const getRecommendations = () => {
+        $.ajax({
+            url: "{{ route('getImageRecommendations') }}",
+            type: "POST",
+            data: JSON.stringify({
+                img_id: image[0].image_id,
+                image_for_sale_id: image[0].image_for_sale_id,
+                coll_id: image[0].coll_id,
+                seller_id: image[0].seller_id,
+                img_title: image[0].title,
+                img_description: image[0].img_description
+            }),
+            dataType: "JSON",
+            contentType: "application/json",
+            headers: {
+                'X-CSRF-TOKEN': csrfToken
+            },
+            success: function(response) {
+                console.log("success: ", response);
+            },
+            error: function(err) {
+                console.log("error: ", err);
+            }
+        });
+    };
+
+    //getRecommendations();
 </script>
 @endsection

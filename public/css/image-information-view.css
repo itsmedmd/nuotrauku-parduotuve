@@ -134,11 +134,13 @@
     background-color: rgb(33, 141, 0);
 }
 
-.image-information-view__price-history-button:hover {
+.image-information-view__price-history-button:hover,
+.image-information-view__new-recommendations-button:hover {
     background-color: rgba(0, 0, 0, 0.1);
 }
 
-.image-information-view__price-history-button:active {
+.image-information-view__price-history-button:active,
+.image-information-view__new-recommendations-button:active {
     background-color: rgba(0, 0, 0, 0.2);
 }
 
@@ -246,5 +248,7 @@
 
 .image-information-view__new-recommendations-button {
     margin-top: 12px;
+    cursor: pointer;
+    background-color: white;
 }
 
