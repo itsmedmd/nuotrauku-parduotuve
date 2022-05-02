@@ -126,15 +126,75 @@
     </div>
     <div class="image-information-view__recommendations">
         <h2 class="image-information-view__recommendations-title">Recommendations</h2>
-        <div class="image-information-view__recommendations-list">
-            recommendations here
+        <div class="image-information-view__recommendations-list" id="recommendations">
         </div>
-        <a href="/" class="image-information-view__new-recommendations-button">New Recommendations</a>
+        <button onclick="getRecommendations()" class="image-information-view__new-recommendations-button">New Recommendations</button>
     </div>
 </main>
 @endsection
 
 @section('js')
 <script>
+    const csrfToken = '{{csrf_token()}}';
+    const image = @json($image);
+    const recommendations_element = document.getElementById("recommendations");
+    let recommendations = [];
+    let all_recommendations_ids = new Set();
+
+    const getRecommendations = () => {
+        $.ajax({
+            url: "{{ route('getImageRecommendations') }}",
+            type: "POST",
+            data: JSON.stringify({
+                img_id: image[0].image_id,
+                image_for_sale_id: image[0].image_for_sale_id,
+                coll_id: image[0].coll_id,
+                seller_id: image[0].seller_id,
+                img_title: image[0].title,
+                img_description: image[0].img_description,
+                old_ids: Array.from(all_recommendations_ids)
+            }),
+            dataType: "JSON",
+            contentType: "application/json",
+            headers: {
+                'X-CSRF-TOKEN': csrfToken
+            },
+            success: function(response) {
+                if (response.recommendations) {
+                    recommendations_element.innerHTML = ""; // remove all old elements from the DOM
+                    recommendations = response.recommendations.slice(0, 5);
+
+                    // if response returned no recommendations and if previously
+                    // there were recommendations, clear old recommendations and
+                    // start recommending from the start again
+                    if (!recommendations.length && all_recommendations_ids.size) {
+                        all_recommendations_ids.clear();
+                        getRecommendations();
+                    } else {
+                        recommendations.forEach((rec) => {
+                            all_recommendations_ids.add(rec.image_for_sale_id);
+
+                            const item = document.createElement("a");
+                            item.classList.add("image-information-view__recommendation__card");
+                            item.href = `/imageInformationView/${rec.image_for_sale_id}`;
+
+                            const img = document.createElement("img");
+                            img.alt = rec.title;
+                            img.classList.add("image-information-view__recommendation__card-image");
+                            img.src = `/${rec.img_url}`;
+
+                            item.appendChild(img);
+                            recommendations_element.appendChild(item);
+                        });
+                    }
+                }
+            },
+            error: function(err) {
+                console.log("error: ", err);
+            }
+        });
+    };
+
+    getRecommendations();
 </script>
 @endsection

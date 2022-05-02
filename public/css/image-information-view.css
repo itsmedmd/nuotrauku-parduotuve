@@ -134,11 +134,13 @@
     background-color: rgb(33, 141, 0);
 }
 
-.image-information-view__price-history-button:hover {
+.image-information-view__price-history-button:hover,
+.image-information-view__new-recommendations-button:hover {
     background-color: rgba(0, 0, 0, 0.1);
 }
 
-.image-information-view__price-history-button:active {
+.image-information-view__price-history-button:active,
+.image-information-view__new-recommendations-button:active {
     background-color: rgba(0, 0, 0, 0.2);
 }
 
@@ -237,14 +239,36 @@
 }
 
 /* recommendations */
-.image-information-view__recommendations {
+.image-information-view__recommendations-list {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    -moz-column-gap: 8px;
+         column-gap: 8px;
 }
 
-.image-information-view__recommendations-list {
+.image-information-view__recommendation__card {
+    display: inline-block;
+    border: 1px solid rgba(0, 0, 0, 0.4);
+    transition: all 0.2s;
+    height: 200px;
+}
 
+.image-information-view__recommendation__card:hover {
+    transform: scale(1.02);
+}
+
+.image-information-view__recommendation__card-image {
+    display: inline-block;
+    -o-object-fit: cover;
+       object-fit: cover;
+    height: 100%;
+    width: 100%;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
 }
 
 .image-information-view__new-recommendations-button {
     margin-top: 12px;
+    cursor: pointer;
+    background-color: white;
 }
 
