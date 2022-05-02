@@ -243,6 +243,13 @@ class ImagesSubsystemController extends Controller
         $seller_id = $request->input('seller_id');
         $img_title = $request->input('img_title');
         $img_description = $request->input('img_description');
+        $old_ids = $request->collect('old_ids');
+
+        // do not return images that have already been recommended
+        $do_not_recommend = "";
+        foreach ($old_ids as $key => $val) {
+            $do_not_recommend = $do_not_recommend." AND NOT images_for_sale.id = ".$val;
+        }
 
         // select 5 most recent images from the same collection
         $recommendations = DB::select("
@@ -255,14 +262,14 @@ class ImagesSubsystemController extends Controller
                 INNER JOIN images
                     ON images_for_sale.fk_image_id = images.id
             WHERE images.fk_collection_id_dabartine = ".$coll_id."
-                AND NOT images_for_sale.id = ".$image_for_sale_id."
+                AND NOT images_for_sale.id = ".$image_for_sale_id.$do_not_recommend."
             ORDER BY images.creation_date DESC
             LIMIT 5
         ");
 
         if (count($recommendations) < 5) {
             // do not return images that are in $recommendations array
-            $images_to_not_include = "";
+            $images_to_not_include = $do_not_recommend;
             foreach ($recommendations as $key => $val) {
                 $images_to_not_include = $images_to_not_include." AND NOT images_for_sale.id = ".$val->image_for_sale_id;
             }
@@ -287,7 +294,7 @@ class ImagesSubsystemController extends Controller
 
             if (count($recommendations) < 5) {
                 // do not return images that are in $recommendations array
-                $images_to_not_include = "";
+                $images_to_not_include = $do_not_recommend;
                 foreach ($recommendations as $key => $val) {
                     $images_to_not_include = $images_to_not_include." AND NOT images_for_sale.id = ".$val->image_for_sale_id;
                 }
@@ -338,7 +345,7 @@ class ImagesSubsystemController extends Controller
 
                 if (count($recommendations) < 5) {
                     // do not return images that are in $recommendations array
-                    $images_to_not_include = "";
+                    $images_to_not_include = $do_not_recommend;
                     foreach ($recommendations as $key => $val) {
                         $images_to_not_include = $images_to_not_include." AND NOT images_for_sale.id = ".$val->image_for_sale_id;
                     }

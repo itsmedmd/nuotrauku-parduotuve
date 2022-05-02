@@ -139,6 +139,7 @@
     const image = @json($image);
     const recommendations_element = document.getElementById("recommendations");
     let recommendations = [];
+    let all_recommendations_ids = new Set();
 
     const getRecommendations = () => {
         $.ajax({
@@ -150,7 +151,8 @@
                 coll_id: image[0].coll_id,
                 seller_id: image[0].seller_id,
                 img_title: image[0].title,
-                img_description: image[0].img_description
+                img_description: image[0].img_description,
+                old_ids: Array.from(all_recommendations_ids)
             }),
             dataType: "JSON",
             contentType: "application/json",
@@ -159,20 +161,32 @@
             },
             success: function(response) {
                 if (response.recommendations) {
+                    recommendations_element.innerHTML = ""; // remove all old elements from the DOM
                     recommendations = response.recommendations.slice(0, 5);
-                    recommendations.forEach((rec) => {
-                        const item = document.createElement("a");
-                        item.classList.add("image-information-view__recommendation__card");
-                        item.href = `/imageInformationView/${rec.image_for_sale_id}`;
 
-                        const img = document.createElement("img");
-                        img.alt = rec.title;
-                        img.classList.add("image-information-view__recommendation__card-image");
-                        img.src = `/${rec.img_url}`;
+                    // if response returned no recommendations and if previously
+                    // there were recommendations, clear old recommendations and
+                    // start recommending from the start again
+                    if (!recommendations.length && all_recommendations_ids.size) {
+                        all_recommendations_ids.clear();
+                        getRecommendations();
+                    } else {
+                        recommendations.forEach((rec) => {
+                            all_recommendations_ids.add(rec.image_for_sale_id);
 
-                        item.appendChild(img);
-                        recommendations_element.appendChild(item);
-                    });
+                            const item = document.createElement("a");
+                            item.classList.add("image-information-view__recommendation__card");
+                            item.href = `/imageInformationView/${rec.image_for_sale_id}`;
+
+                            const img = document.createElement("img");
+                            img.alt = rec.title;
+                            img.classList.add("image-information-view__recommendation__card-image");
+                            img.src = `/${rec.img_url}`;
+
+                            item.appendChild(img);
+                            recommendations_element.appendChild(item);
+                        });
+                    }
                 }
             },
             error: function(err) {
