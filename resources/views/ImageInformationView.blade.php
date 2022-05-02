@@ -126,8 +126,7 @@
     </div>
     <div class="image-information-view__recommendations">
         <h2 class="image-information-view__recommendations-title">Recommendations</h2>
-        <div class="image-information-view__recommendations-list">
-            recommendations here
+        <div class="image-information-view__recommendations-list" id="recommendations">
         </div>
         <button onclick="getRecommendations()" class="image-information-view__new-recommendations-button">New Recommendations</button>
     </div>
@@ -138,7 +137,8 @@
 <script>
     const csrfToken = '{{csrf_token()}}';
     const image = @json($image);
-    const recommendations = [];
+    const recommendations_element = document.getElementById("recommendations");
+    let recommendations = [];
 
     const getRecommendations = () => {
         $.ajax({
@@ -158,7 +158,22 @@
                 'X-CSRF-TOKEN': csrfToken
             },
             success: function(response) {
-                console.log("success: ", response);
+                if (response.recommendations) {
+                    recommendations = response.recommendations.slice(0, 5);
+                    recommendations.forEach((rec) => {
+                        const item = document.createElement("a");
+                        item.classList.add("image-information-view__recommendation__card");
+                        item.href = `/imageInformationView/${rec.image_for_sale_id}`;
+
+                        const img = document.createElement("img");
+                        img.alt = rec.title;
+                        img.classList.add("image-information-view__recommendation__card-image");
+                        img.src = `/${rec.img_url}`;
+
+                        item.appendChild(img);
+                        recommendations_element.appendChild(item);
+                    });
+                }
             },
             error: function(err) {
                 console.log("error: ", err);
@@ -166,6 +181,6 @@
         });
     };
 
-    //getRecommendations();
+    getRecommendations();
 </script>
 @endsection
