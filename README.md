@@ -2,12 +2,12 @@
 - Įsisirašyti Node.js (kartu bus ir npm), PHP, Composer ir XAMPP (galima ir kitą vietoj XAMPP), bet paleidimas bus aprašomas su XAMPP
 - Pasisiųsti projekto failus
 - Nukopijuoti ".env.example" failą į lokalų failą ".env"
+- Projekto direktorijoje paleisti komandą "composer install", kad būtų įrašyti visi composer paketai
+- Projekto direktorijoje paleisti komandą "npm install", kad būtų įrašyti visi npm paketai
 - Projekto direktorijoje paleisti komandą "php artisan key:generate"
 - Pasileisti XAMPP Control Panel ir įjungti "Apache" ir "MySQL"
 - Nuėjus į "http://localhost/phpmyadmin" sukurti naują DB pavadinimu "nuotrauku_db" ir nustatyti "utf8_lithuanian_ci"
 - Projekto direktorijoje paleisti komandą "php artisan migrate", kad būtų sukurtos visos lentelės lokalioje duomenų bazėje
-- Projekto direktorijoje paleisti komandą "composer install", kad būtų įrašyti visi composer paketai
-- Projekto direktorijoje paleisti komandą "npm install", kad būtų įrašyti visi npm paketai
 - "storage/app/public" direktorijoje sukurti "images" direktoriją, kuri būtų pasiekiama per "storage/app/public/images" (bus reikalinga lokaliam nuotraukų saugojimui)
 - Kad būtų galima pasiekti nuotraukas, įvykdyti komandą "php artisan storage:link", kad būtų sukurtas simbolinis susiejimas su "storage/app/public" direktorija ir "public" direktorija
 
