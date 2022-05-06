@@ -7,8 +7,11 @@ use App\Http\Controllers\CollectionsSubsystemController;
 use App\Http\Controllers\ImagesManagementSubsystemController;
 use App\Http\Controllers\ImagesSubsystemController;
 use App\Http\Controllers\PaymentsSubsystemController;
+use App\Http\Controllers\testRolkaController;
 use App\Http\Controllers\UserManagementSubsystemController;
 use App\View\Components\ActionConfirmationForm;
+use Barryvdh\Debugbar\Facades\Debugbar;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -41,6 +44,11 @@ Route::post('submitNewImageData',[ImagesManagementSubsystemController::class,'su
 Route::get('ImageCreationView', [ImagesManagementSubsystemController::class,'openImageCreationView']);
 Route::get('CreatedImagesListView', [ImagesManagementSubsystemController::class,'displayCreatedImageList']);
 
+Route::get('/OwnedImageInformationView/{id}', [testRolkaController::class, 'openOwnedImageInformationView'])->name('OwnedImageInformationView');
+Route::post('/OwnedImageInformationView/{id}', [testRolkaController::class, 'changeVisibility'])->name('blog.store');
+
+// Route::get('/testas/{id}', [testRolkaController::class, 'openOwnedImageInformationView'])->name('OwnedImageInformationView');
+// Route::post('/testas/{id}', [testRolkaController::class, 'changeVisibility'])->name('blog.store');
 
 // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 // ImagesSubsystem
@@ -79,6 +87,15 @@ Route::post('getImageRecommendations',[ImagesSubsystemController::class,'getImag
 Route::get('/', function () {
     return view('HomePage');
 });
+
+
+
+Route::get('bandymas', function () {
+    return view('imageInformationView');
+});
+
+
+
 
 Route::get('AccountEditingView', function () {
     return view('AccountEditingView');
@@ -183,3 +200,10 @@ Route::get('WalletBalanceTopUpView', function () {
 Route::get('WalletView', function () {
     return view('WalletView');
 });
+
+
+//Debug bar usage
+// Debugbar::info('stringHere');
+// Debugbar::error('stringHere');
+// Debugbar::warning('stringHere');
+// Debugbar::addMessage('stringHere');
