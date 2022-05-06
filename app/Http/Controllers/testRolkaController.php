@@ -8,63 +8,83 @@ use Illuminate\Support\Facades\DB;
 
 class testRolkaController extends Controller
 {
-    public function openOwnedImageInformationView($id)
+    public function openCreatedCollectionsListView($id)
     {
-        $image = DB::table('images')->find($id);   //vienam
-        //return view('OwnedImageInformationView')->with('image', $image);
-
-        // $sk = $image->title;   
-        return view('OwnedImageInformationView', [
-            'image' => $image,
+        $collections = DB::table('collections')
+        ->where('fk_user_id_kurejas', $id)
+        ->get();
+    return view('CreatedCollectionsListView', [
+        'collections' => $collections,                 
         ]);
     }
 
-    public function notShow($id)
+    public function showCreatedCollectionsList($id)
     {
-        $image = DB::table('images')->find($id);   //vienam
-        return view('OwnedImageInformationView')->with('image', $image);
-
-        // $sk = 0;
-        // $sk = $image->title;   
-        // return view('OwnedImageInformationView', [
-        //     'image' => $image,
-        //     'sk' => $sk
-        // ]);
-    }
-
-    public function changeVisibility($id)
-    {
-        // dd('in CHANGE VISIBILITY');
-        $image = DB::table('images')->find($id);   //vienam
-        Debugbar::info($image->is_visible);
-        if($image->is_visible == 0)
-        {
-            Debugbar::info('ieita i iF');
-            $image = DB::update('UPDATE images set is_visible = ? where id = ?', [
-                1, 1
+         $collections = DB::table('collections')
+            ->where('id', $id)
+            ->get();
+        return view('CreatedCollectionsListView', [
+            'collections' => $collections,                 
             ]);
-        }
-        else
-        {
-            Debugbar::info('ieita i iF else');
-            $image = DB::update('UPDATE images set is_visible = ? where id = ?', [
-                0, 1
-            ]); 
-        }
-        $image = DB::table('images')->find($id);   //vienam
-
-        return view('OwnedImageInformationView', [
-            'image' => $image,
-        ]);
-
-
-        //return view('OwnedImageInformationView')->with('image', $image);
-        // $image = DB::table('images')->find($id);   //vienam
-
-        // $image = DB::table('images')->update()
-
-
-
-        // return view('OwnedImageInformationView')->with('image', $image);
     }
+
+    // public function openOwnedImageInformationView($id)
+    // {
+    //     $image = DB::table('images')->find($id);   //vienam
+    //     //return view('OwnedImageInformationView')->with('image', $image);
+
+    //     // $sk = $image->title;   
+    //     return view('OwnedImageInformationView', [
+    //         'image' => $image,
+    //     ]);
+    // }
+
+    // public function notShow($id)
+    // {
+    //     $image = DB::table('images')->find($id);   //vienam
+    //     return view('OwnedImageInformationView')->with('image', $image);
+
+    //     // $sk = 0;
+    //     // $sk = $image->title;   
+    //     // return view('OwnedImageInformationView', [
+    //     //     'image' => $image,
+    //     //     'sk' => $sk
+    //     // ]);
+    // }
+
+    // public function changeVisibility($id)
+    // {
+    //     // dd('in CHANGE VISIBILITY');
+    //     $image = DB::table('images')->find($id);   //vienam
+    //     Debugbar::info($image->is_visible);
+    //     if($image->is_visible == 0)
+    //     {
+    //         Debugbar::info('ieita i iF');
+    //         $image = DB::update('UPDATE images set is_visible = ? where id = ?', [
+    //             1, 1
+    //         ]);
+    //     }
+    //     else
+    //     {
+    //         Debugbar::info('ieita i iF else');
+    //         $image = DB::update('UPDATE images set is_visible = ? where id = ?', [
+    //             0, 1
+    //         ]); 
+    //     }
+    //     $image = DB::table('images')->find($id);   //vienam
+
+    //     return view('OwnedImageInformationView', [
+    //         'image' => $image,
+    //     ]);
+
+
+    //     //return view('OwnedImageInformationView')->with('image', $image);
+    //     // $image = DB::table('images')->find($id);   //vienam
+
+    //     // $image = DB::table('images')->update()
+
+
+
+    //     // return view('OwnedImageInformationView')->with('image', $image);
+    // }
 }

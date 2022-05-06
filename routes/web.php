@@ -44,11 +44,9 @@ Route::post('submitNewImageData',[ImagesManagementSubsystemController::class,'su
 Route::get('ImageCreationView', [ImagesManagementSubsystemController::class,'openImageCreationView']);
 Route::get('CreatedImagesListView', [ImagesManagementSubsystemController::class,'displayCreatedImageList']);
 
-Route::get('/OwnedImageInformationView/{id}', [testRolkaController::class, 'openOwnedImageInformationView'])->name('OwnedImageInformationView');
-Route::post('/OwnedImageInformationView/{id}', [testRolkaController::class, 'changeVisibility'])->name('blog.store');
-
-// Route::get('/testas/{id}', [testRolkaController::class, 'openOwnedImageInformationView'])->name('OwnedImageInformationView');
-// Route::post('/testas/{id}', [testRolkaController::class, 'changeVisibility'])->name('blog.store');
+//berods ok, negarantuotai
+Route::get('/OwnedImageInformationView/{id}', [ImagesManagementSubsystemController::class, 'openOwnedImageInformationView'])->name('OwnedImageInformationView');
+Route::post('/OwnedImageInformationView/{id}', [ImagesManagementSubsystemController::class, 'changeVisibility'])->name('blog.store');
 
 // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 // ImagesSubsystem
@@ -82,8 +80,15 @@ Route::post('getImageRecommendations',[ImagesSubsystemController::class,'getImag
 // UserManagementSubsystem
 
 
+// @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@-rolka controllers@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+Route::get('/testas/{id}', [testRolkaController::class, 'openCreatedCollectionsListView'])->name('CreatedCollectionsListView');
+// Route::get('/testas/{id}', [testRolkaController::class, 'openOwnedImageInformationView'])->name('OwnedImageInformationView');
+// Route::post('/testas/{id}', [testRolkaController::class, 'changeVisibility'])->name('blog.store');
+
 // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 // ungrouped routes
+
 Route::get('/', function () {
     return view('HomePage');
 });
