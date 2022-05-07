@@ -7,8 +7,11 @@ use App\Http\Controllers\CollectionsSubsystemController;
 use App\Http\Controllers\ImagesManagementSubsystemController;
 use App\Http\Controllers\ImagesSubsystemController;
 use App\Http\Controllers\PaymentsSubsystemController;
+use App\Http\Controllers\testRolkaController;
 use App\Http\Controllers\UserManagementSubsystemController;
 use App\View\Components\ActionConfirmationForm;
+use Barryvdh\Debugbar\Facades\Debugbar;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -41,6 +44,9 @@ Route::post('submitNewImageData',[ImagesManagementSubsystemController::class,'su
 Route::get('ImageCreationView', [ImagesManagementSubsystemController::class,'openImageCreationView']);
 Route::get('CreatedImagesListView', [ImagesManagementSubsystemController::class,'displayCreatedImageList']);
 
+//berods ok, negarantuotai
+Route::get('/OwnedImageInformationView/{id}', [ImagesManagementSubsystemController::class, 'openOwnedImageInformationView'])->name('OwnedImageInformationView');
+Route::post('/OwnedImageInformationView/{id}', [ImagesManagementSubsystemController::class, 'changeVisibility'])->name('OwnedImageInformationView');
 
 // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 // ImagesSubsystem
@@ -67,6 +73,16 @@ Route::post('getImageRecommendations',[ImagesSubsystemController::class,'getImag
 // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 // CollectionsSubsystem
 
+Route::get('/collections/open/{id}', [CollectionsSubsystemController::class, 'openCreatedCollectionsListView'])->name('CreatedCollectionsListView');
+Route::get('/collections/create/{id}', [CollectionsSubsystemController::class, 'openCollectionCreationView'])->name('CollectionCreationView');
+Route::get('/collections/create/new/{id}',[CollectionsSubsystemController::class, 'createCollection'])->name('whateverName');
+Route::get('/collections/delete/{userId}/{collectionId}',[CollectionsSubsystemController::class, 'deleteCollection'])->name('CreatedCollectionsListView');
+Route::get('/collections/openEdit/{userId}/{collectionId}/{text1}/{text2}',[CollectionsSubsystemController::class, 'openEditCollectionView'])->name('edittoadsyyug');
+Route::get('/collections/edit/{userId}/{collectionId}',[CollectionsSubsystemController::class, 'editCollection'])->name('asdffdsa');
+
+//-----tik iki controller'io prieina, neapsiziurejau, kad ne savo darau, bet trint visai visko nesinori
+Route::get('/collections/{userId}/{collectionId}',[CollectionsSubsystemController::class, 'showCollectionInfo'])->name('CollectionInfo');
+
 // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 // PaymentsSubsystem
 
@@ -74,112 +90,134 @@ Route::post('getImageRecommendations',[ImagesSubsystemController::class,'getImag
 // UserManagementSubsystem
 
 
+// @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@-rolka controllers@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+
+Route::get('/testas',[testRolkaController::class, 'test'])->name('bet kas');
+
+
+
+
+
 // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 // ungrouped routes
+
+//actually naudojami-----------------------------
 Route::get('/', function () {
     return view('HomePage');
-});
-
-Route::get('AccountEditingView', function () {
-    return view('AccountEditingView');
-});
-
-Route::get('ActionConfirmationForm', function () {
-    return view('ActionConfirmationForm');
-});
-
-Route::get('AuctionInformationView', function () {
-    return view('AuctionInformationView');
-});
-
-Route::get('AuctionRegistrationView', function () {
-    return view('AuctionRegistrationView');
-});
-
-Route::get('AuctionsListView', function () {
-    return view('AuctionsListView');
-});
-
-Route::get('AwardsListView', function () {
-    return view('AwardsListView');
-});
-
-Route::get('BankAPICommunicator', function () {
-    return view('BankAPICommunicator');
-});
-
-Route::get('BillsListView', function () {
-    return view('BillsListView');
-});
-
-Route::get('BillsReportView', function () {
-    return view('BillsReportView');
-});
-
-Route::get('CollectionCreationView', function () {
-    return view('CollectionCreationView');
 });
 
 Route::get('CollectionsListView', function () {
     return view('CollectionsListView');
 });
+//-----------------------------------------------
 
-Route::get('CollectionView', function () {
-    return view('CollectionView');
-});
 
-Route::get('CreatedCollectionsListView', function () {
-    return view('CreatedCollectionsListView');
-});
 
-Route::get('ImageForSaleCreationView', function () {
-    return view('ImageForSaleCreationView');
-});
+//patariu neatkomentuot
+//jei savo nauja route kuriat, vis tiek reikes su controlleriu(kitaip paskaitai netiks)
+//o jei pavadinimai dubliuosis, paims paskutini route is zemiau ir bus neaisku ko paciu kurtas route neveikia
 
-Route::get('ImageInformationView', function () {
-    return view('ImageInformationView');
-});
+// Route::get('bandymas', function () {
+//     return view('imageInformationView');
+// });
 
-Route::get('ImageInformationEditView', function () {
-    return view('ImageInformationEditView');
-});
+// Route::get('AccountEditingView', function () {
+//     return view('AccountEditingView');
+// });
 
-Route::get('ImagePriceHistoryView', function () {
-    return view('ImagePriceHistoryView');
-});
+// Route::get('ActionConfirmationForm', function () {
+//     return view('ActionConfirmationForm');
+// });
 
-Route::get('ImagePurchaseInformationView', function () {
-    return view('ImagePurchaseInformationView');
-});
+// Route::get('AuctionInformationView', function () {
+//     return view('AuctionInformationView');
+// });
 
-Route::get('ImageRightsTransferView', function () {
-    return view('ImageRightsTransferView');
-});
+// Route::get('AuctionRegistrationView', function () {
+//     return view('AuctionRegistrationView');
+// });
 
-Route::get('LoginView', function () {
-    return view('LoginView');
-});
+// Route::get('AuctionsListView', function () {
+//     return view('AuctionsListView');
+// });
 
-Route::get('OwnedImageInformationView', function () {
-    return view('OwnedImageInformationView');
-});
+// Route::get('AwardsListView', function () {
+//     return view('AwardsListView');
+// });
 
-Route::get('OwnedImagesListView', function () {
-    return view('OwnedImagesListView');
-});
+// Route::get('BankAPICommunicator', function () {
+//     return view('BankAPICommunicator');
+// });
 
-Route::get('RegistrationView', function () {
-    return view('RegistrationView');
-});
+// Route::get('BillsListView', function () {
+//     return view('BillsListView');
+// });
 
-Route::get('UserProfileInformationView', function () {
-    return view('UserProfileInformationView');
-});
+// Route::get('BillsReportView', function () {
+//     return view('BillsReportView');
+// });
 
-Route::get('WalletBalanceTopUpView', function () {
-    return view('WalletBalanceTopUpView');
-});
+// // Route::get('CollectionCreationView', function () {
+// //     return view('CollectionCreationView');
+// // });
 
-Route::get('WalletView', function () {
-    return view('WalletView');
-});
+// // Route::get('CollectionView', function () {
+// //     return view('CollectionView');
+// // });
+
+// // Route::get('CreatedCollectionsListView', function () {
+// //     return view('CreatedCollectionsListView');
+// // });
+
+// Route::get('ImageForSaleCreationView', function () {
+//     return view('ImageForSaleCreationView');
+// });
+
+// Route::get('ImageInformationView', function () {
+//     return view('ImageInformationView');
+// });
+
+// Route::get('ImageInformationEditView', function () {
+//     return view('ImageInformationEditView');
+// });
+
+// Route::get('ImagePriceHistoryView', function () {
+//     return view('ImagePriceHistoryView');
+// });
+
+// Route::get('ImagePurchaseInformationView', function () {
+//     return view('ImagePurchaseInformationView');
+// });
+
+// Route::get('ImageRightsTransferView', function () {
+//     return view('ImageRightsTransferView');
+// });
+
+// Route::get('LoginView', function () {
+//     return view('LoginView');
+// });
+
+// Route::get('OwnedImageInformationView', function () {
+//     return view('OwnedImageInformationView');
+// });
+
+// Route::get('OwnedImagesListView', function () {
+//     return view('OwnedImagesListView');
+// });
+
+// Route::get('RegistrationView', function () {
+//     return view('RegistrationView');
+// });
+
+// Route::get('UserProfileInformationView', function () {
+//     return view('UserProfileInformationView');
+// });
+
+// Route::get('WalletBalanceTopUpView', function () {
+//     return view('WalletBalanceTopUpView');
+// });
+
+// Route::get('WalletView', function () {
+//     return view('WalletView');
+// });
