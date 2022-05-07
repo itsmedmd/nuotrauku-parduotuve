@@ -21,11 +21,11 @@
     tr:nth-child(even) {
       background-color: #dddddd;
     }
-    </style>
+</style>
 
 <main class="content">
     <h1>
-        My Collections
+        My Collections ({{$userId}})
     </h1>
     <br>
     <table>
@@ -42,7 +42,8 @@
                 </a>
             </th>
             <th>
-                <a>
+                <?php $urlDelete = "/testas/collection/delete/".$userId."/".$collection->id?>
+                <a href={{ $urlDelete }}>
                     Delete
                 </a>
             </th>
@@ -50,7 +51,8 @@
         @empty
         <p>No collections created</p>
         @endforelse
-        <a>Create New</a>
+        <?php $urlNew = "/testas/collection/create/".$userId;?>
+        <a href={{ $urlNew }}>Create New</a>
         <br>
     </table>
 </main>

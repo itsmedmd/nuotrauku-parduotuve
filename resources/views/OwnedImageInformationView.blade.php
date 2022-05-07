@@ -1,5 +1,12 @@
 @extends('layouts/layout')
 @section('content')
+
+<style>
+    input {      
+      width: 100px;
+    }
+</style>
+
 <main class="content">
     <h1>owned image information</h1>
     ID - {{ $image->id }} 
@@ -16,7 +23,7 @@
     ?>
     <form action="{{url($url)}}" method="post">
         @csrf
-       <input type="submit">
+       <input type="submit" value="Change Visibility">
     </form>
 
 

@@ -46,7 +46,7 @@ Route::get('CreatedImagesListView', [ImagesManagementSubsystemController::class,
 
 //berods ok, negarantuotai
 Route::get('/OwnedImageInformationView/{id}', [ImagesManagementSubsystemController::class, 'openOwnedImageInformationView'])->name('OwnedImageInformationView');
-Route::post('/OwnedImageInformationView/{id}', [ImagesManagementSubsystemController::class, 'changeVisibility'])->name('blog.store');
+Route::post('/OwnedImageInformationView/{id}', [ImagesManagementSubsystemController::class, 'changeVisibility'])->name('OwnedImageInformationView');
 
 // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 // ImagesSubsystem
@@ -83,7 +83,9 @@ Route::post('getImageRecommendations',[ImagesSubsystemController::class,'getImag
 // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@-rolka controllers@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
 Route::get('/testas/{id}', [testRolkaController::class, 'openCreatedCollectionsListView'])->name('CreatedCollectionsListView');
-// Route::get('/testas/{id}', [testRolkaController::class, 'openOwnedImageInformationView'])->name('OwnedImageInformationView');
+Route::get('/testas/collection/create/{id}', [testRolkaController::class, 'openCollectionCreationView'])->name('CollectionCreationView');
+Route::post('/testas/collection/create/{UserId}/{name}/{text}',[testRolkaController::class, 'createNewCollection'])->name('CreatedCollectionsListView');
+Route::get('/testas/collection/delete/{userId}/{collectionId}',[testRolkaController::class, 'deleteCollection'])->name('CreatedCollectionsListView');
 // Route::post('/testas/{id}', [testRolkaController::class, 'changeVisibility'])->name('blog.store');
 
 // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
@@ -138,9 +140,9 @@ Route::get('BillsReportView', function () {
     return view('BillsReportView');
 });
 
-Route::get('CollectionCreationView', function () {
-    return view('CollectionCreationView');
-});
+// Route::get('CollectionCreationView', function () {
+//     return view('CollectionCreationView');
+// });
 
 Route::get('CollectionsListView', function () {
     return view('CollectionsListView');
@@ -150,9 +152,9 @@ Route::get('CollectionView', function () {
     return view('CollectionView');
 });
 
-Route::get('CreatedCollectionsListView', function () {
-    return view('CreatedCollectionsListView');
-});
+// Route::get('CreatedCollectionsListView', function () {
+//     return view('CreatedCollectionsListView');
+// });
 
 Route::get('ImageForSaleCreationView', function () {
     return view('ImageForSaleCreationView');

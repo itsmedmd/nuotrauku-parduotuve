@@ -13,19 +13,69 @@ class testRolkaController extends Controller
         $collections = DB::table('collections')
         ->where('fk_user_id_kurejas', $id)
         ->get();
+        $sk = 7;
+        $userId = $id;
     return view('CreatedCollectionsListView', [
-        'collections' => $collections,                 
+        'collections' => $collections,
+        'userId' => $id,
+        'collectionId' => null,
+        'collectionName' => null,
+        'collectionDescription' => null
         ]);
     }
 
-    public function showCreatedCollectionsList($id)
+    public function openCollectionCreationView($id)
     {
          $collections = DB::table('collections')
             ->where('id', $id)
             ->get();
-        return view('CreatedCollectionsListView', [
-            'collections' => $collections,                 
+        return view('CollectionCreationView', [
+            'collections' => $collections,
+            'userId' => $id,
+            'collectionId' => null,
+            'collectionName' => null,
+            'collectionDescription' => null          
             ]);
+    }
+
+    public function createNewCollection($userId, $collectionName, $description)
+    {   
+        DB::insert('INSERT INTO collections (name, description, fk_user_id_kurejas)
+                    VALUES(?, ?, ?)', [
+                        $collectionName, $description, $userId
+        ]);
+        $collections = DB::table('collections')
+        ->where('fk_user_id_kurejas', $userId)
+        ->get();
+        return view('CreatedCollectionsListView', [
+            'collections' => $collections,
+            'userId' => $userId,
+            'collectionId' => null,
+            'collectionName' => $collectionName,
+            'collectionDescription' => $description           
+            ]);
+    }
+
+    public function deleteCollection($userId, $collectionId)
+    {   
+        DB::delete('DELETE FROM collections
+                    WHERE id = ?', [$collectionId]);
+        $collections = DB::table('collections')
+            ->where('fk_user_id_kurejas', $userId)
+            ->get();
+        return view('CreatedCollectionsListView', [
+            'collections' => $collections,
+            'userId' => $userId,
+            'collectionId' => $collectionId,
+            'collectionName' => null,
+            'collectionDescription' => null             
+        ]);
+      
+    }
+
+    public function editCollection($collectionId, $collectionName, $description)
+    {
+        return dd('inEditCollection');
     }
 
     // public function openOwnedImageInformationView($id)
