@@ -145,14 +145,14 @@ class ImagesManagementSubsystemController extends Controller
         {
             Debugbar::info('ieita i iF');
             $image = DB::update('UPDATE images set is_visible = ? where id = ?', [
-                1, 1
+                1, $id
             ]);
         }
         else
         {
             Debugbar::info('ieita i iF else');
             $image = DB::update('UPDATE images set is_visible = ? where id = ?', [
-                0, 1
+                0, $id
             ]); 
         }
         $image = DB::table('images')->find($id);   //vienam
