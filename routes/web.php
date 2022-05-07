@@ -92,22 +92,8 @@ Route::get('/collections/{userId}/{collectionId}',[CollectionsSubsystemControlle
 
 // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@-rolka controllers@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
-// Route::get('/testas/collections/open/{id}', [testRolkaController::class, 'openCreatedCollectionsListView'])->name('CreatedCollectionsListView');
-// Route::get('/testas/collections/create/{id}', [testRolkaController::class, 'openCollectionCreationView'])->name('CollectionCreationView');
-// Route::get('/testas/collections/create/new/{id}',[testRolkaController::class, 'createCollection'])->name('whateverName');
-// Route::get('/testas/collections/delete/{userId}/{collectionId}',[testRolkaController::class, 'deleteCollection'])->name('CreatedCollectionsListView');
-// Route::get('/testas/collections/openEdit/{userId}/{collectionId}/{text1}/{text2}',[testRolkaController::class, 'openEditCollectionView'])->name('edittoadsyyug');
-// Route::get('/testas/collections/edit/{userId}/{collectionId}',[testRolkaController::class, 'editCollection'])->name('asdffdsa');
-
 Route::get('/testas',[testRolkaController::class, 'test'])->name('bet kas');
 
-
-
-
-
-
-//Route::get('/testas/collection/edit',[testRolkaController::class, 'editCollection'])->name('CollectionEditView');
-// Route::post('/testas/{id}', [testRolkaController::class, 'changeVisibility'])->name('blog.store');
 
 // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 // ungrouped routes
