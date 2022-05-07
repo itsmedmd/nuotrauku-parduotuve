@@ -2,28 +2,24 @@
 @section('content')
 
 <style>
-    input {      
-      width: 100px;
+    input[type=submit] {
+        width: 50px;
     }
 </style>
-<?php $url = "/testas/collection/create/".$userId."/text/dexcriptionnnn"?>
-<main class="content image-information-edit-view">
-    <div class="form-wrapper">
-        <h2 class="form-title">Create new collection({{$userId}})</h2>
-        <form action="{{url($url)}}" method="post">
-            @csrf
-            <div>
-                <label for="title">New collection name:</label><br>
-                <input name="title" id="name" type="text">
-            </div>	
-            <div>
-                <label for="description">Description:</label><br>
-                <input name="description" id="description" type="text" maxlength="500">
-            </div>
-            <div>
-                <input type="submit" value="Create">
-            </div>
-        </form>
+
+<main class="content">
+    <h1>User{{$userId}}</h1>
+    <br>
+    <?php $url = "/testas";?>
+    <?php $url2 = "/testas/collections/create/new/".$userId;?>
+    <form action={{$url2}} method="get">
+        <div>
+            Name:  <input type="text" name="collectionName" maxlength="100" required /><br/>
+        </div>
+        <div>
+            Description: <input type="text" name="description" maxlength="500" required /><br/>
+        </div>
+            <input type="submit" name="submit" value="Create" />
     </div>
 </main>
 @endsection

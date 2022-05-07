@@ -1,4 +1,9 @@
 <?php
+// Debug bar usage
+// Debugbar::info('stringHere');
+// Debugbar::error('stringHere');
+// Debugbar::warning('stringHere');
+// Debugbar::addMessage('stringHere');
 
 namespace App\Http\Controllers;
 
@@ -13,15 +18,14 @@ class testRolkaController extends Controller
         $collections = DB::table('collections')
         ->where('fk_user_id_kurejas', $id)
         ->get();
-        $sk = 7;
         $userId = $id;
-    return view('CreatedCollectionsListView', [
-        'collections' => $collections,
-        'userId' => $id,
-        'collectionId' => null,
-        'collectionName' => null,
-        'collectionDescription' => null
-        ]);
+        return view('CreatedCollectionsListView', [
+            'collections' => $collections,
+            'userId' => $id,
+            'collectionId' => null,
+            'collectionName' => null,
+            'collectionDescription' => null
+            ]);
     }
 
     public function openCollectionCreationView($id)
@@ -29,31 +33,13 @@ class testRolkaController extends Controller
          $collections = DB::table('collections')
             ->where('id', $id)
             ->get();
-        return view('CollectionCreationView', [
-            'collections' => $collections,
-            'userId' => $id,
-            'collectionId' => null,
-            'collectionName' => null,
-            'collectionDescription' => null          
-            ]);
-    }
-
-    public function createNewCollection($userId, $collectionName, $description)
-    {   
-        DB::insert('INSERT INTO collections (name, description, fk_user_id_kurejas)
-                    VALUES(?, ?, ?)', [
-                        $collectionName, $description, $userId
-        ]);
-        $collections = DB::table('collections')
-        ->where('fk_user_id_kurejas', $userId)
-        ->get();
-        return view('CreatedCollectionsListView', [
-            'collections' => $collections,
-            'userId' => $userId,
-            'collectionId' => null,
-            'collectionName' => $collectionName,
-            'collectionDescription' => $description           
-            ]);
+            return view('CollectionCreationView', [
+                'collections' => $collections,
+                'userId' => $id,
+                'collectionId' => null,
+                'collectionName' => null,
+                'collectionDescription' => null          
+                ]);
     }
 
     public function deleteCollection($userId, $collectionId)
@@ -70,12 +56,74 @@ class testRolkaController extends Controller
             'collectionName' => null,
             'collectionDescription' => null             
         ]);
-      
     }
 
-    public function editCollection($collectionId, $collectionName, $description)
+    public function createCollection(Request $request, $userId)
     {
-        return dd('inEditCollection');
+        //Debugbar::addMessage($request->input('collectionName'));
+        DB::insert('INSERT INTO collections (name, description, fk_user_id_kurejas)
+                    VALUES(?, ?, ?)', [
+                $request->input('collectionName'),
+                $request->input('description'),
+                $userId
+            ]);
+        $request->request->remove('collectionName');    //neremovina laiku...
+        $request->request->remove('description');
+        $collections = DB::table('collections')
+        ->where('fk_user_id_kurejas', $userId)
+        ->get();
+        return view('CreatedCollectionsListView', [
+            'collections' => $collections,
+            'userId' => $userId,
+            'collectionId' => null,
+            'collectionName' => null,
+            'collectionDescription' => null
+            ]);
+    }
+
+    public function openEditCollectionView($userId, $collectionId, $collectionName, $collectionDescription)
+    {
+        //Debugbar::addMessage($request->input('collectionName'));
+
+        $collections = DB::table('collections')
+        ->where('fk_user_id_kurejas', $userId)
+        ->get();
+        return view('CollectionEditView', [
+            'collections' => $collections,
+            'userId' => $userId,
+            'collectionId' => $collectionId,
+            'collectionName' => $collectionName,
+            'collectionDescription' => $collectionDescription
+            ]);
+    }
+
+    public function editCollection(Request $request, $userId, $collectionId)
+    {
+        
+        Debugbar::addMessage($userId);
+        Debugbar::addMessage($collectionId);
+        Debugbar::addMessage($request->input('collectionName'));
+        Debugbar::addMessage($request->input('description'));
+        DB::update('UPDATE collections SET name = ?, description = ? WHERE id = ?',[
+                     $request->input('collectionName'),
+                     $request->input('description'),
+                     $collectionId
+                    ]);
+        $collections = DB::table('collections')
+        ->where('fk_user_id_kurejas', $userId)
+        ->get();
+        return view('CreatedCollectionsListView', [
+            'collections' => $collections,
+            'userId' => $userId,
+            'collectionId' => null,
+            'collectionName' => null,
+            'collectionDescription' => null
+            ]);
+    }
+
+    public function test()
+    {
+        dd('pasieke test controller');
     }
 
     // public function openOwnedImageInformationView($id)

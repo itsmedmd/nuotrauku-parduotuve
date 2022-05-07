@@ -30,19 +30,27 @@
     <br>
     <table>
         <tr>
-            <th colspan="3">Collection name </th>
+            <th colspan="4">Collection name </th>
 
           </tr>
         @forelse ($collections as $collection)
         <tr>
             <td>{{ $collection->name }}</td>
             <th>
-                <a>
-                    Edit
-                </a>
+              <?php $urlInfo ="/collections/".$userId."/".$collection->id?>
+              <a href={{ $urlInfo }}>
+                  Info
+              </a>
+          </th>
+            <th>
+              <?php $urlEdit2 = "/testas"?>
+              <?php $urlEdit = "/testas/collections/openEdit/".$userId."/".$collection->id."/".$collection->name."/".$collection->description?>
+              <a href={{ $urlEdit }}>
+                  Edit
+              </a>
             </th>
             <th>
-                <?php $urlDelete = "/testas/collection/delete/".$userId."/".$collection->id?>
+                <?php $urlDelete ="/testas/collections/delete/".$userId."/".$collection->id?>
                 <a href={{ $urlDelete }}>
                     Delete
                 </a>
@@ -51,7 +59,7 @@
         @empty
         <p>No collections created</p>
         @endforelse
-        <?php $urlNew = "/testas/collection/create/".$userId;?>
+        <?php $urlNew = "/testas/collections/create/".$userId;?>
         <a href={{ $urlNew }}>Create New</a>
         <br>
     </table>
