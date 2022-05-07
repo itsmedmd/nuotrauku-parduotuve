@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Storage;
 use App\Models\Image;
 use App\Models\image_for_sale;
 use App\Models\collection;
+use Barryvdh\Debugbar\Facades\Debugbar;
+use Illuminate\Support\Facades\DB;
 
 class ImagesManagementSubsystemController extends Controller
 {
@@ -122,5 +124,41 @@ class ImagesManagementSubsystemController extends Controller
         ]);
 
         return redirect('CreatedImagesListView')->with('success-status', 'Successfully updated image information!');
+    }
+
+    public function openOwnedImageInformationView($id)
+    {
+        $image = DB::table('images')->find($id);   //vienam
+        //return view('OwnedImageInformationView')->with('image', $image);
+
+        // $sk = $image->title;   
+        return view('OwnedImageInformationView', [
+            'image' => $image,
+        ]);
+    }
+
+    public function changeVisibility($id)
+    {
+        $image = DB::table('images')->find($id);   //vienam
+        Debugbar::info($image->is_visible);
+        if($image->is_visible == 0)
+        {
+            Debugbar::info('ieita i iF');
+            $image = DB::update('UPDATE images set is_visible = ? where id = ?', [
+                1, 1
+            ]);
+        }
+        else
+        {
+            Debugbar::info('ieita i iF else');
+            $image = DB::update('UPDATE images set is_visible = ? where id = ?', [
+                0, 1
+            ]); 
+        }
+        $image = DB::table('images')->find($id);   //vienam
+
+        return view('OwnedImageInformationView', [
+            'image' => $image,
+        ]);
     }
 }

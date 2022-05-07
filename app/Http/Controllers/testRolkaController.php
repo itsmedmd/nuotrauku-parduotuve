@@ -104,7 +104,6 @@ class testRolkaController extends Controller
         Debugbar::addMessage($collectionId);
         Debugbar::addMessage($request->input('collectionName'));
         Debugbar::addMessage($request->input('description'));
-
         DB::update('UPDATE collections SET name = ?, description = ? WHERE id = ?',[
                      $request->input('collectionName'),
                      $request->input('description'),
