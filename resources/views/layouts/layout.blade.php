@@ -26,6 +26,9 @@
                   <li>
                      <a href="/CreatedImagesListView">Created Images</a>
                   </li>
+                  <li>
+                     <a href="/AuctionsListView">Auctions</a>
+                  </li>
                </ul>
             </nav>
             @yield('content')

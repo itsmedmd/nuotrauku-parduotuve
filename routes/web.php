@@ -61,6 +61,8 @@ Route::post('getImageRecommendations',[ImagesSubsystemController::class,'getImag
 // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 // AuctionsSubsystem
 
+Route::get('AuctionsListView', [AuctionsSubsystemController::class,'displayAuctionsList'])->name('AuctionsListView');
+
 // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 // AwardsSubsystem
 
