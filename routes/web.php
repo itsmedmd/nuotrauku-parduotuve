@@ -93,6 +93,8 @@ Route::get('/collections/{userId}/{collectionId}',[CollectionsSubsystemControlle
 // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@-rolka controllers@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
 
+Route::get('/ownedimages/{id}', [testRolkaController::class, 'openOwnedImages'])->name('ownedImg');
+
 Route::get('/testas',[testRolkaController::class, 'test'])->name('bet kas');
 
 
@@ -107,7 +109,7 @@ Route::get('/', function () {
     return view('HomePage');
 });
 
-Route::get('CollectionsListView', function () {
+Route::get('/CollectionsListView', function () {
     return view('CollectionsListView');
 });
 //-----------------------------------------------
@@ -202,9 +204,7 @@ Route::get('CollectionsListView', function () {
 //     return view('OwnedImageInformationView');
 // });
 
-// Route::get('OwnedImagesListView', function () {
-//     return view('OwnedImagesListView');
-// });
+
 
 // Route::get('RegistrationView', function () {
 //     return view('RegistrationView');

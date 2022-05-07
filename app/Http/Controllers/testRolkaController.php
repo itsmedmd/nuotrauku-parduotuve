@@ -113,17 +113,31 @@ class testRolkaController extends Controller
         ->where('fk_user_id_kurejas', $userId)
         ->get();
         return view('CreatedCollectionsListView', [
-            'collections' => $collections,
+            
             'userId' => $userId,
             'collectionId' => null,
             'collectionName' => null,
             'collectionDescription' => null
             ]);
     }
+    public function openOwnedImages($userId)
+    {   
+        $images = DB::table('images')
+            ->where('fk_user_id_savininkas', $userId)
+            ->get();
+        $collections = DB::table('collections')
+            ->where('fk_user_id_kurejas', $userId)
+            ->get();
+        return view('OwnedImagesListView', [
+            'images' => $images,
+            'userId' => $userId,
+            'collections' => $collections
+            ]);
+    }
 
     public function test()
     {
-        dd('pasieke test controller');
+        return "Pasieke testController.test()";
     }
 
     // public function openOwnedImageInformationView($id)
