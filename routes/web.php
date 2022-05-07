@@ -73,7 +73,14 @@ Route::post('getImageRecommendations',[ImagesSubsystemController::class,'getImag
 // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 // CollectionsSubsystem
 
-//-----tik iki controller'io prieina, neapsiziurejau, bet trint visai visko nesinori
+Route::get('/collections/open/{id}', [CollectionsSubsystemController::class, 'openCreatedCollectionsListView'])->name('CreatedCollectionsListView');
+Route::get('/collections/create/{id}', [CollectionsSubsystemController::class, 'openCollectionCreationView'])->name('CollectionCreationView');
+Route::get('/collections/create/new/{id}',[CollectionsSubsystemController::class, 'createCollection'])->name('whateverName');
+Route::get('/collections/delete/{userId}/{collectionId}',[CollectionsSubsystemController::class, 'deleteCollection'])->name('CreatedCollectionsListView');
+Route::get('/collections/openEdit/{userId}/{collectionId}/{text1}/{text2}',[CollectionsSubsystemController::class, 'openEditCollectionView'])->name('edittoadsyyug');
+Route::get('/collections/edit/{userId}/{collectionId}',[CollectionsSubsystemController::class, 'editCollection'])->name('asdffdsa');
+
+//-----tik iki controller'io prieina, neapsiziurejau, kad ne savo darau, bet trint visai visko nesinori
 Route::get('/collections/{userId}/{collectionId}',[CollectionsSubsystemController::class, 'showCollectionInfo'])->name('CollectionInfo');
 
 // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
@@ -85,13 +92,12 @@ Route::get('/collections/{userId}/{collectionId}',[CollectionsSubsystemControlle
 
 // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@-rolka controllers@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
-Route::get('/testas/collections/open/{id}', [testRolkaController::class, 'openCreatedCollectionsListView'])->name('CreatedCollectionsListView');
-Route::get('/testas/collections/create/{id}', [testRolkaController::class, 'openCollectionCreationView'])->name('CollectionCreationView');
-Route::get('/testas/collections/create/new/{id}',[testRolkaController::class, 'createCollection'])->name('whateverName');
-Route::get('/testas/collections/delete/{userId}/{collectionId}',[testRolkaController::class, 'deleteCollection'])->name('CreatedCollectionsListView');
-
-Route::get('/testas/collections/openEdit/{userId}/{collectionId}/{text1}/{text2}',[testRolkaController::class, 'openEditCollectionView'])->name('edittoadsyyug');
-Route::get('/testas/collections/edit/{userId}/{collectionId}',[testRolkaController::class, 'editCollection'])->name('asdffdsa');
+// Route::get('/testas/collections/open/{id}', [testRolkaController::class, 'openCreatedCollectionsListView'])->name('CreatedCollectionsListView');
+// Route::get('/testas/collections/create/{id}', [testRolkaController::class, 'openCollectionCreationView'])->name('CollectionCreationView');
+// Route::get('/testas/collections/create/new/{id}',[testRolkaController::class, 'createCollection'])->name('whateverName');
+// Route::get('/testas/collections/delete/{userId}/{collectionId}',[testRolkaController::class, 'deleteCollection'])->name('CreatedCollectionsListView');
+// Route::get('/testas/collections/openEdit/{userId}/{collectionId}/{text1}/{text2}',[testRolkaController::class, 'openEditCollectionView'])->name('edittoadsyyug');
+// Route::get('/testas/collections/edit/{userId}/{collectionId}',[testRolkaController::class, 'editCollection'])->name('asdffdsa');
 
 Route::get('/testas',[testRolkaController::class, 'test'])->name('bet kas');
 

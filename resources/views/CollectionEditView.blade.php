@@ -11,7 +11,7 @@
     <h1>User{{$userId}}</h1>
     <h1>Collection{{$collectionId}}</h1>
     <br>
-    <?php $url = "/testas/collections/edit/".$userId."/".$collectionId?>
+    <?php $url = "/collections/edit/".$userId."/".$collectionId?>
     <form action={{$url}} method="get">
         <div>
             Name:  <input type="text" name="collectionName" maxlength="100" value="{{$collectionName}}" required /><br/>

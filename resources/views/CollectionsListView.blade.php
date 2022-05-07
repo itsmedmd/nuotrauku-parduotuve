@@ -7,7 +7,7 @@
             onclick="openCreatedCollectionsListView"
         >
             <?php
-                $url = "/testas/collections/open/1";     //kai view priimineja viena nari, o ne masyva
+                $url = "/collections/open/1";     //kai view priimineja viena nari, o ne masyva
             ?>
             <a href={{ $url }}>
                 My Collections

@@ -10,8 +10,7 @@
 <main class="content">
     <h1>User{{$userId}}</h1>
     <br>
-    <?php $url = "/testas";?>
-    <?php $url2 = "/testas/collections/create/new/".$userId;?>
+    <?php $url2 = "/collections/create/new/".$userId;?>
     <form action={{$url2}} method="get">
         <div>
             Name:  <input type="text" name="collectionName" maxlength="100" required /><br/>

@@ -43,14 +43,13 @@
               </a>
           </th>
             <th>
-              <?php $urlEdit2 = "/testas"?>
-              <?php $urlEdit = "/testas/collections/openEdit/".$userId."/".$collection->id."/".$collection->name."/".$collection->description?>
+              <?php $urlEdit = "/collections/openEdit/".$userId."/".$collection->id."/".$collection->name."/".$collection->description?>
               <a href={{ $urlEdit }}>
                   Edit
               </a>
             </th>
             <th>
-                <?php $urlDelete ="/testas/collections/delete/".$userId."/".$collection->id?>
+                <?php $urlDelete ="/collections/delete/".$userId."/".$collection->id?>
                 <a href={{ $urlDelete }}>
                     Delete
                 </a>
@@ -59,7 +58,7 @@
         @empty
         <p>No collections created</p>
         @endforelse
-        <?php $urlNew = "/testas/collections/create/".$userId;?>
+        <?php $urlNew = "/collections/create/".$userId;?>
         <a href={{ $urlNew }}>Create New</a>
         <br>
     </table>
