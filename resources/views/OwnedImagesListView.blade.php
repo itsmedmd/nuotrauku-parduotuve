@@ -51,6 +51,13 @@ table {
                         @endforeach
                     </p>
                 </th>
+                <th>
+                    <p>
+                        <form action="/images/sellwindow/{{ $userId }}/{{ $img->id }}">
+                            <input type="submit" value="sell">
+                        </form>
+                    </p>
+                </th>
             </tr>
         @empty
             No images owned

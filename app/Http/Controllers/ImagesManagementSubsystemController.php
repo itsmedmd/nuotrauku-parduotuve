@@ -197,4 +197,48 @@ class ImagesManagementSubsystemController extends Controller
            'msg' => "Successfully moved" 
            ]);
     }
+
+    public function openSellPictureWindow($userId, $pictureId)
+    {   
+        return view ('ImageForSaleCreationView', [
+            'pictureId' => $pictureId,
+            'userId' => $userId,
+            'msg' => null
+        ]);
+    }
+
+    public function putForSale(Request $request, $userId, $pictureId)
+    {           
+        $image = DB::table('images')->find($pictureId);
+        $forSale = DB::table('images_for_sale')
+          ->where('fk_image_id', $pictureId)
+          ->get();
+        $exists = sizeof($forSale);
+        
+        if($exists == 1){
+            $picture = $forSale[0];
+        DB::update('UPDATE images_for_sale SET price = ?, updated_at = CURRENT_TIMESTAMP() WHERE id = ?',[
+            $request->input('price'),
+            $picture->id
+           ]);
+        }
+        else{
+            DB::insert('INSERT INTO images_for_sale (price, creation_date, fk_image_id, created_at)
+            VALUES(?, ?, ?, CURRENT_TIMESTAMP())', [  
+            $request->input('price'),
+            $image->creation_date,
+            $pictureId
+        ]);
+        }
+        $msg = "";
+        if($exists == 1)
+            $msg = " price updated.";
+        else $msg = " placed for sale";
+
+        return view ('ImageForSaleCreationView', [
+            'pictureId' => $pictureId,
+            'userId' => $userId,
+            'msg' => $image->title.$msg
+        ]);
+    }
 }

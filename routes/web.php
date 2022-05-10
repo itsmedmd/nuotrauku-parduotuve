@@ -95,7 +95,8 @@ Route::get('/collections/{userId}/{collectionId}',[CollectionsSubsystemControlle
 
 // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@-rolka controllers@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
-
+Route::get('/images/sellwindow/{userId}/{imageId}',[testRolkaController::class, 'openSellPictureWindow'])->name('openWindow');
+Route::get('/images/putforsale/{userId}/{imageId}',[testRolkaController::class, 'putForSale'])->name('openWindow');
 
 
 

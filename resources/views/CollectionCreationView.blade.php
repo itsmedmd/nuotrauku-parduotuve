@@ -19,7 +19,9 @@
             Description: <input type="text" name="description" maxlength="500" required /><br/>
         </div>
             <input type="submit" name="submit" value="Create" />
-    </div>
+        </div>
+    </form>
+    
 </main>
 @endsection
 
