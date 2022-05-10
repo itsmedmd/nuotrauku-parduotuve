@@ -9,7 +9,7 @@
 
 <main class="content">
     <h1>owned image information</h1>
-    ID - {{ $image->id }} 
+    <img src="{{ asset($image->image) }}" alt="loading..." width="400" height="300"><br>
     <br>
     Title - {{ $image->title }} 
     <br>

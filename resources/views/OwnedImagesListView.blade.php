@@ -54,7 +54,23 @@ table {
                 <th>
                     <p>
                         <form action="/images/sellwindow/{{ $userId }}/{{ $img->id }}">
-                            <input type="submit" value="sell">
+                            <input type="submit" value="Sell">
+                        </form>
+                    </p>
+                </th>
+                <th>
+                    <p>
+                        <form action="/purchaseinformation/{{ $img->id }}">
+                        <?php
+                            $wasSold = DB::table('bills')
+                            ->where('fk_image_id', $img->id)
+                            ->get();
+                            $show = $exists = sizeof($wasSold);
+                        ?>
+                            <h1><?php if($show) : ?>
+                                <input type="submit" value="Purchase Info">
+                                <?php endif; ?>
+                            </h1>
                         </form>
                     </p>
                 </th>

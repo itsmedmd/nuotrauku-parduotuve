@@ -48,6 +48,8 @@ Route::get('/OwnedImageInformationView/{id}', [ImagesManagementSubsystemControll
 Route::post('/OwnedImageInformationView/{id}', [ImagesManagementSubsystemController::class, 'changeVisibility'])->name('OwnedImageInformationView');
 Route::get('/ownedimages/{id}', [ImagesManagementSubsystemController::class, 'openOwnedImages'])->name('ownedImg');
 Route::get('/ownedimages/movetocollection/{userId}/', [ImagesManagementSubsystemController::class, 'movePictureToCollection'])->name('moveToCollection');
+Route::get('/images/sellwindow/{userId}/{imageId}',[ImagesManagementSubsystemController::class, 'openSellPictureWindow'])->name('openWindow');
+Route::get('/images/putforsale/{userId}/{imageId}',[ImagesManagementSubsystemController::class, 'putForSale'])->name('openWindow');
 
 // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 // ImagesSubsystem
@@ -92,6 +94,7 @@ Route::get('/collections/{userId}/{collectionId}',[CollectionsSubsystemControlle
 
 // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 // PaymentsSubsystem
+Route::get('/purchaseinformation/{id:int}',[PaymentsSubsystemController::class, 'showPurchaseInformation'])->name('purchaseInfoWindowOpen');
 
 // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 // UserManagementSubsystem
@@ -99,8 +102,7 @@ Route::get('/collections/{userId}/{collectionId}',[CollectionsSubsystemControlle
 
 // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@-rolka controllers@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
-Route::get('/images/sellwindow/{userId}/{imageId}',[testRolkaController::class, 'openSellPictureWindow'])->name('openWindow');
-Route::get('/images/putforsale/{userId}/{imageId}',[testRolkaController::class, 'putForSale'])->name('openWindow');
+
 
 
 
