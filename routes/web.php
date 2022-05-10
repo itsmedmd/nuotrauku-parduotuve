@@ -44,9 +44,10 @@ Route::post('submitNewImageData',[ImagesManagementSubsystemController::class,'su
 Route::get('ImageCreationView', [ImagesManagementSubsystemController::class,'openImageCreationView']);
 Route::get('CreatedImagesListView', [ImagesManagementSubsystemController::class,'displayCreatedImageList']);
 
-//berods ok, negarantuotai
 Route::get('/OwnedImageInformationView/{id}', [ImagesManagementSubsystemController::class, 'openOwnedImageInformationView'])->name('OwnedImageInformationView');
 Route::post('/OwnedImageInformationView/{id}', [ImagesManagementSubsystemController::class, 'changeVisibility'])->name('OwnedImageInformationView');
+Route::get('/ownedimages/{id}', [ImagesManagementSubsystemController::class, 'openOwnedImages'])->name('ownedImg');
+Route::get('/ownedimages/movetocollection/{userId}/', [ImagesManagementSubsystemController::class, 'movePictureToCollection'])->name('moveToCollection');
 
 // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 // ImagesSubsystem
@@ -73,6 +74,8 @@ Route::post('getImageRecommendations',[ImagesSubsystemController::class,'getImag
 // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 // CollectionsSubsystem
 
+//404 nzn ko truksta, tai kol kas be confirmation
+Route::get('/submitCreatedCollectionDelete/{userId}/{collectionId}',[testRolkaController::class,'submitCollectionDelete'])->name('submitCreatedCollectionDelete');
 Route::get('/collections/open/{id}', [CollectionsSubsystemController::class, 'openCreatedCollectionsListView'])->name('CreatedCollectionsListView');
 Route::get('/collections/create/{id}', [CollectionsSubsystemController::class, 'openCollectionCreationView'])->name('CollectionCreationView');
 Route::get('/collections/create/new/{id}',[CollectionsSubsystemController::class, 'createCollection'])->name('whateverName');
@@ -93,7 +96,8 @@ Route::get('/collections/{userId}/{collectionId}',[CollectionsSubsystemControlle
 // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@-rolka controllers@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
 
-Route::get('/ownedimages/{id}', [testRolkaController::class, 'openOwnedImages'])->name('ownedImg');
+
+
 
 Route::get('/testas',[testRolkaController::class, 'test'])->name('bet kas');
 

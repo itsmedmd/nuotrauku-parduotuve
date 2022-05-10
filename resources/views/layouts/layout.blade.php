@@ -27,6 +27,9 @@
                      <a href="/CreatedImagesListView">Created Images</a>
                   </li>
                   <li>
+                     <a href="/ownedimages/1">Owned Images</a>
+                  </li>
+                  <li>
                      <a href="/CollectionsListView">Image Collections</a>
                   </li>
                </ul>

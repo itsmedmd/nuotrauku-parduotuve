@@ -161,4 +161,40 @@ class ImagesManagementSubsystemController extends Controller
             'image' => $image,
         ]);
     }
+
+    public function openOwnedImages($userId)
+    {   
+        $images = DB::table('images')
+            ->where('fk_user_id_savininkas', $userId)
+            ->get();
+        $collections = DB::table('collections')
+            ->where('fk_user_id_kurejas', $userId)
+            ->get();
+        return view('OwnedImagesListView', [
+            'images' => $images,
+            'userId' => $userId,
+            'collections' => $collections,
+            'msg' => null
+            ]);
+    }
+
+    public function movePictureToCollection(Request $request, $userId,)
+    {   
+        DB::update('UPDATE images SET fk_collection_id_dabartine = ? WHERE id = ?',[
+            $request->input('collId'),
+            $request->input('picId')
+           ]);
+        $images = DB::table('images')
+           ->where('fk_user_id_savininkas', $userId)
+           ->get();
+       $collections = DB::table('collections')
+           ->where('fk_user_id_kurejas', $userId)
+           ->get();
+       return view('OwnedImagesListView', [
+           'images' => $images,
+           'userId' => $userId,
+           'collections' => $collections,
+           'msg' => "Successfully moved" 
+           ]);
+    }
 }

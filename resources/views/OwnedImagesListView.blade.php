@@ -17,6 +17,15 @@ table {
   a {
       color: blue;
   }
+
+  select {
+    width: 300px;
+  }
+
+  input {
+    width: 100px;
+  }
+
   
   </style>
 
@@ -24,22 +33,9 @@ table {
     User Id - {{ $userId }}
     <h1>Owned Images</h1>
     <table>
-        <tr>
-            <th style="width:30%">
-            </th>
-            <th>
-                Title
-            </th>
-            <th>
-                Current Collection
-            </th>
-            <th>
-                Change Collection to...
-            </th>
-        </tr>
         @forelse ($images as $img)
         <?php
-            $coll = DB::select('SELECT * FROM collections WHERE id = ?', [$img->fk_user_id_savininkas]);
+            $coll = DB::select('SELECT * FROM collections WHERE id = ?', [$img->fk_collection_id_dabartine]);
         ?>
             <tr>
                 <th style="width:30%">
@@ -55,16 +51,42 @@ table {
                         @endforeach
                     </p>
                 </th>
-                <th>
-                    @foreach($collections as $collection)
-                        <a href="">{{$collection->name}}</a>
-                    @endforeach
-                </th>
             </tr>
         @empty
             No images owned
         @endforelse
     </table>
+
+    <br>
+    <h3>Move picture to collection...</h3>
+    <form action="/ownedimages/movetocollection/{{ $userId }}">
+        <label for="cars">Picture to move:</label>
+        <br> 
+        <select name="picId" id="titles">
+            @forelse ($images as $img)
+            <option value="{{$img->id}}">{{$img->title}}</option>
+            @empty
+            <option>--No images owned--</option>
+            @endforelse
+        </select>
+        <br>   
+        <label for="cars">To collection:</label> 
+        <br> 
+          <select name="collId" id="collections">
+            @forelse ($collections as $collection)
+            <option value="{{$collection->id}}">{{$collection->name}}</option>
+            @empty
+                <option>--No collections owned--</option>
+            @endforelse
+        </select>
+        <br><br>
+        <input type="submit" value="Move">
+      </form>
+      <p style="color:green; font-size:12px;">{{ $msg }}</p>
+
+
+
+
 </main>
 @endsection
 

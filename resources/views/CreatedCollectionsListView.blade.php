@@ -23,6 +23,15 @@
     }
 </style>
 
+@if (session('openActionConfirmationForm') == true)
+<x-action-confirmation-form
+    message="Do you really want to delete the collection?"
+    origin="CreatedCollectionsListView"
+    action="/collections/delete"
+    itemID="{{session('itemID')}}"
+/>
+@endif
+
 <main class="content">
     <h1>
         My Collections ({{$userId}})

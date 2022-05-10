@@ -108,6 +108,14 @@ class CollectionsSubsystemController extends Controller
             ]);
     }
 
+    public function submitCollectionDelete($userId, $collectionId) {
+        return redirect('CreatedCollectionsListView')->with([
+            'openActionConfirmationForm' => true,
+            'userId' => $userId,
+            'itemID' => $collectionId
+        ]);
+    }
+
     public function showCollectionInfo()
     {
         dd('pasieke CollectionsSubsystemController.showCollectionInfo()');
