@@ -116,8 +116,14 @@ class CollectionsSubsystemController extends Controller
         ]);
     }
 
-    public function showCollectionInfo()
+    //user id nereikia, bet meh...
+    public function showCollectionInfo($userId, $collectionId)
     {
-        dd('pasieke CollectionsSubsystemController.showCollectionInfo()');
+        $collection = DB::table('collections')->find($collectionId);
+        $user = DB::table('users')->find($userId);
+        return view('CollectionView')->with([
+            'username' => $user->username,
+            'collection' => $collection
+        ]);
     }
 }

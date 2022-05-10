@@ -104,11 +104,7 @@ Route::get('/purchaseinformation/{id:int}',[PaymentsSubsystemController::class, 
 
 
 
-
-
 Route::get('/testas',[testRolkaController::class, 'test'])->name('bet kas');
-
-
 
 
 
