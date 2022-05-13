@@ -237,13 +237,32 @@ class ImagesSubsystemController extends Controller
     // get recommendations for an image
     public function getImageRecommendations(Request $request) {
         // get parameters from request
-        $img_id = $request->input('img_id');
         $image_for_sale_id = $request->input('image_for_sale_id');
-        $coll_id = $request->input('coll_id');
-        $seller_id = $request->input('seller_id');
-        $img_title = $request->input('img_title');
-        $img_description = $request->input('img_description');
         $old_ids = $request->collect('old_ids');
+
+        // get image data needed for recommendations
+        $image = DB::select("
+            SELECT
+                images.id as image_id,
+                images.title as title,
+                images.description as img_description,
+                images.fk_user_id_savininkas as seller_id,
+                images.fk_collection_id_dabartine as coll_id
+            FROM images_for_sale
+            INNER JOIN images
+                ON images_for_sale.fk_image_id = images.id
+            INNER JOIN collections
+                ON images.fk_collection_id_dabartine = collections.id
+            INNER JOIN users
+                ON images.fk_user_id_savininkas = users.id
+            WHERE images_for_sale.id = ".$image_for_sale_id
+        );
+
+        $img_id = $image[0]->image_id;
+        $coll_id = $image[0]->coll_id;
+        $seller_id = $image[0]->seller_id;
+        $img_title = $image[0]->title;
+        $img_description = $image[0]->img_description;
 
         // do not return images that have already been recommended
         $do_not_recommend = "";

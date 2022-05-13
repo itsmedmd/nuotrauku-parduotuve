@@ -101,8 +101,6 @@
                 image = response.image[0];
                 comments = response.comments;
                 user_rated_img = response.user_rated_img;
-
-                getRecommendations();
                 renderInformation();
             },
             error: function(err) {
@@ -116,12 +114,7 @@
             url: "{{ route('getImageRecommendations') }}",
             type: "POST",
             data: JSON.stringify({
-                img_id: image.image_id,
-                image_for_sale_id: image.image_for_sale_id,
-                coll_id: image.coll_id,
-                seller_id: image.seller_id,
-                img_title: image.title,
-                img_description: image.img_description,
+                image_for_sale_id: image_for_sale_id,
                 old_ids: Array.from(all_recommendations_ids)
             }),
             dataType: "JSON",
@@ -255,5 +248,6 @@
     };
 
     getInformation();
+    getRecommendations();
 </script>
 @endsection
