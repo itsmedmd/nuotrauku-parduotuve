@@ -4,6 +4,7 @@
 
 @extends('layouts/layout')
 @section('content')
+
 <main class="content">
     @if (count($images) == 0)
         <h2>There are no images for sale</h2>

@@ -1,4 +1,6 @@
 <?php
+
+use App\Models\collection;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminSubsystemController;
 use App\Http\Controllers\AuctionsSubsystemController;
@@ -81,6 +83,8 @@ Route::get('imageInformationView/{id}', function () {
 // CollectionsSubsystem
 
 //404 nzn ko truksta, tai kol kas be confirmation
+Route::get('CollectionsListView',[CollectionsSubsystemController::class, 'index']);
+
 Route::get('/submitCreatedCollectionDelete/{userId}/{collectionId}',[testRolkaController::class,'submitCollectionDelete'])->name('submitCreatedCollectionDelete');
 Route::get('/collections/open/{id}', [CollectionsSubsystemController::class, 'openCreatedCollectionsListView'])->name('CreatedCollectionsListView');
 Route::get('/collections/create/{id}', [CollectionsSubsystemController::class, 'openCollectionCreationView'])->name('CollectionCreationView');
@@ -88,6 +92,9 @@ Route::get('/collections/create/new/{id}',[CollectionsSubsystemController::class
 Route::get('/collections/delete/{userId}/{collectionId}',[CollectionsSubsystemController::class, 'deleteCollection'])->name('CreatedCollectionsListView');
 Route::get('/collections/openEdit/{userId}/{collectionId}/{text1}/{text2}',[CollectionsSubsystemController::class, 'openEditCollectionView'])->name('edittoadsyyug');
 Route::get('/collections/edit/{userId}/{collectionId}',[CollectionsSubsystemController::class, 'editCollection'])->name('asdffdsa');
+
+Route::get('sortCollectionsListDesc',[CollectionsSubsystemController::class,'sortCollectionsListDesc'])->name('sortCollectionsListDesc');
+Route::get('sortCollectionsListAsc',[CollectionsSubsystemController::class,'sortCollectionsListAsc'])->name('sortCollectionsListAsc');
 
 //-----tik iki controller'io prieina, neapsiziurejau, kad ne savo darau, bet trint visai visko nesinori
 Route::get('/collections/{userId}/{collectionId}',[CollectionsSubsystemController::class, 'showCollectionInfo'])->name('CollectionInfo');
@@ -116,13 +123,13 @@ Route::get('/', function () {
     return view('HomePage');
 });
 
-Route::get('/CollectionsListView', function () {
-    return view('CollectionsListView');
-});
+// Route::get('/CollectionsListView', function () {
+//     return view('CollectionsListView');
+// });
 //-----------------------------------------------
 
 
-
+Route::get('CollectionViewInfo/{collections}',[CollectionsSubsystemController::class, 'openCollectionView']);
 //patariu neatkomentuot
 //jei savo nauja route kuriat, vis tiek reikes su controlleriu(kitaip paskaitai netiks)
 //o jei pavadinimai dubliuosis, paims paskutini route is zemiau ir bus neaisku ko paciu kurtas route neveikia
