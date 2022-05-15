@@ -60,7 +60,7 @@ table {
                 </th>
                 <th>
                     <p>
-                        <form action="/purchaseinformation/{{ $img->id }}">
+                        <form action="/purchaseinformation/{{ $img->id }}/{{ $userId }}">
                         <?php
                             $wasSold = DB::table('bills')
                             ->where('fk_image_id', $img->id)

@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\DB;
 
 class PaymentsSubsystemController extends Controller
 {
-    public function showPurchaseInformation($imageId)
+    public function showPurchaseInformation($imageId, $userId)
     {
         $image = DB::table('images')->find($imageId);
         $collection =  DB::table('collections')->find($image->fk_collection_id_dabartine);
@@ -18,7 +18,7 @@ class PaymentsSubsystemController extends Controller
         return view ('ImagePurchaseInformationView', [
             'image' => $image,
             'collection' => $collection,
-            'user' => $user
+            'owner' => $user
             // 'bill' => $wasSold[0]
         ]);
     }

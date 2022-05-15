@@ -81,20 +81,20 @@ Route::get('imageInformationView/{id}', function () {
 // CollectionsSubsystem
 
 //404 nzn ko truksta, tai kol kas be confirmation
-Route::get('/submitCreatedCollectionDelete/{userId}/{collectionId}',[testRolkaController::class,'submitCollectionDelete'])->name('submitCreatedCollectionDelete');
-Route::get('/collections/open/{id}', [CollectionsSubsystemController::class, 'openCreatedCollectionsListView'])->name('CreatedCollectionsListView');
-Route::get('/collections/create/{id}', [CollectionsSubsystemController::class, 'openCollectionCreationView'])->name('CollectionCreationView');
-Route::get('/collections/create/new/{id}',[CollectionsSubsystemController::class, 'createCollection'])->name('whateverName');
-Route::get('/collections/delete/{userId}/{collectionId}',[CollectionsSubsystemController::class, 'deleteCollection'])->name('CreatedCollectionsListView');
-Route::get('/collections/openEdit/{userId}/{collectionId}/{text1}/{text2}',[CollectionsSubsystemController::class, 'openEditCollectionView'])->name('edittoadsyyug');
-Route::get('/collections/edit/{userId}/{collectionId}',[CollectionsSubsystemController::class, 'editCollection'])->name('asdffdsa');
-
-//-----tik iki controller'io prieina, neapsiziurejau, kad ne savo darau, bet trint visai visko nesinori
-Route::get('/collections/{userId}/{collectionId}',[CollectionsSubsystemController::class, 'showCollectionInfo'])->name('CollectionInfo');
+Route::get('/submitCreatedCollectionDelete/{userId:int}/{collectionId:int}',[testRolkaController::class,'submitCollectionDelete'])->name('submitCreatedCollectionDelete');
+Route::get('/collections/open/{id:int}', [CollectionsSubsystemController::class, 'openCreatedCollectionsListView'])->name('CreatedCollectionsListView');
+Route::get('/collections/create/{id:int}', [CollectionsSubsystemController::class, 'openCollectionCreationView'])->name('CollectionCreationView');
+Route::get('/collections/create/new/{id:int}',[CollectionsSubsystemController::class, 'createCollection'])->name('whateverName');
+Route::get('/collections/delete/{userId:int}/{collectionId:int}',[CollectionsSubsystemController::class, 'deleteCollection'])->name('CreatedCollectionsListView');
+Route::get('/collections/openEdit/{userId:int}/{collectionId:int}/{text1}/{text2}',[CollectionsSubsystemController::class, 'openEditCollectionView'])->name('edittoadsyyug');
+Route::get('/collections/edit/{userId:int}/{collectionId:int}',[CollectionsSubsystemController::class, 'editCollection'])->name('asdffdsa');
+Route::get('/collections/{userId:int}/{collectionId:int}',[CollectionsSubsystemController::class, 'showCollectionInfo'])->name('CollectionInfo');
 
 // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 // PaymentsSubsystem
-Route::get('/purchaseinformation/{id:int}',[PaymentsSubsystemController::class, 'showPurchaseInformation'])->name('purchaseInfoWindowOpen');
+
+// ImageId - aisku kas, userId - PERKANCIOJO ID
+Route::get('/purchaseinformation/{imageId:int}/{userId:int}',[PaymentsSubsystemController::class, 'showPurchaseInformation'])->name('purchaseInfoWindowOpen');
 
 // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 // UserManagementSubsystem
