@@ -42,7 +42,12 @@ table {
                     <img src="{{ asset($img->image) }}" alt="kazkas" width="100" height="100">
                 </th>
                 <th>
-                    <p>{{ $img->title }}</p>
+                    <?php
+                    $url = "/OwnedImageInformationView/".$img->id;     //kai view priimineja viena nari, o ne masyva
+                 ?>
+                    <a href={{ $url }}>
+                        {{ $img->title }}
+                    </a> 
                 </th>
                 <th>
                     <p>
