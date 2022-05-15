@@ -93,20 +93,15 @@ Route::get('/collections/{userId:int}/{collectionId:int}',[CollectionsSubsystemC
 // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 // PaymentsSubsystem
 
-// ImageId - aisku kas, userId - PERKANCIOJO ID
-Route::get('/purchaseinformation/{imageId:int}/{userId:int}',[PaymentsSubsystemController::class, 'showPurchaseInformation'])->name('purchaseInfoWindowOpen');
+// userId - PERKANCIOJO ID
+// action: 1   kitokios action reiksmes ateina programos veikimo metu (jei reiks kitokiu action kodu, pasikuriam patys, jau uzimta 10, 11, 20, 21)
+Route::get('/purchaseinformation/{imageId:int}/{userId:int}/{action:int}',[PaymentsSubsystemController::class, 'showPurchaseInformation'])->name('purchaseInfoWindowOpen');
+Route::get('/purchaseWallet/{imageId:int}/{userId:int}/{action:int}',[PaymentsSubsystemController::class, 'purchaseWallet'])->name('purchaseconfirmWindowWallet');
+Route::get('/purchaseConfirmation/{imageId:int}/{userId:int}/{action:int}',[PaymentsSubsystemController::class, 'purchaseConfirmation'])->name('purchaseconfirmWindowWallett');
+Route::get('/purchaseBank/{imageId:int}/{userId:int}/{action:int}',[PaymentsSubsystemController::class, 'purchaseBank'])->name('purchaseconfirmWindowBank');
 
 // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 // UserManagementSubsystem
-
-
-// @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@-rolka controllers@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-
-
-
-Route::get('/testas',[testRolkaController::class, 'test'])->name('bet kas');
-
-
 
 // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 // ungrouped routes
@@ -211,8 +206,6 @@ Route::get('/CollectionsListView', function () {
 //     return view('OwnedImageInformationView');
 // });
 
-
-
 // Route::get('RegistrationView', function () {
 //     return view('RegistrationView');
 // });
@@ -228,3 +221,7 @@ Route::get('/CollectionsListView', function () {
 // Route::get('WalletView', function () {
 //     return view('WalletView');
 // });
+
+// @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@-rolka controllers@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+// Route::get('/testas',[testRolkaController::class, 'test'])->name('bet kas');
