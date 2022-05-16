@@ -78,7 +78,7 @@ Route::get('imageInformationView/{id}', function () {
 
 // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 // AwardsSubsystem
-
+Route::get('AwardsListView',[AwardsSubsystemController::class, 'getAwards']);
 // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 // CollectionsSubsystem
 
@@ -98,7 +98,7 @@ Route::get('sortCollectionsListAsc',[CollectionsSubsystemController::class,'sort
 
 //-----tik iki controller'io prieina, neapsiziurejau, kad ne savo darau, bet trint visai visko nesinori
 Route::get('/collections/{userId}/{collectionId}',[CollectionsSubsystemController::class, 'showCollectionInfo'])->name('CollectionInfo');
-
+Route::get('CollectionViewInfo/{collections}',[CollectionsSubsystemController::class, 'openCollectionView']);
 // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 // PaymentsSubsystem
 Route::get('/purchaseinformation/{id:int}',[PaymentsSubsystemController::class, 'showPurchaseInformation'])->name('purchaseInfoWindowOpen');
@@ -129,7 +129,7 @@ Route::get('/', function () {
 //-----------------------------------------------
 
 
-Route::get('CollectionViewInfo/{collections}',[CollectionsSubsystemController::class, 'openCollectionView']);
+
 //patariu neatkomentuot
 //jei savo nauja route kuriat, vis tiek reikes su controlleriu(kitaip paskaitai netiks)
 //o jei pavadinimai dubliuosis, paims paskutini route is zemiau ir bus neaisku ko paciu kurtas route neveikia

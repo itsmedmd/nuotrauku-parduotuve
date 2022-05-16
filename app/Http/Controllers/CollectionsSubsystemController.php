@@ -142,8 +142,8 @@ class CollectionsSubsystemController extends Controller
     public function openCollectionView(collection $collections) {
         // $imagesForSale = DB::table('images_for_sale')->select('id', 'fk_image_id')->get();
         
-        $images = DB::table('images')->select('id', 'title', 'image', 'rating', 'fk_collection_id_dabartine')
-        // ->where('id', $imagesForSale->fk_image_id)
+        $images = DB::table('images')->select('id', 'is_visible','title', 'image', 'rating', 'fk_collection_id_dabartine')
+        ->where('is_visible','=', '1')
         ->where('fk_collection_id_dabartine',$collections->id)
         ->get();
 
