@@ -40,6 +40,17 @@
                     @if ($img->fk_user_id_savininkas == $img->fk_user_id_kurejas)
                         <button
                             class="button button-default-actions"
+                            onclick="openOwnedImageInformationView({{ $img->id }})"
+                        >
+                            <?php
+                                $url = "/OwnedImageInformationView/".$img->id;     //kai view priimineja viena nari, o ne masyva
+                            ?>
+                            <a href={{ $url }}>
+                                Info
+                            </a> 
+                        </button>
+                        <button
+                            class="button button-default-actions"
                             onclick="editImageInformation({{ $img->id }})"
                         >
                             <a href="{{ route('editImageInformation', ['id' => $img->id]) }}">

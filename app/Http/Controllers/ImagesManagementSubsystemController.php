@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Storage;
 use App\Models\Image;
 use App\Models\image_for_sale;
 use App\Models\collection;
+use Barryvdh\Debugbar\Facades\Debugbar;
+use Illuminate\Support\Facades\DB;
 
 class ImagesManagementSubsystemController extends Controller
 {
@@ -122,5 +124,121 @@ class ImagesManagementSubsystemController extends Controller
         ]);
 
         return redirect('CreatedImagesListView')->with('success-status', 'Successfully updated image information!');
+    }
+
+    public function openOwnedImageInformationView($id)
+    {
+        $image = DB::table('images')->find($id);   //vienam
+        //return view('OwnedImageInformationView')->with('image', $image);
+
+        // $sk = $image->title;   
+        return view('OwnedImageInformationView', [
+            'image' => $image,
+        ]);
+    }
+
+    public function changeVisibility($id)
+    {
+        $image = DB::table('images')->find($id);   //vienam
+        Debugbar::info($image->is_visible);
+        if($image->is_visible == 0)
+        {
+            Debugbar::info('ieita i iF');
+            $image = DB::update('UPDATE images set is_visible = ? where id = ?', [
+                1, $id
+            ]);
+        }
+        else
+        {
+            Debugbar::info('ieita i iF else');
+            $image = DB::update('UPDATE images set is_visible = ? where id = ?', [
+                0, $id
+            ]); 
+        }
+        $image = DB::table('images')->find($id);   //vienam
+
+        return view('OwnedImageInformationView', [
+            'image' => $image,
+        ]);
+    }
+
+    public function openOwnedImages($userId)
+    {   
+        $images = DB::table('images')
+            ->where('fk_user_id_savininkas', $userId)
+            ->get();
+        $collections = DB::table('collections')
+            ->where('fk_user_id_kurejas', $userId)
+            ->get();
+        return view('OwnedImagesListView', [
+            'images' => $images,
+            'userId' => $userId,
+            'collections' => $collections,
+            'msg' => null
+            ]);
+    }
+
+    public function movePictureToCollection(Request $request, $userId,)
+    {   
+        DB::update('UPDATE images SET fk_collection_id_dabartine = ? WHERE id = ?',[
+            $request->input('collId'),
+            $request->input('picId')
+           ]);
+        $images = DB::table('images')
+           ->where('fk_user_id_savininkas', $userId)
+           ->get();
+       $collections = DB::table('collections')
+           ->where('fk_user_id_kurejas', $userId)
+           ->get();
+       return view('OwnedImagesListView', [
+           'images' => $images,
+           'userId' => $userId,
+           'collections' => $collections,
+           'msg' => "Successfully moved" 
+           ]);
+    }
+
+    public function openSellPictureWindow($userId, $pictureId)
+    {   
+        return view ('ImageForSaleCreationView', [
+            'pictureId' => $pictureId,
+            'userId' => $userId,
+            'msg' => null
+        ]);
+    }
+
+    public function putForSale(Request $request, $userId, $pictureId)
+    {           
+        $image = DB::table('images')->find($pictureId);
+        $forSale = DB::table('images_for_sale')
+          ->where('fk_image_id', $pictureId)
+          ->get();
+        $exists = sizeof($forSale);
+        
+        if($exists == 1){
+            $picture = $forSale[0];
+        DB::update('UPDATE images_for_sale SET price = ?, updated_at = CURRENT_TIMESTAMP() WHERE id = ?',[
+            $request->input('price'),
+            $picture->id
+           ]);
+        }
+        else{
+            DB::insert('INSERT INTO images_for_sale (price, creation_date, fk_image_id, created_at)
+            VALUES(?, ?, ?, CURRENT_TIMESTAMP())', [  
+            $request->input('price'),
+            $image->creation_date,
+            $pictureId
+        ]);
+        }
+        $msg = "";
+        if($exists == 1)
+            $msg = " price updated.";
+        else $msg = " placed for sale";
+
+        return view ('ImageForSaleCreationView', [
+            'pictureId' => $pictureId,
+            'userId' => $userId,
+            'msg' => $image->title.$msg
+        ]);
     }
 }

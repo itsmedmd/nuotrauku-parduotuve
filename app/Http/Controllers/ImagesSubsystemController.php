@@ -237,13 +237,32 @@ class ImagesSubsystemController extends Controller
     // get recommendations for an image
     public function getImageRecommendations(Request $request) {
         // get parameters from request
-        $img_id = $request->input('img_id');
         $image_for_sale_id = $request->input('image_for_sale_id');
-        $coll_id = $request->input('coll_id');
-        $seller_id = $request->input('seller_id');
-        $img_title = $request->input('img_title');
-        $img_description = $request->input('img_description');
         $old_ids = $request->collect('old_ids');
+
+        // get image data needed for recommendations
+        $image = DB::select("
+            SELECT
+                images.id as image_id,
+                images.title as title,
+                images.description as img_description,
+                images.fk_user_id_savininkas as seller_id,
+                images.fk_collection_id_dabartine as coll_id
+            FROM images_for_sale
+            INNER JOIN images
+                ON images_for_sale.fk_image_id = images.id
+            INNER JOIN collections
+                ON images.fk_collection_id_dabartine = collections.id
+            INNER JOIN users
+                ON images.fk_user_id_savininkas = users.id
+            WHERE images_for_sale.id = ".$image_for_sale_id
+        );
+
+        $img_id = $image[0]->image_id;
+        $coll_id = $image[0]->coll_id;
+        $seller_id = $image[0]->seller_id;
+        $img_title = $image[0]->title;
+        $img_description = $image[0]->img_description;
 
         // do not return images that have already been recommended
         $do_not_recommend = "";
@@ -372,6 +391,67 @@ class ImagesSubsystemController extends Controller
         return response()->json(
             [
                 'recommendations' => $recommendations
+            ]
+        );
+    }
+
+    public function getImageInformation(Request $request) {
+        // get parameters from request
+        $image_for_sale_id = $request->input('image_for_sale_id');
+
+        // get image data
+        $image = DB::select("
+            SELECT
+                images_for_sale.id as image_for_sale_id,
+                images.id as image_id,
+                images.title as title,
+                images.description as img_description,
+                images.rating as rating,
+                images.image as img_url,
+                images.creation_date as creation_date,
+                collections.name as coll_name,
+                collections.description as coll_description,
+                images_for_sale.price as price,
+                users.username as seller_name,
+                images.fk_user_id_savininkas as seller_id,
+                images.fk_collection_id_dabartine as coll_id
+            FROM images_for_sale
+            INNER JOIN images
+                ON images_for_sale.fk_image_id = images.id
+            INNER JOIN collections
+                ON images.fk_collection_id_dabartine = collections.id
+            INNER JOIN users
+                ON images.fk_user_id_savininkas = users.id
+            WHERE images_for_sale.id = ".$image_for_sale_id
+        );
+
+        // get image comments
+        $comments = DB::select("
+            SELECT
+                comments.comment as comment,
+                comments.date as date,
+                users.username as author,
+                users.profile_picture as author_img
+            FROM comments
+            INNER JOIN users
+                ON comments.fk_user_id = users.id
+            WHERE comments.fk_image_for_sale_id = ".$image_for_sale_id."
+            ORDER BY comments.date DESC
+        ");
+
+        // check if the user rated this image
+        $user_rated_img = DB::select("
+            SELECT rating
+            FROM image_ratings
+            WHERE fk_user_id_vertintojas = ".$this->USER_ID."
+            AND fk_image_id = ".$image[0]->image_id
+        );
+
+        return response()->json(
+            [
+                'image' => $image,
+                'comments' => $comments,
+                'user_rated_img' => $user_rated_img,
             ]
         );
     }

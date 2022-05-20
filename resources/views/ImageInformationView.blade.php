@@ -8,73 +8,33 @@
     <div class="image-information-view__content">
         <div class="image-information-view__row">
             <div class="image-information-view__rating-container">
-                @if (count($user_rated_img) > 0)
-                    @if($user_rated_img[0]->rating == true)
-                        <a
-                            href="{{ route('rateImage', ['id' => $image[0]->image_id, 'rating' => 'true']) }}"
-                            class="image-information-view__rate-up image-information-view__rate-up--active"
-                        >
-                            &#129093;
-                        </a>
-                        <a
-                            href="{{ route('rateImage', ['id' => $image[0]->image_id, 'rating' => 'false']) }}"
-                            class="image-information-view__rate-down"
-                        >
-                            &#129095;
-                        </a>
-                    @else
-                        <a
-                            href="{{ route('rateImage', ['id' => $image[0]->image_id, 'rating' => 'true']) }}"
-                            class="image-information-view__rate-up"
-                        >
-                            &#129093;
-                        </a>
-                        <a
-                            href="{{ route('rateImage', ['id' => $image[0]->image_id, 'rating' => 'false']) }}"
-                            class="image-information-view__rate-down image-information-view__rate-down--active"
-                        >
-                            &#129095;
-                        </a>
-                    @endif
-                @else
-                    <a
-                        href="{{ route('rateImage', ['id' => $image[0]->image_id, 'rating' => 'true']) }}"
-                        class="image-information-view__rate-up"
-                    >
-                        &#129093;
-                    </a>
-                    <a
-                        href="{{ route('rateImage', ['id' => $image[0]->image_id, 'rating' => 'false']) }}"
-                        class="image-information-view__rate-down"
-                    >
-                        &#129095;
-                    </a>
-                @endif
-                <p class="image-information-view__rating">{{$image[0]->rating}}</p>
+                <a class="image-information-view__rate-up" id="rate-up">
+                    &#129093;
+                </a>
+                <a class="image-information-view__rate-down" id="rate-down">
+                    &#129095;
+                </a>
+                <p class="image-information-view__rating" id="rating"></p>
             </div>
-            <img
-                src="{{ asset($image[0]->img_url) }}"
-                alt="{{ $image[0]->title }}"
-                class="image-information-view__image"
-            >
+            <img class="image-information-view__image" id="image">
             <div class="image-information-view__image-text">
-                <h1 class="image-information-view__image-title">{{$image[0]->title}}</h1>
-                <h2 class="image-information-view__image-price">{{$image[0]->price}}$</h2>
-                <h3 class="image-information-view__image-creation-date">Created at {{$image[0]->creation_date}}</h3>
+                <h1 class="image-information-view__image-title" id="title"></h1>
+                <h2 class="image-information-view__image-price" id="price"></h2>
+                <h3 class="image-information-view__image-creation-date" id="creation_date"></h3>
                 <h3 class="image-information-view__image-seller">
-                    Current owner: <span class="image-information-view__image-seller-name">{{$image[0]->seller_name}}</span>
+                    Current owner: <span class="image-information-view__image-seller-name" id="seller_name"></span>
                 </h3>
                 <h3 class="image-information-view__image-coll">Collection:</h3>
-                <h4 class="image-information-view__image-coll-name">Title: <b>{{$image[0]->coll_name}}</b></h4>
-                <h4 class="image-information-view__image-coll-desc">Description: <b>{{$image[0]->coll_description}}</b></h4>
+                <h4 class="image-information-view__image-coll-name">Title: <b id="coll_name"></b></h4>
+                <h4 class="image-information-view__image-coll-desc">Description: <b id="coll_description"></b></h4>
                 <h3 class="image-information-view__image-desc-title">Image description:</h3>
-                <h4 class="image-information-view__image-desc">{{$image[0]->img_description}}</h4>
+                <h4 class="image-information-view__image-desc" id="img_description"></h4>
             </div>
         </div>
         <div class="image-information-view__row">
             <a href="/" class="image-information-view__buy-button">Buy Now</a>
             <a
-                href="{{ route('imagePriceHistoryView', ['id' => $image[0]->image_id]) }}"
+                id="price_history_button"
                 class="image-information-view__price-history-button"
             >
                 Show Price History
@@ -98,30 +58,8 @@
                     value="Comment"
                 />
             </form>
-            @if (count($comments) == 0)
-                <h2 class="image-information-view__no-comments-msg">There are no comments yet</h2>
-            @endif
-            @if (count($comments) > 0)
-                <div class="image-information-view__comments-list">
-                    @foreach($comments as $comment)
-                        <div class="image-information-view__comment-container">
-                            <img
-                                src="{{ asset($comment->author_img) }}"
-                                alt="{{ $comment->author }}"
-                                class="image-information-view__comment-author-image"
-                            >
-
-                            <div class="image-information-view__comment-content">
-                                <p class="image-information-view__comment-author">
-                                    {{$comment->author}}
-                                    <span class="image-information-view__comment-date">{{$comment->date}}</span>
-                                </p>
-                                <p class="image-information-view__comment-text">{{$comment->comment}}</p>
-                            </div>
-                        </div>
-                    @endforeach
-                </div>
-            @endif
+            <h2 class="image-information-view__no-comments-msg" id="comments-title">There are no comments yet</h2>
+            <div class="image-information-view__comments-list" id="comments-list"></div>
         </div>
     </div>
     <div class="image-information-view__recommendations">
@@ -136,22 +74,47 @@
 @section('js')
 <script>
     const csrfToken = '{{csrf_token()}}';
-    const image = @json($image);
+    const path = window.location.href.split("/");
+    const image_for_sale_id = path[path.length - 1];
+
+    let image = null;
+    let comments = null;
+    let user_rated_img = null;
+
     const recommendations_element = document.getElementById("recommendations");
     let recommendations = [];
     let all_recommendations_ids = new Set();
+
+    const getInformation = () => {
+        $.ajax({
+            url: "{{ route('getImageInformation') }}",
+            type: "POST",
+            data: JSON.stringify({
+                image_for_sale_id: image_for_sale_id
+            }),
+            dataType: "JSON",
+            contentType: "application/json",
+            headers: {
+                'X-CSRF-TOKEN': csrfToken
+            },
+            success: function(response) {
+                image = response.image[0];
+                comments = response.comments;
+                user_rated_img = response.user_rated_img;
+                renderInformation();
+            },
+            error: function(err) {
+                console.log("error: ", err);
+            }
+        });
+    };
 
     const getRecommendations = () => {
         $.ajax({
             url: "{{ route('getImageRecommendations') }}",
             type: "POST",
             data: JSON.stringify({
-                img_id: image[0].image_id,
-                image_for_sale_id: image[0].image_for_sale_id,
-                coll_id: image[0].coll_id,
-                seller_id: image[0].seller_id,
-                img_title: image[0].title,
-                img_description: image[0].img_description,
+                image_for_sale_id: image_for_sale_id,
                 old_ids: Array.from(all_recommendations_ids)
             }),
             dataType: "JSON",
@@ -195,6 +158,96 @@
         });
     };
 
+    const renderInformation = () => {
+        // rating
+        const ratingEl = document.getElementById("rating");
+        ratingEl.innerText = image.rating;
+
+        const rateUpEl = document.getElementById("rate-up");
+        rateUpEl.href = `/rateImage/${image.image_id}/true`;
+
+        const rateDownEl = document.getElementById("rate-down");
+        rateDownEl.href = `/rateImage/${image.image_id}/false`;
+
+        if (user_rated_img.length) {
+            if (user_rated_img[0].rating) {
+                rateUpEl.classList.add("image-information-view__rate-up--active");
+            } else {
+                rateDownEl.classList.add("image-information-view__rate-down--active");
+            }
+        }
+
+        // price history button
+        const price_history_buttonEl = document.getElementById("price_history_button");
+        price_history_buttonEl.href = `/imagePriceHistoryView/${image.image_id}`;
+
+        // image information
+        const imageEl = document.getElementById("image");
+        imageEl.src = "/" + image.img_url;
+        imageEl.alt = image.title;
+
+        const titleEl = document.getElementById("title");
+        titleEl.innerText = image.title;
+
+        const priceEl = document.getElementById("price");
+        priceEl.innerText = image.price + "$";
+
+        const creation_dateEl = document.getElementById("creation_date");
+        creation_dateEl.innerText = "Created at " + image.creation_date;
+
+        const seller_nameEl = document.getElementById("seller_name");
+        seller_nameEl.innerText = image.seller_name;
+
+        const coll_nameEl = document.getElementById("coll_name");
+        coll_nameEl.innerText = image.coll_name;
+
+        const coll_descriptionEl = document.getElementById("coll_description");
+        coll_descriptionEl.innerText = image.coll_description;
+
+        const img_descriptionEl = document.getElementById("img_description");
+        img_descriptionEl.innerText = image.img_description;
+
+        // comments
+        const commentsTitleEl = document.getElementById("comments-title");
+        if (comments.length) {
+            commentsTitleEl.style.display = "none"
+        }
+
+        const commentsListEl = document.getElementById("comments-list");
+        comments.forEach((comment) => {
+            const commentContainerEl = document.createElement("div");
+            commentContainerEl.classList.add("image-information-view__comment-container");
+
+            const commentAuthorImgEl = document.createElement("img");
+            commentAuthorImgEl.classList.add("image-information-view__comment-author-image");
+            commentAuthorImgEl.alt = comment.author;
+            commentAuthorImgEl.src = "/" + comment.author_img;
+
+            const commentContentEl = document.createElement("div");
+            commentContentEl.classList.add("image-information-view__comment-content");
+
+            const commentAuthorEl = document.createElement("p");
+            commentAuthorEl.classList.add("image-information-view__comment-author");
+            commentAuthorEl.innerHTML = `
+                ${comment.author}
+                <span class="image-information-view__comment-date">${comment.date}</span>
+            `;
+
+            const commentTextEl = document.createElement("p");
+            commentTextEl.classList.add("image-information-view__comment-text");
+            commentTextEl.innerText = comment.comment;
+
+            commentContentEl.appendChild(commentAuthorEl);
+            commentContentEl.appendChild(commentTextEl);
+
+            commentContainerEl.appendChild(commentAuthorImgEl);
+            commentContainerEl.appendChild(commentContentEl);
+
+            commentsListEl.appendChild(commentContainerEl);
+        });
+    };
+
+    getInformation();
     getRecommendations();
 </script>
 @endsection
