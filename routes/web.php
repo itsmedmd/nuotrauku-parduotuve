@@ -61,8 +61,12 @@ Route::post('getImageRecommendations',[ImagesSubsystemController::class,'getImag
 // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 // AuctionsSubsystem
 
-Route::get('AuctionsListView', [AuctionsSubsystemController::class,'displayAuctionsList'])->name('AuctionsListView');
-
+Route::get('AuctionsListView', [AuctionsSubsystemController::class,'getAuctionsList'])->name('AuctionsListView');
+Route::get('AuctionRegistrationView',[AuctionsSubsystemController::class,'openImageCreationView'])->name('AuctionRegistrationView');
+Route::post('createNewAuction',[AuctionsSubsystemController::class,'createNewAuction'])->name('createNewAuction');
+Route::get('openAuctionInformationView/{id}',[AuctionsSubsystemController::class,'openAuctionInformationView'])->name('openAuctionInformationView');
+Route::post('submitAuctionBid',[AuctionsSubsystemController::class,'submitAuctionBid'])->name('submitAuctionBid');
+//Route::get('AuctionInformationView',[AuctionsSubsystemController::class,'hideAbilityToPlaceABid'])->name('AuctionInformationView');
 // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 // AwardsSubsystem
 
@@ -94,13 +98,6 @@ Route::get('AuctionInformationView', function () {
     return view('AuctionInformationView');
 });
 
-Route::get('AuctionRegistrationView', function () {
-    return view('AuctionRegistrationView');
-});
-
-Route::get('AuctionsListView', function () {
-    return view('AuctionsListView');
-});
 
 Route::get('AwardsListView', function () {
     return view('AwardsListView');
