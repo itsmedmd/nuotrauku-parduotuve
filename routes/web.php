@@ -65,13 +65,18 @@ Route::get('rateImage/{id}/{rating}',[ImagesSubsystemController::class,'rateImag
 Route::post('getImageRecommendations',[ImagesSubsystemController::class,'getImageRecommendations'])->name('getImageRecommendations');
 Route::post('getImageInformation',[ImagesSubsystemController::class,'getImageInformation'])->name('getImageInformation');
 
+
 Route::get('imageInformationView/{id}', function () {
     return view('ImageInformationView');
 })->name('imageInformationView');
 
 
+
 // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 // AdminSubsystem
+
+Route::get('submitImageDelete/{id}',[AdminSubsystemController::class,'submitImageDelete'])->name('submitImageDelete');
+Route::get('deleteImage/{id}',[AdminSubsystemController::class,'deleteImage'])->name('deleteImage');
 
 // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 // AuctionsSubsystem
