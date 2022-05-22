@@ -12,7 +12,7 @@ use App\Models\bill;
 use App\Models\auction_bid;
 use App\Models\User;
 
-class checkIfAuctionTimeEnded extends Command
+class weeklyAwards extends Command
 {
     /**
      * The name and signature of the console command.

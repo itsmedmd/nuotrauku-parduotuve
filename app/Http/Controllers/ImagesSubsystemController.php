@@ -498,7 +498,7 @@ class ImagesSubsystemController extends Controller
     // open delete image view
     public function submitCommentDelete($id) {
         return redirect()->back()->with([
-            'openActionConfirmationForm' => true,
+            'openCommentActionForm' => true,
             'itemID' => $id
         ]);
     }
