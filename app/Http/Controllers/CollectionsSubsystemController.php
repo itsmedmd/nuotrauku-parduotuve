@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use Barryvdh\Debugbar\Facades\Debugbar;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\collection;
 use App\Models\image;
 use App\Models\image_for_sale;
-
-
+use Exception;
 
 class CollectionsSubsystemController extends Controller
 {
@@ -43,6 +43,49 @@ class CollectionsSubsystemController extends Controller
 
     public function deleteCollection($userId, $collectionId)
     {   
+
+        try
+        {
+            $images = DB::table('images')
+                ->where('fk_collection_id_dabartine', $collectionId)
+                ->get();
+            
+            foreach ($images as $image) {
+                
+                # delete comments
+                DB::delete('DELETE FROM comments
+                            WHERE fk_image_for_sale_id = ?', [$image->id]);
+                # delete image bills
+                DB::delete('DELETE FROM bills
+                WHERE fk_image_id = ?', [$image->id]);
+                # delete image ratings
+                DB::delete('DELETE FROM image_ratings
+                WHERE fk_image_id = ?', [$image->id]);
+                # delete image for sale
+                DB::delete('DELETE FROM images_for_sale
+                WHERE fk_image_id = ?', [$image->id]);
+                # get image auction
+                DB::delete('DELETE FROM images_for_sale
+                WHERE fk_image_id = ?', [$image->id]);
+                # get auction and delete bids on it
+                $auction = DB::table('auctions')->find($image->id);
+                // DB::delete('DELETE FROM auction_bids     //sitos vietos nesigauna sutvarkyt
+                // WHERE fk_image_id = ?', [$auction->id]);
+                # delete auctions
+                DB::delete('DELETE FROM auctions
+                WHERE fk_image_id = ?', [$image->id]);
+                // delete image file from storage 
+                $img = DB::table('images')->find($image->id); 
+                $path_arr = explode("/", $img->image); 
+                $path_in_storage = 'public/'.$path_arr[1].'/'.$path_arr[2];
+                DB::delete('DELETE FROM images
+                WHERE id = ?', [$image->id]);
+            }
+        } 
+        catch(Exception $e) 
+        {
+
+        }
         DB::delete('DELETE FROM collections
                     WHERE id = ?', [$collectionId]);
         $collections = DB::table('collections')

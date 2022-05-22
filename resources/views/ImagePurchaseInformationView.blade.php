@@ -25,8 +25,8 @@
     
     <?php if($userId != $image->fk_user_id_savininkas) : ?>
         <p>Buy Picture</p>
-        <p>{{ $userId }}</p>
-        <p>{{ $image->fk_user_id_savininkas }}</p>
+        {{-- <p>{{ $userId }}</p>
+        <p>{{ $image->fk_user_id_savininkas }}</p> --}}
         <table style="width:100%">
             <tr>
                 <td>
