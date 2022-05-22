@@ -57,9 +57,9 @@
                     <div class="flex">
                         <div>
                             <h3 class="text-2xl">
-                                {{$awards[$i]->id}}
+                                {{-- {{$awards[$i]->id}} --}}
                             </h3>
-                            {{-- <div class="text-xlmb-4">{{$awards[$i]->prize}} $</div>   --}}
+                            <div class="text-xlmb-4">{{$awards[$i]->prize_amount}} $</div>  
                             <div class="text-xlmb-4">
                                 <img
                                     src="{{ asset($awards[$i]->image) }}"

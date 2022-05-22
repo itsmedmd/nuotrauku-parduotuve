@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use DateTime;
+use App\Models\bill;
+use App\Models\User;
 use App\Models\award;
 use App\Models\Image;
-use App\Models\bill;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use DateTime;
 
 class AwardsSubsystemController extends Controller
 {
@@ -20,7 +21,8 @@ class AwardsSubsystemController extends Controller
     // tada top 3 atrenki, tai [70, 15, 12]
     // va cia laimejusios nuotraukos, tada sukuri awards irasus joms ir apdovanoji kurejus
 
-      private function index(){        
+    private function index(){        
+        DB::table('awards')->delete();
 
         $weekBills = DB::table('bills') 
             ->whereBetween('created_at', [
@@ -28,8 +30,6 @@ class AwardsSubsystemController extends Controller
                 now()->locale('en')->endOfWeek(),
             ])
             ->get();
-
-        // dump($weekBills);
 
         $weekBills = DB::select("
             SELECT
@@ -47,7 +47,6 @@ class AwardsSubsystemController extends Controller
 
 
         $pic_arr = array();
-        // dd($pic_arr);
         if(count($weekBills)>0){
             for ($i = 0; $i < 3; $i++) {            
                 $images = DB::table('images')
@@ -56,16 +55,35 @@ class AwardsSubsystemController extends Controller
                 array_push($pic_arr, $images);
             }
         }
-        
         // dd($pic_arr);
 
+        $reward = [1000,500,250];
+        if(count($pic_arr) > 0)
+        {
+            for ($i = 0; $i < 3; $i++) {         
+                $imageOwner = image::where('id', $weekBills[$i]->fk_image_id)->get();
+                User::where('id', $imageOwner[0]->fk_user_id_savininkas)
+                ->increment('wallet_balance', $reward[$i]);
+                // $pls = 
+                DB::table('awards')->insert(
+                    [
+                        'prize_amount' => $reward[$i],
+                        'fk_user_id_laimetojas' => $imageOwner[0]->fk_user_id_savininkas,
+                        'fk_image_id' => $weekBills[$i]->fk_image_id
+                    ]
+                );
+            }
+        }
+        // dd($pls);
         
         return $pic_arr; 
     }
 
     public function getAwards() {
         // $awards = $this->index();
-        $awards = DB::table('awards')->get();
+        $awards = DB::table('awards')
+        ->join('images', 'fk_image_id', '=' ,'images.id')
+        ->get();
         // dd($awards);
         return view('AwardsListView', compact('awards'));
     }
