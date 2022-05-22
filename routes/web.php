@@ -119,6 +119,11 @@ Route::get('/purchaseBank/{imageId:int}/{userId:int}/{action:int}',[PaymentsSubs
 Route::get('WalletView',[UserManagementSubsystemController::class,'openWallet'])->name('WalletView');
 Route::get('WalletBalanceTopUpView/{id}',[UserManagementSubsystemController::class,'openWalletTopUpView'])->name('WalletBalanceTopUpView');
 Route::post('submitTopUpValue',[UserManagementSubsystemController::class,'submitTopUpValue'])->name('submitTopUpValue');
+Route::get('/ImageRightsTransferView/{userId}/{imgId}',[UserManagementSubsystemController::class, 'openImageRightsTransferView'])->name('openWindow');
+Route::post('submitNewOwner',[UserManagementSubsystemController::class,'submitNewOwner'])->name('submitNewOwner');
+
+//Route::get('ImageRightsTransferView',[UserManagementSubsystemController::class,'openImageRightsTransferView'])->name('ImageRightsTransferView');
+//Route::post('submitNewOwner',[UserManagementSubsystemController::class,'submitNewOwner'])->name('submitNewOwner');
 //Route::post('WalletBalanceTopUpView',[UserManagementSubsystemController::class,'openWalletTopUpView'])->name('WalletBalanceTopUpView');
 
 

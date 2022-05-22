@@ -35,6 +35,33 @@ class UserManagementSubsystemController extends Controller
 
        User::where('id', $request->id)->increment('wallet_balance', $request->price);
 
-       return redirect('WalletView')->with('success-status', 'New image successfully created!');
+       return redirect('WalletView')->with('success-status', 'Wallet top up successful!');
     }
+
+    public function openImageRightsTransferView($userId, $pictureId)
+    {   
+        $users = DB::select("
+            SELECT username, id
+            FROM users
+            WHERE id <> ".$this->USER_ID
+        );
+
+        return view ('ImageRightsTransferView', [
+            'pictureId' => $pictureId,
+            'users' => $users,
+            'userId' => $userId,
+            'msg' => null
+        ]);
+    }
+
+    public function submitNewOwner(Request $request)
+    {
+        DB::update('UPDATE images SET fk_user_id_savininkas = ? WHERE id = ?',[
+            $request->userId,
+            $request->imageId
+           ]);
+        return redirect()->back()->with('success', 'Rights transfer successful');   
+        //return redirect('OwnedImagesListView')->with('success-status', 'Rights transfer successful');
+    }
+
 }
