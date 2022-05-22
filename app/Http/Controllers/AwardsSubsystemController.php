@@ -47,12 +47,16 @@ class AwardsSubsystemController extends Controller
 
 
         $pic_arr = array();
-        for ($i = 0; $i < 3; $i++) {            
-            $images = DB::table('images')
-            ->where('id','=',$weekBills[$i]->fk_image_id)
-            ->first();
-            array_push($pic_arr, $images);
+        // dd($pic_arr);
+        if(count($weekBills)>0){
+            for ($i = 0; $i < 3; $i++) {            
+                $images = DB::table('images')
+                ->where('id','=',$weekBills[$i]->fk_image_id)
+                ->first();
+                array_push($pic_arr, $images);
+            }
         }
+        
         // dd($pic_arr);
 
         
@@ -60,7 +64,8 @@ class AwardsSubsystemController extends Controller
     }
 
     public function getAwards() {
-        $awards = $this->index();
+        // $awards = $this->index();
+        $awards = DB::table('awards')->get();
         // dd($awards);
         return view('AwardsListView', compact('awards'));
     }
