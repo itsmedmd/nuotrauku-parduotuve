@@ -102,6 +102,11 @@ Route::get('/purchaseBank/{imageId:int}/{userId:int}/{action:int}',[PaymentsSubs
 
 // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 // UserManagementSubsystem
+Route::get('WalletView',[UserManagementSubsystemController::class,'openWallet'])->name('WalletView');
+Route::get('WalletBalanceTopUpView/{id}',[UserManagementSubsystemController::class,'openWalletTopUpView'])->name('WalletBalanceTopUpView');
+Route::post('submitTopUpValue',[UserManagementSubsystemController::class,'submitTopUpValue'])->name('submitTopUpValue');
+//Route::post('WalletBalanceTopUpView',[UserManagementSubsystemController::class,'openWalletTopUpView'])->name('WalletBalanceTopUpView');
+
 
 // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 // ungrouped routes
