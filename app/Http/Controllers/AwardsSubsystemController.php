@@ -50,16 +50,18 @@ class AwardsSubsystemController extends Controller
         for ($i = 0; $i < 3; $i++) {            
             $images = DB::table('images')
             ->where('id','=',$weekBills[$i]->fk_image_id)
-            ->get();
+            ->first();
             array_push($pic_arr, $images);
         }
-        dd($pic_arr);
+        // dd($pic_arr);
 
-        return $pic_arr;
+        
+        return $pic_arr; 
     }
 
     public function getAwards() {
         $awards = $this->index();
+        // dd($awards);
         return view('AwardsListView', compact('awards'));
     }
 }

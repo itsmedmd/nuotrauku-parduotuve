@@ -51,26 +51,27 @@
         </h2>        
         <br>
         <div class="lg:grid lg:grid-cols-6 gap-4 space-y-4 md:space-y-0 mx-4">
-            @foreach ($awards as $aw)
+            {{-- @foreach ($awards as $aw) --}}
+            @for ($i = 0; $i < count($awards); $i++)
                 <x-card>
                     <div class="flex">
                         <div>
                             <h3 class="text-2xl">
-                                {{$aw->id}}
+                                {{$awards[$i]->id}}
                             </h3>
-                            <div class="text-xl font-bold mb-4">{{$aw->date}}</div>
-                            <div class="text-xlmb-4">{{$aw->prize}} $</div>  
+                            {{-- <div class="text-xlmb-4">{{$awards[$i]->prize}} $</div>   --}}
                             <div class="text-xlmb-4">
                                 <img
-                                    src="{{ asset($aw->img_url) }}"
-                                    alt="{{ $aw->title }}"
+                                    src="{{ asset($awards[$i]->image) }}"
+                                    alt="{{ $awards[$i]->title }}"
                                 >
-                                {{ $aw->title }}
+                                {{ $awards[$i]->title }}
                             </div>  
                         </div>                            
                     </div>
-                </x-card>                    
-            @endforeach            
+                </x-card>   
+            @endfor                 
+            {{-- @endforeach             --}}
         </div>
     @endif
 </main>
