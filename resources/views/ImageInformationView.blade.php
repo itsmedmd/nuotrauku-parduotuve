@@ -4,6 +4,15 @@
 
 @extends('layouts/layout')
 @section('content')
+
+@if (session('openActionConfirmationForm') == true)
+<x-action-confirmation-form
+    message="Do you really want to delete comment?"
+    origin="ImagesListView"
+    action="deleteComment"
+    itemID="{{session('itemID')}}"
+/>
+@endif
 <main class="content">
     <div class="image-information-view__content">
         <div class="image-information-view__row">
@@ -44,7 +53,9 @@
     <div class="image-information-view__comments">
         <h2 class="image-information-view__comments-title">Comments</h2>
         <div class="image-information-view__comments-content">
-            <form class="image-information-view__comment-form" action="/" method="post">
+            <form class="image-information-view__comment-form" id="commentForm" action="{{ route('createComment')}}" method="post">
+                @csrf
+                <input name="id" id="commentId" type="hidden">
                 <input
                     type="text"
                     name="text"
@@ -100,6 +111,7 @@
             success: function(response) {
                 image = response.image[0];
                 comments = response.comments;
+                console.log(comments);
                 user_rated_img = response.user_rated_img;
                 renderInformation();
             },
@@ -212,6 +224,8 @@
         if (comments.length) {
             commentsTitleEl.style.display = "none"
         }
+        const commentId = document.getElementById("commentId");
+        commentId.value = image_for_sale_id;
 
         const commentsListEl = document.getElementById("comments-list");
         comments.forEach((comment) => {
@@ -237,8 +251,21 @@
             commentTextEl.classList.add("image-information-view__comment-text");
             commentTextEl.innerText = comment.comment;
 
+            const editBtn = document.createElement("a");
+            editBtn.classList.add();
+            editBtn.href = `/CommentEditForm/${comment.commentid}`;
+
+            const deleteBtn = document.createElement("a");
+            deleteBtn.classList.add();
+            deleteBtn.href = `/submitCommentDelete/${comment.commentid}`;
+
+            deleteBtn.innerText = "Delete";
+            editBtn.innerText = "Edit";
+
             commentContentEl.appendChild(commentAuthorEl);
             commentContentEl.appendChild(commentTextEl);
+            commentContentEl.appendChild(deleteBtn);
+            commentContentEl.appendChild(editBtn);
 
             commentContainerEl.appendChild(commentAuthorImgEl);
             commentContainerEl.appendChild(commentContentEl);

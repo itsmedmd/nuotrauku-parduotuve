@@ -32,6 +32,7 @@ use Barryvdh\Debugbar\Facades\Debugbar;
 // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 // action confirmation form
 Route::get('cancelAction/{action}',[ActionConfirmationForm::class,'cancelAction'])->name('cancelAction');
+Route::get('cancelActionTwo/{action}/{id}',[ActionConfirmationForm::class,'cancelActionTwo'])->name('cancelActionTwo');
 Route::get('confirmAction/{action}/{id}',[ActionConfirmationForm::class,'confirmAction'])->name('confirmAction');
 
 // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
@@ -63,8 +64,14 @@ Route::get('rateImage/{id}/{rating}',[ImagesSubsystemController::class,'rateImag
 Route::post('getImageRecommendations',[ImagesSubsystemController::class,'getImageRecommendations'])->name('getImageRecommendations');
 Route::post('getImageInformation',[ImagesSubsystemController::class,'getImageInformation'])->name('getImageInformation');
 
-Route::get('imageInformationView/{id}', function () {
-    return view('ImageInformationView');
+Route::post('createComment',[ImagesSubsystemController::class,'createComment'])->name('createComment');
+Route::post('editComment',[ImagesSubsystemController::class,'editComment'])->name('editComment');
+Route::get('deleteComment/{id}',[ImagesSubsystemController::class,'deleteComment'])->name('deleteComment');
+
+Route::get('submitCommentDelete/{id}',[ImagesSubsystemController::class,'submitCommentDelete'])->name('submitCommentDelete');
+
+Route::get('imageInformationView/{id}', function ($id) {
+    return view('ImageInformationView')->with('id', $id);
 })->name('imageInformationView');
 
 

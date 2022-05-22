@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 use App\Models\image_for_sale;
 use App\Models\image_rating;
 use App\Models\image;
+use App\Models\comment;
 
 class ImagesSubsystemController extends Controller
 {
@@ -428,6 +429,7 @@ class ImagesSubsystemController extends Controller
         // get image comments
         $comments = DB::select("
             SELECT
+                comments.id as commentid,
                 comments.comment as comment,
                 comments.date as date,
                 users.username as author,
@@ -455,4 +457,50 @@ class ImagesSubsystemController extends Controller
             ]
         );
     }
+
+    public function createComment(Request $request)
+    {
+        // create new comment entry in the database
+        $comment = new comment;
+        $comment->comment = $request->text;
+        $comment->fk_user_id = $this->USER_ID;
+        $comment->fk_image_for_sale_id = $request->id;
+        $comment->save();
+
+        return redirect()->back();
+    }
+
+    public function openCommentEditForm($id)
+    {
+        $comm = comment::where('id', $id)->get();
+        return view('CommentEditForm')->with('comment' ,$comm[0]);
+    }
+
+    public function editComment(Request $request)
+    {
+        //Update comment
+        comment::where('id', $request->id)
+        ->update([
+            'comment' => $request->commentValue
+        ]);
+
+        return redirect()->back()->with('status' ,'Comment successfuly updated');
+    }
+
+    public function deleteComment(Request $request)
+    {
+        //Update comment
+        comment::where('id', $request->id)->delete();
+
+        return redirect()->back();
+    }
+
+    // open delete image view
+    public function submitCommentDelete($id) {
+        return redirect()->back()->with([
+            'openActionConfirmationForm' => true,
+            'itemID' => $id
+        ]);
+    }
+
 }

@@ -8,7 +8,7 @@ $item = $auct[0];
 $useris = $user[0];
 @endphp
 
-@if($status_auct)
+    @if($status_auct)
         <div class="status-container">
             <h2 class="success">{{ $status_auct }}</h2>
         </div>
