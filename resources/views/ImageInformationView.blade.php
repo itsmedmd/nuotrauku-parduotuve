@@ -3,26 +3,29 @@
 @endsection
 @extends('layouts/layout')
 @section('content')
+
 @php
     $USER_ID = 2
 @endphp
+
 @if (session('openActionConfirmationForm') == true)
         <x-action-confirmation-form
-        message="Do you really want to delete the image?"
-        origin="imageInformationView"
-        action="deleteImage"
-        itemID="{{session('itemID')}}"
+            message="Do you really want to delete the image?"
+            origin="imageInformationView"
+            action="deleteImageAdmin"
+            itemID="{{session('itemID')}}"
+            cancelWithID="1"
         />
 @endif
+
 @if($USER_ID == 2)
     <button class="button button-default-actions">
         <button class="button button-default-actions">
-            <a href="{{ route('submitImageDelete/', ['id' => $img->id]) }}">
+            <a id="delete-image-button">
                 Delete
             </a> 
         </button>
     </button>
-    
 @endif
 
 <main class="content">
@@ -180,6 +183,11 @@
     };
 
     const renderInformation = () => {
+        const deleteImageButton = document.getElementById("delete-image-button");
+        if (deleteImageButton) {
+            deleteImageButton.href = `/submitImageDeleteAdmin/${image.image_for_sale_id}`;
+        }
+
         // rating
         const ratingEl = document.getElementById("rating");
         ratingEl.innerText = image.rating;

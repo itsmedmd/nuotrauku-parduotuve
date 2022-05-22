@@ -10,6 +10,7 @@
     origin="CreatedImagesListView"
     action="deleteCreatedImage"
     itemID="{{session('itemID')}}"
+    cancelWithID="0"
 />
 @endif
 <main class="content">

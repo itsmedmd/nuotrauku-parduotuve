@@ -29,6 +29,7 @@
     origin="CreatedCollectionsListView"
     action="/collections/delete"
     itemID="{{session('itemID')}}"
+    cancelWithID="1"
 />
 @endif
 

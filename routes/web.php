@@ -33,7 +33,7 @@ use Barryvdh\Debugbar\Facades\Debugbar;
 
 // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 // action confirmation form
-Route::get('cancelAction/{action}',[ActionConfirmationForm::class,'cancelAction'])->name('cancelAction');
+Route::get('cancelAction/{action}/{id}',[ActionConfirmationForm::class,'cancelAction'])->name('cancelAction');
 Route::get('confirmAction/{action}/{id}',[ActionConfirmationForm::class,'confirmAction'])->name('confirmAction');
 
 // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
@@ -75,8 +75,8 @@ Route::get('imageInformationView/{id}', function () {
 // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 // AdminSubsystem
 
-Route::get('submitImageDelete/{id}',[AdminSubsystemController::class,'submitImageDelete'])->name('submitImageDelete');
-Route::get('deleteImage/{id}',[AdminSubsystemController::class,'deleteImage'])->name('deleteImage');
+Route::get('submitImageDeleteAdmin/{id}',[AdminSubsystemController::class,'submitImageDelete'])->name('submitImageDeleteAdmin');
+Route::get('deleteImageAdmin/{id}',[AdminSubsystemController::class,'deleteImage'])->name('deleteImageAdmin');
 
 // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 // AuctionsSubsystem
