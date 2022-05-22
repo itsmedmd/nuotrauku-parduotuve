@@ -5,11 +5,7 @@
 @php
 use App\Http\Controllers\UserManagementSubsystemController;
 @endphp
-@if($successTopUp)
-        <div class="status-container">
-            <h2 class="success">{{ $successTopUp }}</h2>
-        </div>
-@endif
+
     <div>
         <h1>TOP UP SUM</h1>
         <form method="post" action="{{ route('submitTopUpValue') }}">

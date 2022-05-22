@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\DB;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Redirector;
 
 class UserManagementSubsystemController extends Controller
 {
@@ -34,6 +35,6 @@ class UserManagementSubsystemController extends Controller
 
        User::where('id', $request->id)->increment('wallet_balance', $request->price);
 
-       return view('WalletBalanceTopUpView')->with(['successTopUp' => 'TOP UP SUCCESSFUL', 'item' => $user[0]]);
+       return redirect('WalletView')->with('success-status', 'New image successfully created!');
     }
 }

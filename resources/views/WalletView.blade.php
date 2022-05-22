@@ -6,13 +6,17 @@
 
 @section('content')
 <main class="content">
-
-    
+@if(session('success-status'))
+        <div class="status-container">
+            <h2 class="success">{{ session('success-status') }}</h2>
+        </div>
+@endif
 <h3>{{$item->wallet_balance}}</h3>
 
 <button class="button button-default-actions">
-    <a href="{{ route('WalletBalanceTopUpView', ['id' => $item->id]) }}">Information</a> 
+    <a href="{{ route('WalletBalanceTopUpView', ['id' => $item->id]) }}">Top Up Wallet</a> 
 </button>
+  
 
 </main>
 @endsection
