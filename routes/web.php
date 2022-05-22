@@ -1,4 +1,6 @@
 <?php
+
+use App\Models\collection;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminSubsystemController;
 use App\Http\Controllers\AuctionsSubsystemController;
@@ -31,8 +33,7 @@ use Barryvdh\Debugbar\Facades\Debugbar;
 
 // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 // action confirmation form
-Route::get('cancelAction/{action}',[ActionConfirmationForm::class,'cancelAction'])->name('cancelAction');
-Route::get('cancelActionTwo/{action}/{id}',[ActionConfirmationForm::class,'cancelActionTwo'])->name('cancelActionTwo');
+Route::get('cancelAction/{action}/{id}',[ActionConfirmationForm::class,'cancelAction'])->name('cancelAction');
 Route::get('confirmAction/{action}/{id}',[ActionConfirmationForm::class,'confirmAction'])->name('confirmAction');
 
 // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
@@ -71,12 +72,16 @@ Route::get('deleteComment/{id}',[ImagesSubsystemController::class,'deleteComment
 Route::get('submitCommentDelete/{id}',[ImagesSubsystemController::class,'submitCommentDelete'])->name('submitCommentDelete');
 
 Route::get('imageInformationView/{id}', function ($id) {
-    return view('ImageInformationView')->with('id', $id);
+    return view('ImageInformationView')->with('id',$id);
 })->name('imageInformationView');
+
 
 
 // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 // AdminSubsystem
+
+Route::get('submitImageDeleteAdmin/{id}',[AdminSubsystemController::class,'submitImageDelete'])->name('submitImageDeleteAdmin');
+Route::get('deleteImageAdmin/{id}',[AdminSubsystemController::class,'deleteImage'])->name('deleteImageAdmin');
 
 // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 // AuctionsSubsystem
@@ -89,20 +94,27 @@ Route::post('submitAuctionBid',[AuctionsSubsystemController::class,'submitAuctio
 //Route::get('AuctionInformationView',[AuctionsSubsystemController::class,'hideAbilityToPlaceABid'])->name('AuctionInformationView');
 // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 // AwardsSubsystem
-
+Route::get('AwardsListView',[AwardsSubsystemController::class, 'getAwards']);
 // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 // CollectionsSubsystem
 
 //404 nzn ko truksta, tai kol kas be confirmation
-Route::get('/submitCreatedCollectionDelete/{userId:int}/{collectionId:int}',[testRolkaController::class,'submitCollectionDelete'])->name('submitCreatedCollectionDelete');
-Route::get('/collections/open/{id:int}', [CollectionsSubsystemController::class, 'openCreatedCollectionsListView'])->name('CreatedCollectionsListView');
-Route::get('/collections/create/{id:int}', [CollectionsSubsystemController::class, 'openCollectionCreationView'])->name('CollectionCreationView');
-Route::get('/collections/create/new/{id:int}',[CollectionsSubsystemController::class, 'createCollection'])->name('whateverName');
-Route::get('/collections/delete/{userId:int}/{collectionId:int}',[CollectionsSubsystemController::class, 'deleteCollection'])->name('CreatedCollectionsListView');
-Route::get('/collections/openEdit/{userId:int}/{collectionId:int}/{text1}/{text2}',[CollectionsSubsystemController::class, 'openEditCollectionView'])->name('edittoadsyyug');
-Route::get('/collections/edit/{userId:int}/{collectionId:int}',[CollectionsSubsystemController::class, 'editCollection'])->name('asdffdsa');
-Route::get('/collections/{userId:int}/{collectionId:int}',[CollectionsSubsystemController::class, 'showCollectionInfo'])->name('CollectionInfo');
+Route::get('CollectionsListView',[CollectionsSubsystemController::class, 'index']);
 
+Route::get('/submitCreatedCollectionDelete/{userId}/{collectionId}',[testRolkaController::class,'submitCollectionDelete'])->name('submitCreatedCollectionDelete');
+Route::get('/collections/open/{id}', [CollectionsSubsystemController::class, 'openCreatedCollectionsListView'])->name('CreatedCollectionsListView');
+Route::get('/collections/create/{id}', [CollectionsSubsystemController::class, 'openCollectionCreationView'])->name('CollectionCreationView');
+Route::get('/collections/create/new/{id}',[CollectionsSubsystemController::class, 'createCollection'])->name('whateverName');
+Route::get('/collections/delete/{userId}/{collectionId}',[CollectionsSubsystemController::class, 'deleteCollection'])->name('CreatedCollectionsListView');
+Route::get('/collections/openEdit/{userId}/{collectionId}/{text1}/{text2}',[CollectionsSubsystemController::class, 'openEditCollectionView'])->name('edittoadsyyug');
+Route::get('/collections/edit/{userId}/{collectionId}',[CollectionsSubsystemController::class, 'editCollection'])->name('asdffdsa');
+
+Route::get('sortCollectionsListDesc',[CollectionsSubsystemController::class,'sortCollectionsListDesc'])->name('sortCollectionsListDesc');
+Route::get('sortCollectionsListAsc',[CollectionsSubsystemController::class,'sortCollectionsListAsc'])->name('sortCollectionsListAsc');
+
+//-----tik iki controller'io prieina, neapsiziurejau, kad ne savo darau, bet trint visai visko nesinori
+Route::get('/collections/{userId}/{collectionId}',[CollectionsSubsystemController::class, 'showCollectionInfo'])->name('CollectionInfo');
+Route::get('CollectionViewInfo/{collections}',[CollectionsSubsystemController::class, 'openCollectionView']);
 // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 // PaymentsSubsystem
 
@@ -115,6 +127,16 @@ Route::get('/purchaseBank/{imageId:int}/{userId:int}/{action:int}',[PaymentsSubs
 
 // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 // UserManagementSubsystem
+Route::get('WalletView',[UserManagementSubsystemController::class,'openWallet'])->name('WalletView');
+Route::get('WalletBalanceTopUpView/{id}',[UserManagementSubsystemController::class,'openWalletTopUpView'])->name('WalletBalanceTopUpView');
+Route::post('submitTopUpValue',[UserManagementSubsystemController::class,'submitTopUpValue'])->name('submitTopUpValue');
+Route::get('/ImageRightsTransferView/{userId}/{imgId}',[UserManagementSubsystemController::class, 'openImageRightsTransferView'])->name('openWindow');
+Route::post('submitNewOwner',[UserManagementSubsystemController::class,'submitNewOwner'])->name('submitNewOwner');
+
+//Route::get('ImageRightsTransferView',[UserManagementSubsystemController::class,'openImageRightsTransferView'])->name('ImageRightsTransferView');
+//Route::post('submitNewOwner',[UserManagementSubsystemController::class,'submitNewOwner'])->name('submitNewOwner');
+//Route::post('WalletBalanceTopUpView',[UserManagementSubsystemController::class,'openWalletTopUpView'])->name('WalletBalanceTopUpView');
+
 
 // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 // ungrouped routes
@@ -124,9 +146,9 @@ Route::get('/', function () {
     return view('HomePage');
 });
 
-Route::get('/CollectionsListView', function () {
-    return view('CollectionsListView');
-});
+// Route::get('/CollectionsListView', function () {
+//     return view('CollectionsListView');
+// });
 //-----------------------------------------------
 
 

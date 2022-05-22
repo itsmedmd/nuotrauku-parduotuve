@@ -35,6 +35,12 @@
                   <li>
                      <a href="/CollectionsListView">Image Collections</a>
                   </li>
+                  <li>
+                     <a href="/AwardsListView">Awards</a>
+                  </li>
+                  <li>
+                     <a href="/WalletView">Wallet</a>
+                  </li>
                </ul>
             </nav>
             @yield('content')

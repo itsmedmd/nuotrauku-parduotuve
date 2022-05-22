@@ -28,7 +28,9 @@ table {
 
   
   </style>
-
+@php
+    use App\Http\Controllers\UserManagementSubsystemController;
+@endphp
 <main class="content">
     User Id - {{ $userId }}
     <h1>Owned Images</h1>
@@ -60,6 +62,13 @@ table {
                     <p>
                         <form action="/images/sellwindow/{{ $userId }}/{{ $img->id }}">
                             <input type="submit" value="Sell">
+                        </form>
+                    </p>
+                </th>
+                <th>
+                    <p>
+                        <form action="/ImageRightsTransferView/{{ $userId }}/{{ $img->id }}">
+                            <input type="submit" value="Transfer Rights">
                         </form>
                     </p>
                 </th>
@@ -111,8 +120,9 @@ table {
         <input type="submit" value="Move">
       </form>
       <p style="color:green; font-size:12px;">{{ $msg }}</p>
-
-
+        
+      <br>
+     
 
 
 </main>
@@ -120,8 +130,6 @@ table {
 
 @section('js')
 <script>
-
-
 
 </script>
 @endsection

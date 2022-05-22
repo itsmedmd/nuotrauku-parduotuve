@@ -3,7 +3,6 @@
 @endsection
 
 @extends('layouts/layout')
-
 @section('content')
 @if (session('openActionConfirmationForm') == true)
 <x-action-confirmation-form
@@ -11,6 +10,7 @@
     origin="CreatedImagesListView"
     action="deleteCreatedImage"
     itemID="{{session('itemID')}}"
+    cancelWithID="0"
 />
 @endif
 <main class="content">

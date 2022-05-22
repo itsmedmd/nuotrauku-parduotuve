@@ -4,7 +4,13 @@
 
 @extends('layouts/layout')
 @section('content')
+
 <main class="content">
+    @if(session('success-status'))
+        <div class="status-container">
+            <h2 class="success">{{ session('success-status') }}</h2>
+        </div>
+    @endif
     @if (count($images) == 0)
         <h2>There are no images for sale</h2>
     @endif
