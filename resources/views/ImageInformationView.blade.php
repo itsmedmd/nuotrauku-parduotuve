@@ -1,9 +1,33 @@
 @section('styles')
 <link rel="stylesheet" href="{{ asset('css/image-information-view.css') }}">
 @endsection
-
 @extends('layouts/layout')
 @section('content')
+
+@php
+    $USER_ID = 2
+@endphp
+
+@if (session('openActionConfirmationForm') == true)
+        <x-action-confirmation-form
+            message="Do you really want to delete the image?"
+            origin="imageInformationView"
+            action="deleteImageAdmin"
+            itemID="{{session('itemID')}}"
+            cancelWithID="1"
+        />
+@endif
+
+@if($USER_ID == 2)
+    <button class="button button-default-actions">
+        <button class="button button-default-actions">
+            <a id="delete-image-button">
+                Delete
+            </a> 
+        </button>
+    </button>
+@endif
+
 <main class="content">
     <div class="image-information-view__content">
         <div class="image-information-view__row">
@@ -159,6 +183,11 @@
     };
 
     const renderInformation = () => {
+        const deleteImageButton = document.getElementById("delete-image-button");
+        if (deleteImageButton) {
+            deleteImageButton.href = `/submitImageDeleteAdmin/${image.image_for_sale_id}`;
+        }
+
         // rating
         const ratingEl = document.getElementById("rating");
         ratingEl.innerText = image.rating;

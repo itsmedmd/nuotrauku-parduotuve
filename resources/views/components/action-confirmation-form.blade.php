@@ -15,12 +15,21 @@
             <button
                 class="button action-confirmation-form-cancel"
             >
+                @if($cancelWithID == '1')
                 <a
-                    href="{{ route('cancelAction', ['action' => $origin]) }}"
+                    href="{{ route('cancelAction', ['action' => $origin, 'id' => $itemID]) }}"
                     class="action-confirmation-form-link"
                 >
                     Cancel
-                </a> 
+                </a>
+                @else
+                <a
+                    href="{{ route('cancelAction', ['action' => $origin, 'id' => -1]) }}"
+                    class="action-confirmation-form-link"
+                >
+                    Cancel
+                </a>
+                @endif
             </button>
         </div>
     </div>

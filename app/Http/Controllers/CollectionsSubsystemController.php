@@ -4,6 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Models\collection;
+use App\Models\image;
+use App\Models\image_for_sale;
+
+
 
 class CollectionsSubsystemController extends Controller
 {
@@ -126,4 +131,26 @@ class CollectionsSubsystemController extends Controller
             'collection' => $collection
         ]);
     }
+
+    public function index(){
+        // dd(request()->tag);
+        return view('CollectionsListView', [
+            'collections' => collection::latest()->filter(request(['search']))->paginate(2)
+        ]);
+    }
+
+    public function openCollectionView(collection $collections) {
+        // $imagesForSale = DB::table('images_for_sale')->select('id', 'fk_image_id')->get();
+        
+        $images = DB::table('images')->select('id', 'is_visible','title', 'image', 'rating', 'fk_collection_id_dabartine')
+        ->where('is_visible','=', '1')
+        ->where('fk_collection_id_dabartine',$collections->id)
+        ->get();
+
+        return view('CollectionViewInfo', [
+            'collections' => $collections,
+            'images' => $images
+        ]);
+    }
+
 }
