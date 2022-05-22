@@ -3,7 +3,6 @@
 @endsection
 
 @extends('layouts/layout')
-
 @section('content')
 @if (session('openActionConfirmationForm') == true)
 <x-action-confirmation-form

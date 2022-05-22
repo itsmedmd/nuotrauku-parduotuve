@@ -1,9 +1,30 @@
 @section('styles')
 <link rel="stylesheet" href="{{ asset('css/image-information-view.css') }}">
 @endsection
-
 @extends('layouts/layout')
 @section('content')
+@php
+    $USER_ID = 2
+@endphp
+@if (session('openActionConfirmationForm') == true)
+        <x-action-confirmation-form
+        message="Do you really want to delete the image?"
+        origin="imageInformationView"
+        action="deleteImage"
+        itemID="{{session('itemID')}}"
+        />
+@endif
+@if($USER_ID == 2)
+    <button class="button button-default-actions">
+        <button class="button button-default-actions">
+            <a href="{{ route('submitImageDelete/', ['id' => $img->id]) }}">
+                Delete
+            </a> 
+        </button>
+    </button>
+    
+@endif
+
 <main class="content">
     <div class="image-information-view__content">
         <div class="image-information-view__row">
