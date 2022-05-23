@@ -9,7 +9,7 @@
 <main class="content">
     <h1 class="page-title">Auctions List</h1>
     <div class="created-images-list-new-image">
-        <button class="button" onclick="openAuctionCreationView()">
+        <button class="button" onclick="openAuctionRegistrationView()">
             Create New Auction
         </button>
     </div>
@@ -50,7 +50,7 @@
 
 @section('js')
 <script>
-    const openAuctionCreationView = () => {
+    const openAuctionRegistrationView = () => {
         window.location.href = "/AuctionRegistrationView";
     };
 </script>

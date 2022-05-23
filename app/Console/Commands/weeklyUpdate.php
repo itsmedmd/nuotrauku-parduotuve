@@ -1,29 +1,42 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Console\Commands;
 
-use DateTime;
-use App\Models\bill;
-use App\Models\User;
-use App\Models\award;
-use App\Models\Image;
-use Illuminate\Http\Request;
+use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
+use App\Models\auction;
+use Carbon\Carbon;
+use App\Models\image;
+use App\Models\award;
+use App\Models\bill;
+use App\Models\auction_bid;
+use App\Models\User;
 
-class AwardsSubsystemController extends Controller
+class weeklyUpdate extends Command
 {
-    // wait tai cia ne bills limit 3 reikia
-    // cia jau final 3 awards
-    // nu tipo algoritmas:
-    // paimi visus egzistuojancius bills irasus
-    // suskaiciuoji kiek per praeitas 7 dienas (pagal data atrenki) kiekviena nuotrauka turi bills
-    // tuos counts surikiuoji mazejancia tvarka, tai pvz turiu 6 nuotraukas ir bills count bus: [70, 15, 12, 7, 6, 0]
-    // tada top 3 atrenki, tai [70, 15, 12]
-    // va cia laimejusios nuotraukos, tada sukuri awards irasus joms ir apdovanoji kurejus
+    /**
+     * The name and signature of the console command.
+     *
+     * @var string
+     */
+    protected $signature = 'check:awards';
 
-    private function index(){        
+    /**
+     * The console command description.
+     *
+     * @var string
+     */
+    protected $description = 'Command description';
+
+    /**
+     * Execute the console command.
+     *
+     * @return int
+     */
+    public function handle()
+    {
         DB::table('awards')->delete();
-
+        
         $weekBills = DB::table('bills') 
             ->whereBetween('created_at', [
                 now()->locale('en')->startOfWeek(),
@@ -65,26 +78,18 @@ class AwardsSubsystemController extends Controller
                 User::where('id', $imageOwner[0]->fk_user_id_savininkas)
                 ->increment('wallet_balance', $reward[$i]);
                 // $pls = 
-                DB::table('awards')->insert(
+                $pls = DB::table('awards')->insert(
                     [
                         'prize_amount' => $reward[$i],
                         'fk_user_id_laimetojas' => $imageOwner[0]->fk_user_id_savininkas,
                         'fk_image_id' => $weekBills[$i]->fk_image_id
                     ]
                 );
+                // $pls->join('images', 'fk_image_id', '=' ,'images.id')
+                // ->first();
             }
         }
-        // dd($pls);
         
-        return $pic_arr; 
-    }
-
-    public function getAwards() {
-        // $awards = $this->index();
-        $awards = DB::table('awards')
-        ->join('images', 'fk_image_id', '=' ,'images.id')
-        ->get();
-        // dd($awards);
-        return view('AwardsListView', compact('awards'));
+        $this->info('Week Update has been send successfully');
     }
 }

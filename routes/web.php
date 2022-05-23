@@ -88,7 +88,7 @@ Route::get('deleteImageAdmin/{id}',[AdminSubsystemController::class,'deleteImage
 
 Route::get('AuctionsListView', [AuctionsSubsystemController::class,'getAuctionsList'])->name('AuctionsListView');
 Route::get('AuctionRegistrationView',[AuctionsSubsystemController::class,'openImageCreationView'])->name('AuctionRegistrationView');
-Route::post('createNewAuction',[AuctionsSubsystemController::class,'createNewAuction'])->name('createNewAuction');
+Route::post('registerAuction',[AuctionsSubsystemController::class,'registerAuction'])->name('registerAuction');
 Route::get('openAuctionInformationView/{id}',[AuctionsSubsystemController::class,'openAuctionInformationView'])->name('openAuctionInformationView');
 Route::post('submitAuctionBid',[AuctionsSubsystemController::class,'submitAuctionBid'])->name('submitAuctionBid');
 //Route::get('AuctionInformationView',[AuctionsSubsystemController::class,'hideAbilityToPlaceABid'])->name('AuctionInformationView');
@@ -111,7 +111,6 @@ Route::get('/collections/edit/{userId}/{collectionId}',[CollectionsSubsystemCont
 
 Route::get('sortCollectionsListDesc',[CollectionsSubsystemController::class,'sortCollectionsListDesc'])->name('sortCollectionsListDesc');
 Route::get('sortCollectionsListAsc',[CollectionsSubsystemController::class,'sortCollectionsListAsc'])->name('sortCollectionsListAsc');
-
 //-----tik iki controller'io prieina, neapsiziurejau, kad ne savo darau, bet trint visai visko nesinori
 Route::get('/collections/{userId}/{collectionId}',[CollectionsSubsystemController::class, 'showCollectionInfo'])->name('CollectionInfo');
 Route::get('CollectionViewInfo/{collections}',[CollectionsSubsystemController::class, 'openCollectionView']);

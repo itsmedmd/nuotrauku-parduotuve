@@ -20,7 +20,7 @@ use App\Http\Controllers\AuctionsSubsystemController;
             </div>
         @endif
 
-        <form method="post" enctype="multipart/form-data" action="{{ route('createNewAuction') }}">
+        <form method="post" enctype="multipart/form-data" action="{{ route('registerAuction') }}">
             @csrf
             <div>
                 <label for="end_date">End date:</label><br>
