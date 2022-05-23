@@ -17,7 +17,8 @@ $useris = $user[0];
     <div><h1>{{$item->title}}</h1></div>
     <img src="{{ asset($item->image) }}"
         alt="{{ $item->title }}"
-        class="created-images-list-image">
+        class="created-images-list-image"
+        style="max-width:400px;">
     <h3>{{$item->description}}</h3>
     <h3>Started: {{$item->creation_date}}</h3>
     <h3>Ends: {{$item->end_date}}</h3>

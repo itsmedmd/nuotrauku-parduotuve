@@ -1,5 +1,6 @@
 @section('styles')
 <link rel="stylesheet" href="{{ asset('css/images-for-sale-list-view.css') }}">
+<link rel="stylesheet" href="{{ asset('css/created-images-list-view.css') }}">
 @endsection
 
 @extends('layouts/layout')
