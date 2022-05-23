@@ -12,7 +12,7 @@ use Carbon\Carbon;
 
 class AuctionsSubsystemController extends Controller
 {
-    private $USER_ID = 1;
+    private $USER_ID = 2;
     
     public function getChosenAuction($id)
     {
