@@ -88,7 +88,7 @@ Route::get('deleteImageAdmin/{id}',[AdminSubsystemController::class,'deleteImage
 
 Route::get('AuctionsListView', [AuctionsSubsystemController::class,'getAuctionsList'])->name('AuctionsListView');
 Route::get('AuctionRegistrationView',[AuctionsSubsystemController::class,'openImageCreationView'])->name('AuctionRegistrationView');
-Route::post('createNewAuction',[AuctionsSubsystemController::class,'createNewAuction'])->name('createNewAuction');
+Route::post('registerAuction',[AuctionsSubsystemController::class,'registerAuction'])->name('registerAuction');
 Route::get('openAuctionInformationView/{id}',[AuctionsSubsystemController::class,'openAuctionInformationView'])->name('openAuctionInformationView');
 Route::post('submitAuctionBid',[AuctionsSubsystemController::class,'submitAuctionBid'])->name('submitAuctionBid');
 //Route::get('AuctionInformationView',[AuctionsSubsystemController::class,'hideAbilityToPlaceABid'])->name('AuctionInformationView');
