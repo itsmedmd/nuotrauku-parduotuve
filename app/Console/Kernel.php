@@ -19,8 +19,7 @@ class Kernel extends ConsoleKernel
                 ->everyMinute();
         // $schedule->command('inspire')->hourly();
 
-        $schedule->command('check:awards')
-                ->weekly();
+        $schedule->command('check:awards')->everyMinute();
     }
 
     /**

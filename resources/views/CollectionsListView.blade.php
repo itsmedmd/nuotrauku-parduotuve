@@ -15,6 +15,9 @@
         <link rel="stylesheet" href="{{ asset('css/images-for-sale-list-view.css') }}">
         <script src="//unpkg.com/alpinejs" defer></script>
         <script src="https://cdn.tailwindcss.com"></script>
+        <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet">
         <script>
             tailwind.config = {
                 theme: {
@@ -27,7 +30,7 @@
             };
         </script>
     </head>
-
+ 
     <style>
     .crimson-text {
         color: black;
@@ -57,21 +60,9 @@
     <br>
     <h4>collections list</h4>
     @include('partials._search')
-    <div class="images-for-sale__sort-container">
-        <a
-            class="form-submit-button images-for-sale__sorting"
-            href="{{ route('sortCollectionsListAsc', ['text' => app('request')->input('text')]) }}"
-        >
-            Sort Price Ascending
-        </a>
-        <a
-            class="form-submit-button images-for-sale__sorting"
-            href="{{ route('sortCollectionsListDesc', ['text' => app('request')->input('text')]) }}"
-        >
-            Sort Price Descending
-        </a>    
-    </div>
+    
     <br>
+    
     @if (count($collections) == 0)
         <h2>There are no collections</h2>
     @endif
@@ -79,7 +70,23 @@
         <h2>
             Total results: {{ count($collections) }}
         </h2>
-        
+
+        <div class="images-for-sale__sort-container">
+            <a
+                class="form-submit-button images-for-sale__sorting"
+                href="{{ route('sortCollectionsListAsc') }}"
+            >
+                Sort creation date Ascending
+            </a>
+            <a
+                class="form-submit-button images-for-sale__sorting"
+                href="{{ route('sortCollectionsListDesc') }}"
+            >
+                Sort creation date Descending
+            </a>    
+        </div>
+
+        <br>
         <br>
         <div class="lg:grid lg:grid-cols-6 gap-4 space-y-4 md:space-y-0 mx-4">
             @foreach ($collections as $coll)
@@ -92,10 +99,9 @@
 
 
 @section('js')
-<script>
-</script>
+<script></script>
 <div class="mt-6 p-4">
-    {{$collections->links()}}
+    {{-- {{$collections->links()}} --}}
 </div>
 @endsection
 </html>

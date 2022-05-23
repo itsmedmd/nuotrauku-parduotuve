@@ -5,11 +5,11 @@ namespace App\Http\Controllers;
 use Barryvdh\Debugbar\Facades\Debugbar;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use App\Models\collection;
 use App\Models\image;
+use App\Models\collection;
 use App\Models\image_for_sale;
 use Exception;
-
+use Carbon\Carbon;
 class CollectionsSubsystemController extends Controller
 {
     public function openCreatedCollectionsListView($id)
@@ -178,7 +178,7 @@ class CollectionsSubsystemController extends Controller
     public function index(){
         // dd(request()->tag);
         return view('CollectionsListView', [
-            'collections' => collection::latest()->filter(request(['search']))->paginate(2)
+            'collections' => collection::latest()->filter(request(['search']))->paginate(20)
         ]);
     }
 
@@ -196,4 +196,29 @@ class CollectionsSubsystemController extends Controller
         ]);
     }
 
+    private function sort($order = "DESC") {
+        $collections = DB::select(
+            "
+                SELECT
+                    collections.id as id,
+                    collections.name as name,
+                    collections.description as description,
+                    collections.creation_date as creation_date
+                FROM collections
+                ORDER BY collections.creation_date ".$order
+            );
+        return $collections;
+    }
+
+    // sort images by price in descending order
+    public function sortCollectionsListDesc() {
+        $collections = $this->sort("DESC");
+        return view('CollectionsListView', compact('collections'));
+    }
+
+    // sort images by price in ascending order
+    public function sortCollectionsListAsc() {
+        $collections = $this->sort("ASC");
+        return view('CollectionsListView', compact('collections'));
+    }
 }

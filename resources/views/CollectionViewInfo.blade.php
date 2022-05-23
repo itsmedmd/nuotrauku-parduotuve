@@ -51,11 +51,11 @@
                     Pictures
                 </h3>
                 <div>
+                    @php($sum = 0);
                     @if (count($images) == 0)
                         <h2>There are no images for sale</h2>
                     @endif
-                    @if (count($images) > 0)
-                    @php($sum = 0);
+                    @if (count($images) > 0)                    
                     <div class="images-for-sale__images-list">
                         @foreach($images as $img)
                             <a
@@ -75,10 +75,11 @@
                         
                     </div>                    
                     @endif
+                    
                 </div>                
-            </div>
-        </x-card>
-        <h1> Kolekcijos nuotrauku bendras reitingas: {{$sum}}</h1>
+            </div>            
+        </x-card>     
+        <h1> Kolekcijos nuotrauku bendras reitingas: {{$sum}}</h1>   
     </div> 
     @endsection
 

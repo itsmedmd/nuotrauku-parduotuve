@@ -111,7 +111,6 @@ Route::get('/collections/edit/{userId}/{collectionId}',[CollectionsSubsystemCont
 
 Route::get('sortCollectionsListDesc',[CollectionsSubsystemController::class,'sortCollectionsListDesc'])->name('sortCollectionsListDesc');
 Route::get('sortCollectionsListAsc',[CollectionsSubsystemController::class,'sortCollectionsListAsc'])->name('sortCollectionsListAsc');
-
 //-----tik iki controller'io prieina, neapsiziurejau, kad ne savo darau, bet trint visai visko nesinori
 Route::get('/collections/{userId}/{collectionId}',[CollectionsSubsystemController::class, 'showCollectionInfo'])->name('CollectionInfo');
 Route::get('CollectionViewInfo/{collections}',[CollectionsSubsystemController::class, 'openCollectionView']);
