@@ -12,7 +12,7 @@ use Carbon\Carbon;
 
 class AuctionsSubsystemController extends Controller
 {
-    private $USER_ID = 3;
+    private $USER_ID = 2;
     
     public function getChosenAuction($id)
     {
@@ -59,7 +59,7 @@ class AuctionsSubsystemController extends Controller
     }
 
      // create new auction
-     public function createNewAuction(Request $request)
+     public function registerAuction(Request $request)
      {
         $this->validateAuctionRegistrationData($request);
  
@@ -101,7 +101,7 @@ class AuctionsSubsystemController extends Controller
 
             if($this->checkIfAuctionTimeIsLongerThenOneMinute($auctionEndTime))
             {
-                $newDateTime = Carbon::now()->addMinute();
+                $newDateTime = Carbon::now('GMT+3')->addMinute();
                 auction::whereId($auct[0]->auctionID)->update([
                     'end_date' => $newDateTime
                 ]);
@@ -138,36 +138,6 @@ class AuctionsSubsystemController extends Controller
        // $activeAuctions = auction::where('status', 'ongoing')->get();
         $avaivableImageNames = image::where('fk_user_id_savininkas', $this->USER_ID)->get();
 
-        ///REIKIA PATOBULINTI KAD IMTU TIK DAR NEADALYVAUJANCIUS AUKCIONE NUOTRAUKAS
-/*
-        $going = "ongoing";
-        $avaivableImageNames = DB::table('images')
-                        ->leftJoin('auctions', function($join)
-                        {
-                            $join->on('images.id', '=', 'auctions.fk_image_id')
-                            ->on('auctions.status', 'not like', '%ongoing%');
-                        })
-                        
-                        ->where('images.fk_user_id_savininkas','=', $this->USER_ID)
-                        ->select('images.*')
-                        
-                        ->get();*/
-        /*;
-        for($i=0; $i< count($avaivableImageNames); $i++)
-        {
-            foreach($activeAuctions as $item)
-            {
-                if($avaivableImageNames[$i]->id != $item->fk_user_id)
-                {
-                    array_splice($avaivableImageNames, $i, 1);
-                }
-                ->where('status','!=', 'ongoing')
-                ->leftJoin('auctions', 'images.id', '!=', 'auctions.fk_image_id')
-            }
-            
-                        
-        }*/
-
         return view('AuctionRegistrationView', compact('avaivableImageNames'));
     }
 
@@ -197,12 +167,12 @@ class AuctionsSubsystemController extends Controller
         $imagesPrices = image::where('fk_user_id_savininkas', $currentCollectionID)
         ->get('price');
 
-        $totalSum = static::calculateAveragePriceFromAllCollectionImages($imagesPrices);
+        $totalSum = static::calculateAveragePriceFromAllUserImages($imagesPrices);
         
         return static::checkIfThereAreImagesWithPrice($totalSum);
     }
 
-    private static function calculateAveragePriceFromAllCollectionImages($prices)
+    private static function calculateAveragePriceFromAllUserImages($prices)
     {
         $counter = 0;
         foreach($prices as $item)
