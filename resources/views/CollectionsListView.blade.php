@@ -85,6 +85,16 @@
                 Sort creation date Descending
             </a>    
         </div>
+        
+        <form method="GET">
+            @csrf
+            <label>Date from</label>
+            <input type="date" name="datefrom"><br><br>
+            <label>Date to</label>
+            <input type="date" name="dateto"><br><br>
+            <input type="submit" value="Submit" href="{{ route('chooseFilter') }}">
+        </form>
+        
 
         <br>
         <br>

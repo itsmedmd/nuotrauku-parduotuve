@@ -178,4 +178,13 @@ class CollectionsSubsystemController extends Controller
         $collections = $this->sort("ASC");
         return view('CollectionsListView', compact('collections'));
     }
+
+    public function chooseFilter(Request $req) {
+        $dateFrom = $req->datefrom;
+        $dateTo = $req->dateto;
+
+        $collections = DB::table('collections')->whereBetween('created_at',[$dateFrom." 00:00:00",$dateTo." 23:59:59"])->get();
+        
+        return view('CollectionsListView', $collections);
+    }
 }
